@@ -1,3 +1,6 @@
+-- For some reason, although all of these functions has the ability to pass an inflictor though them, this weapon never set one.
+-- This has been modified to pass the inflictor though all of the functions this weapon goes through, before the player finally takes the damage
+-- This allows this weapon to respect roles such as the jester winning on dying, or the phantom haunting the attacking player
 AddCSLuaFile("shared.lua")
 AddCSLuaFile("cl_init.lua")
 include("shared.lua")
@@ -34,7 +37,6 @@ local function unfreeze(ent, kill, inf, stack)
     effectdata:SetScale(scale)
     effectdata:SetMagnitude(2)
     util.Effect("GlassImpact", effectdata, true, true)
-    --ent:EmitSound("weapons/shatter.wav")
     local d = DamageInfo()
 
     if stack then
@@ -160,7 +162,6 @@ function SWEP:FreezeFunc(ent, kil, inf, type)
     ent.m_Material = ent:GetMaterial()
     ent:SetMaterial(mat)
 
-    --ParticleEffectAttach("howl_victim_bodyice",PATTACH_ABSORIGIN_FOLLOW,ent,0)
     local randomSound2 = {Sound("weapons/freeze0.wav"), Sound("weapons/freeze1.wav"), Sound("weapons/freeze2.wav")}
 
     local randomSound2 = table.Random(randomSound2)
@@ -172,7 +173,6 @@ function SWEP:FreezeObject(ent, kil, inf)
     if ent:IsNPC() then
         ent:SetPlaybackRate(0.25)
 
-        --timer.Simple(3, function() ent:SetPlaybackRate( 1.0 ) end)
         if ent:Health() < 25 then
             self:FreezeFunc(ent, kil, inf, 1)
         end
@@ -191,7 +191,6 @@ function SWEP:FreezeObject(ent, kil, inf)
     elseif ent.Type == "nextbot" then
         ent.loco:SetDesiredSpeed(25)
 
-        --timer.Simple(3, function() ent.loco:SetDesiredSpeed(100) end)
         if ent:Health() < 75 then
             self:FreezeFunc(ent, kil, inf, 2)
         else
