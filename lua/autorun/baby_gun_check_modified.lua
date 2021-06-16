@@ -1,5 +1,10 @@
+-- This entire lua file is dedicated to fixing the infamous Baby Maker glitch
+-- The saga of fixing this is finally over, for your own sanity, it's best you don't touch this lua file...
+-- (Unless absolutely necessary)
 hook.Add("TTTEndRound", "BabyMakerTTTReset", function()
     timer.Simple(0.1, function()
+        -- The problem was "IsBaby" was left to "true", after a player had respawned, causing all sorts of crazy shenanigans
+        -- So, at the end of every round of TTT, everyone has the flags set by the Baby Maker to false, as a fail-safe
         for i, ply in pairs(player.GetAll()) do
             ply:SetNWString("BabyOnGround", "false")
             ply:SetNWString("IsBaby", "false")
@@ -7,10 +12,13 @@ hook.Add("TTTEndRound", "BabyMakerTTTReset", function()
     end)
 end)
 
+-- The hook has been renamed so that it isn't overridden by the old hook
 hook.Add("Think", "KickBabyGunCheckModified", function()
     local babykicker = nil
+    -- Removing the old hook every tick may be overkill, but after so many attempts at fixing this bug I wanted revenge...
     hook.Remove("Think", "KickBabyGunCheck")
 
+    -- This part behaved just fine, it constantly checks if a baby player needs to be kicked into the air
     for k, v in pairs(player.GetAll()) do
         for a, b in pairs(ents.FindInSphere(v:GetPos(), 35)) do
             if b:IsNPC() or scripted_ents.GetType(b:GetClass()) == "nextbot" or b:IsPlayer() and v ~= b then
@@ -22,7 +30,6 @@ hook.Add("Think", "KickBabyGunCheckModified", function()
                         if b:IsNPC() or scripted_ents.GetType(b:GetClass()) == "nextbot" or b:IsPlayer() then
                             local OldBoneScale = b:GetModelScale()
 
-                            --                          rag:GetPhysicsObject():ApplyForceCenter(Vector(0,0,900))
                             if b:GetNWString("CanAddVelocity") == "true" then
                                 local tr = v:GetEyeTrace()
                                 local shot_length = tr.HitPos:Length()
@@ -62,6 +69,7 @@ hook.Add("Think", "KickBabyGunCheckModified", function()
             end
         end
 
+        -- But this was the problem, the part that checks whether a kicked player has hit the ground, and must be killed
         for c, d in pairs(ents.GetAll()) do
             if IsValid(v) and IsValid(d) and d:IsOnGround() and d:GetNWString("BabyOnGround") == "true" and d:GetNWString("IsBaby") == "true" then
                 local dpos = d:GetPos()
@@ -71,12 +79,15 @@ hook.Add("Think", "KickBabyGunCheckModified", function()
                         local dmg = DamageInfo()
                         dmg:SetDamage(d:Health())
                         dmg:SetAttacker(v)
+                        -- Set the damage type to club (crowbar) so jesters aren't immune to this weapon
                         dmg:SetDamageType(DMG_CLUB)
 
+                        -- A damage inflictor was needed so that this weapon respects role effects, such as the phantom haunting, or the jester winning when killed
                         if IsValid(GetGlobalEntity("BabyMakerInflictor")) then
                             dmg:SetInflictor(GetGlobalEntity("BabyMakerInflictor"))
                         end
 
+                        -- Probably overkill, but TakeDamageInfo() was being called on the client in the original weapon, at the least causing lua errors
                         if SERVER then
                             d:TakeDamageInfo(dmg)
                             d:Remove()
@@ -112,6 +123,8 @@ hook.Add("Think", "KickBabyGunCheckModified", function()
                     end
                 end
 
+                -- Other than removing the old hook, this is the part that really helped finally fix the bug,
+                -- Setting the player's IsBaby flag to false, now that the player should have died and no longer be a baby
                 d:SetNWString("IsBaby", "false")
             end
         end
