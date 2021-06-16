@@ -1,3 +1,4 @@
+-- Editing only what's absolutely necessary to change the damage, and set an inflictor on this weapon
 ENT.Base = "obj_wgun_proj"
 
 function ENT:OnCollide(ent, hitpos)
