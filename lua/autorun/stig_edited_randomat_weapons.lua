@@ -1,8 +1,10 @@
 if engine.ActiveGamemode() == "terrortown" then
+    -- Moves the TFA inspect key off of 'C' to not be annoying when opening the buy menu
     if SERVER then
         RunConsoleCommand("sv_tfa_cmenu_key", "21")
     end
 
+    -- Edits all weapons randomats use to be compatible with TTT, if they are installed
     hook.Add("PreRegisterSWEP", "StigRandomatModifiedWeaponsHook", function(SWEP, class)
         if class == "republic_mcbow" then
             SWEP.Base = "weapon_tttbase"
