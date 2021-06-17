@@ -73,7 +73,7 @@ end
 
 function SWEP:Think()
     -- Constantly check if self.Spinning is true
-    if self.Spinning then
+    if self.Spinning and SERVER then
         -- If so, spin the player around
         self:GetOwner():SetEyeAngles(Angle(0, self:GetOwner():EyeAngles().y + 20, 0))
 
