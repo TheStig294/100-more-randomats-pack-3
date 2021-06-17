@@ -54,7 +54,7 @@ function EVENT:Begin()
         if boughtAllDetective and boughtAllTraitor then
             -- Add them to the table of players who've bought everything and print a message to chat
             table.insert(boughtEmAllPlayers, ply)
-            ply:ChatPrint("==CONGRATS! YOU BOUGHT 'EM ALL!==\nYou get to choose what randomat happens at the start of each round!")
+            ply:ChatPrint("==CONGRATS! YOU BOUGHT 'EM ALL!==\nYou get to choose randomats at the start of each round!")
 
             timer.Simple(5, function()
                 Randomat:SmallNotify("Someone has bought 'em all!")
