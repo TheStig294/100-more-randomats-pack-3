@@ -11,4 +11,14 @@ function EVENT:Begin()
     end
 end
 
+function EVENT:Condition()
+    local has_wep = false
+
+    if weapons.Get("ttt_amaterasu") ~= nil then
+        has_wep = true
+    end
+
+    return has_wep
+end
+
 Randomat:register(EVENT)
