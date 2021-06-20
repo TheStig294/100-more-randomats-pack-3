@@ -33,4 +33,18 @@ function EVENT:Begin()
     end)
 end
 
+-- Checking the afk mod exists
+-- Or more specifically, every player has the "Minimized" bool set from that mod
+function EVENT:Condition()
+    local has_bool = true
+
+    for i, ply in pairs(self:GetPlayers()) do
+        if ply:GetNWBool("Minimized", "doesn't exist") == "doesn't exist" then
+            has_bool = false
+        end
+    end
+
+    return has_bool
+end
+
 Randomat:register(EVENT)
