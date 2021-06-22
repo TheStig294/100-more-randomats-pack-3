@@ -46,7 +46,15 @@ function EVENT:Begin()
     end
 
     timer.Simple(1, function()
-        Randomat:SilentTriggerEvent("ammo", self.owner)
+        self:AddHook("Think", function()
+            for _, v in pairs(self:GetAlivePlayers()) do
+                if IsValid(v:GetActiveWeapon()) then
+                    if v:GetActiveWeapon():GetClass() == "weapon_rp_railgun" then
+                        v:GetActiveWeapon():SetClip1(v:GetActiveWeapon().Primary.ClipSize)
+                    end
+                end
+            end
+        end)
     end)
 end
 
