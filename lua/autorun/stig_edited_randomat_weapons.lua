@@ -1122,5 +1122,8 @@ if engine.ActiveGamemode() == "terrortown" then
             SWEP.Slot = 6
             SWEP.ProjectileEntity = "obj_acidgat_proj_modified"
         end
+
+        if class == "tfa_fusionshotgun" then return false end
+        if class == "tfa_venomx" then return false end
     end)
 end
