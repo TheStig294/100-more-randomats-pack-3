@@ -14,4 +14,14 @@ function EVENT:Begin()
     end
 end
 
+function EVENT:Condition()
+    local has_wep = false
+
+    if isnumber(EQUIP_BUNKER) then
+        has_wep = true
+    end
+
+    return has_wep
+end
+
 Randomat:register(EVENT)
