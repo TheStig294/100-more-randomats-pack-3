@@ -63,4 +63,8 @@ function EVENT:End()
     end
 end
 
+function EVENT:Condition()
+    return weapons.Get("weapon_ttt_timestop") ~= nil
+end
+
 Randomat:register(EVENT)

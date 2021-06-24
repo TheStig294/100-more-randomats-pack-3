@@ -2,6 +2,7 @@ local EVENT = {}
 EVENT.Title = "Random Deathmatch"
 EVENT.Description = "Infinite free kill guns only!"
 EVENT.id = "rdm"
+EVENT.Type = EVENT_TYPE_WEAPON_OVERRIDE
 
 function EVENT:Begin()
     for k, ply in pairs(self:GetAlivePlayers(true)) do
@@ -59,11 +60,7 @@ function EVENT:Begin()
 end
 
 function EVENT:Condition()
-    if (Randomat:IsEventActive("reload") or Randomat:IsEventActive("prophunt") or Randomat:IsEventActive("harpoon") or Randomat:IsEventActive("slam")) or (not ConVarExists("ttt_rp_railgun_sound")) then
-        return false
-    else
-        return true
-    end
+    return weapons.Get("weapon_rp_railgun") ~= nil
 end
 
 Randomat:register(EVENT)

@@ -10,6 +10,10 @@ EVENT.Title = "Home Run!"
 EVENT.Description = "Homerun bats only!"
 EVENT.id = "homerun"
 
+if GetConVar("randomat_homerun_strip"):GetBool() then
+    EVENT.Type = EVENT_TYPE_WEAPON_OVERRIDE
+end
+
 function EVENT:Begin()
     timer.Create("RandomatHomeRunTimer", GetConVar("randomat_homerun_timer"):GetInt(), 0, function()
         for i, ply in pairs(self:GetAlivePlayers(true)) do
@@ -26,6 +30,10 @@ end
 
 function EVENT:End()
     timer.Remove("RandomatHomeRunTimer")
+end
+
+function EVENT:Condition()
+    return weapons.Get(GetConVar("randomat_homerun_weaponid"):GetString()) ~= nil
 end
 
 function EVENT:GetConVars()

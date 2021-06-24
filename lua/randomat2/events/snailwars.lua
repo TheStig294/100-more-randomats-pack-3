@@ -20,7 +20,7 @@ end
 function EVENT:Condition()
     local mapHasAI = MapHasAI()
 
-    return mapHasAI
+    return mapHasAI and GetConVar("randomat_snailwars_weaponid"):GetString() ~= nil and has_weapons.Get("weapon_ttt_killersnail") ~= nil
 end
 
 function EVENT:GetConVars()
