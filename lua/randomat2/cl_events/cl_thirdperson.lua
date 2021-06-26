@@ -1,5 +1,12 @@
 local thirdPersonWasOn = false
 
+net.Receive("ThirdPersonRandomatCheck", function()
+    if ConVarExists("thirdperson_etp") then
+        net.Start("ThirdPersonRandomatCheck")
+        net.SendToServer("ThirdPersonRandomatCheck")
+    end
+end)
+
 net.Receive("ThirdPersonRandomat", function()
     -- Get whether the player was already in third person
     thirdPersonWasOn = GetConVar("thirdperson_etp"):GetBool()

@@ -115,15 +115,8 @@ function EVENT:Begin()
 end
 
 function EVENT:Condition()
-    local has_data = true
-
-    -- Check the stats data file exists
-    if file.Read("ttt/ttt_total_statistics/stats.txt", "DATA") == nil then
-        has_data = false
-    end
-    -- Trigger when this randomat has not triggered before this map, the data file exists and the 'Choose an Event!' randomat exists and is allowed to trigger
-
-    return notTriggered and has_data and Randomat:CanEventRun("choose")
+    -- Trigger when this randomat has not triggered before this map, the 'Choose an Event!' randomat exists and is allowed to trigger and 'TTT Total Statistics' is installed
+    return notTriggered and Randomat:CanEventRun("choose") and file.Exists("gamemodes/terrortown/entities/entities/ttt_total_statistics/init.lua", "THIRDPARTY")
 end
 
 Randomat:register(EVENT)
