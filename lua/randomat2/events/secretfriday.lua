@@ -35,7 +35,7 @@ function EVENT:Begin()
 end
 
 function EVENT:Condition()
-    return weapons.Get("republic_mcbow") ~= nil and has_weapons.Get("minecraft_swep") ~= nil
+    return weapons.Get("republic_mcbow") ~= nil and weapons.Get("minecraft_swep") ~= nil
 end
 
 Randomat:register(EVENT)

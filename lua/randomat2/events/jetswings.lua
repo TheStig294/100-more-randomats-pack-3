@@ -18,7 +18,7 @@ function EVENT:Begin()
 end
 
 function EVENT:Condition()
-    return weapons.Get("weapon_ttt_jetpackspawner") ~= nil and has_weapons.Get("weapon_ttt_homingpigeon") ~= nil
+    return weapons.Get("weapon_ttt_jetpackspawner") ~= nil and weapons.Get("weapon_ttt_homingpigeon") ~= nil
 end
 
 Randomat:register(EVENT)

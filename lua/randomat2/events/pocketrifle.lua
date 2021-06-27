@@ -44,7 +44,7 @@ function EVENT:Begin()
 end
 
 function EVENT:Condition()
-    return weapons.Get("weapon_rp_pocket") ~= nil and has_weapons.Get("weapon_752_dl44") ~= nil
+    return weapons.Get("weapon_rp_pocket") ~= nil and weapons.Get("weapon_752_dl44") ~= nil
 end
 
 Randomat:register(EVENT)

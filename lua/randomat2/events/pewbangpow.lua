@@ -29,7 +29,7 @@ function EVENT:Begin()
 end
 
 function EVENT:Condition()
-    return weapons.Get("custom_pewgun") ~= nil and has_weapons.Get("fingergun") ~= nil
+    return weapons.Get("custom_pewgun") ~= nil and weapons.Get("fingergun") ~= nil
 end
 
 Randomat:register(EVENT)
