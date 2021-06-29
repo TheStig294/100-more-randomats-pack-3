@@ -19,7 +19,11 @@ function EVENT:Begin()
     detectiveStats = {}
 
     for i, ply in pairs(self:GetAlivePlayers()) do
-        detectiveStats[stats[ply:SteamID()]["DetectiveWins"] / stats[ply:SteamID()]["DetectiveRounds"]] = ply:Nick()
+        if stats[ply:SteamID()]["DetectiveWins"] ~= nil then
+            detectiveStats[stats[ply:SteamID()]["DetectiveWins"] / stats[ply:SteamID()]["DetectiveRounds"]] = ply:Nick()
+        else
+            detectiveStats[stats[ply:SteamID()]["detectiveWins"] / stats[ply:SteamID()]["detectiveRounds"]] = ply:Nick()
+        end
     end
 
     bestDetectiveTable = table.GetKeys(detectiveStats)

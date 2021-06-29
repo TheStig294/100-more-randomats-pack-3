@@ -19,7 +19,13 @@ function EVENT:Begin()
     chosenTraitor = table.Random(self:GetAlivePlayers())
     id = chosenTraitor:SteamID()
     nickname = chosenTraitor:Nick()
-    traitorStats = stats[id]["TraitorPartners"]
+
+    if IsValid(stats[id]["TraitorPartners"]) ~= nil then
+        traitorStats = stats[id]["TraitorPartners"]
+    else
+        traitorStats = stats[id]["traitorPartners"]
+    end
+
     traitorWinRates = {}
 
     for i, ply in pairs(self:GetAlivePlayers()) do
