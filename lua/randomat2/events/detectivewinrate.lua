@@ -4,20 +4,12 @@ EVENT.Description = "Whoever has the highest detective winrate is now the detect
 EVENT.id = "detectivewinrate"
 
 function EVENT:Begin()
+    -- The stats data is recorded from another mod, 'TTT Total Statistics'
     local data = file.Read("ttt/ttt_total_statistics/stats.txt", "DATA")
+    local stats = util.JSONToTable(data)
+    local detectiveStats = {}
 
-    if data == nil then
-        timer.Simple(5, function()
-            self:SmallNotify("[TTT] Total Statistics not installed... Randomat can't trigger")
-        end)
-
-        return
-    else
-        stats = util.JSONToTable(data)
-    end
-
-    detectiveStats = {}
-
+    -- Grabbing everyone's detective winrate, 'Detective' is capitalised in the old version of TTT Total Statistics
     for i, ply in pairs(self:GetAlivePlayers()) do
         if stats[ply:SteamID()]["DetectiveWins"] ~= nil then
             detectiveStats[stats[ply:SteamID()]["DetectiveWins"] / stats[ply:SteamID()]["DetectiveRounds"]] = ply:Nick()
@@ -26,46 +18,46 @@ function EVENT:Begin()
         end
     end
 
-    bestDetectiveTable = table.GetKeys(detectiveStats)
+    -- Grabbing the Steam nickname of the player with the highest detective winrate
+    local bestDetectiveTable = table.GetKeys(detectiveStats)
     table.sort(bestDetectiveTable)
-    bestDetectiveWinRate = bestDetectiveTable[#bestDetectiveTable]
-    bestDetectiveNickname = detectiveStats[bestDetectiveWinRate]
+    local bestDetectiveWinRate = bestDetectiveTable[#bestDetectiveTable]
+    local bestDetectiveNickname = detectiveStats[bestDetectiveWinRate]
+    local detectiveChanged = false
 
-    --removing detective
+    -- Turn a current detective into an innocent, if there is one
     for i, ply in pairs(self:GetAlivePlayers()) do
-        if ply:GetRole() == ROLE_DETECTIVE then
-            self:StripRoleWeapons(ply)
+        if ply:GetRole() == ROLE_DETECTIVE and detectiveChanged == false then
             Randomat:SetRole(ply, ROLE_INNOCENT)
+            self:StripRoleWeapons(ply)
             SendFullStateUpdate()
+            detectiveChanged = true
         end
     end
 
-    --setting detective to best detective
+    local traitorChanged = false
+
+    -- Make the player with the highest winrate a detective
     for i, ply in pairs(self:GetAlivePlayers()) do
         if ply:Nick() == bestDetectiveNickname then
-            self:StripRoleWeapons(ply)
+            if Randomat:IsTraitorTeam(ply) then
+                traitorChanged = true
+            end
+
             Randomat:SetRole(ply, ROLE_DETECTIVE)
+            self:StripRoleWeapons(ply)
             ply:SetCredits(GetConVar("ttt_det_credits_starting"):GetInt())
             SendFullStateUpdate()
         end
     end
 
-    --counting no. of traitors to check if detective was a traitor
-    traitorCount = 0
-
-    for i, ply in pairs(self:GetAlivePlayers()) do
-        if ply:GetRole() == ROLE_TRAITOR or ply:GetRole() == ROLE_ASSASIN or ply:GetRole() == ROLE_HYPNOTIST or ply:GetRole() == ROLE_VAMPIRE then
-            traitorCount = traitorCount + 1
-        end
-    end
-
-    --if less than 2 traitors, set a random innocents, other than the detective, into traitors until we have 2 
-    for i, ply in pairs(self:GetAlivePlayers()) do
-        if (traitorCount < 2) and (ply:GetRole() == ROLE_INNOCENT or ply:GetRole() == ROLE_MERCENARY or ply:GetRole() == ROLE_PHANTOM or ply:GetRole() == ROLE_GLITCH) then
+    -- If a traitor was made the detective, change a random non-traitor, non-detective into traitor
+    for i, ply in pairs(self:GetAlivePlayers(true)) do
+        if traitorChanged and not Randomat:IsTraitorTeam(ply) and not Randomat:IsDetectiveLike(ply) then
             Randomat:SetRole(ply, ROLE_TRAITOR)
             ply:SetCredits(GetConVar("ttt_credits_starting"):GetInt())
             SendFullStateUpdate()
-            traitorCount = traitorCount + 1
+            traitorChanged = false
         end
     end
 
@@ -76,15 +68,8 @@ function EVENT:Begin()
 end
 
 function EVENT:Condition()
-    -- Awful code that'll be fixed later...
-    local isDetective = false
-
-    if player.GetCount() < GetConVar("ttt_detective_min_players"):GetInt() then
-        isDetective = true
-    end
-    -- Trigger when there is a detective and 'TTT Total Statistics' is installed
-
-    return isDetective and file.Exists("gamemodes/terrortown/entities/entities/ttt_total_statistics/init.lua", "THIRDPARTY")
+    -- Trigger when 'TTT Total Statistics' is installed
+    return file.Exists("gamemodes/terrortown/entities/entities/ttt_total_statistics/init.lua", "THIRDPARTY")
 end
 
 Randomat:register(EVENT)
