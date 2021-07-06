@@ -11,35 +11,21 @@ EVENT.AltTitle = "What it's like to be ..."
 CreateConVar("randomat_whatitslike_disguise", 0, {FCVAR_NOTIFY, FCVAR_ARCHIVE}, "Player names hidden when randomat is active.")
 
 function EVENT:Begin()
-    randomatWhatItsLikeSetPlayerLikeness()
-end
-
-function randomatWhatItsLikeSetPlayerLikeness()
-    -- We chose a random player out of all players (thanks google)
-    --local randomPly = Entity(1)
     local randomPly = table.Random(player.GetAll())
-    -- Now we save that player's model like this...
-    local chosenModel = randomPly:GetModel()
     -- and we use this to write "It's PLAYERNAME" (taken from suspicion.lua)
     Randomat:EventNotifySilent("What it's like to be " .. randomPly:Nick())
+    -- The stats data is recorded from another mod, 'TTT Total Statistics'
     local data = file.Read("ttt/ttt_total_statistics/stats.txt", "DATA")
+    local stats = util.JSONToTable(data)
+    local chosenModel = randomPly:GetModel()
+    local id = randomPly:SteamID()
+    -- Get the chosen player's most bought detective/traitor weapon
+    local detectiveStats = stats[id]["DetectiveEquipment"]
+    local detectiveItemName = table.GetWinningKey(detectiveStats)
+    local traitorStats = stats[id]["TraitorEquipment"]
+    local traitorItemName = table.GetWinningKey(traitorStats)
 
-    if data == nil then
-        timer.Simple(5, function()
-            EVENT:SmallNotify("[TTT] Total Statistics not installed... Randomat can't trigger")
-        end)
-
-        return
-    else
-        stats = util.JSONToTable(data)
-    end
-
-    id = randomPly:SteamID()
-    detectiveStats = stats[id]["DetectiveEquipment"]
-    detectiveItemName = table.GetWinningKey(detectiveStats)
-    traitorStats = stats[id]["TraitorEquipment"]
-    traitorItemName = table.GetWinningKey(traitorStats)
-
+    -- Give them their most bought weapon first
     for i, ply in pairs(EVENT:GetAlivePlayers()) do
         timer.Simple(0.1, function()
             if detectiveStats[detectiveItemName] >= traitorStats[traitorItemName] then
@@ -52,11 +38,9 @@ function randomatWhatItsLikeSetPlayerLikeness()
         end)
     end
 
-    -- Gets all players...
     for k, v in pairs(player.GetAll()) do
-        -- if they're alive and not in spectator mode
         if v:Alive() and not v:IsSpec() then
-            -- and not a bot (bots do not have the following command, so it's unnecessary)
+            -- bots do not have the following command, so it's unnecessary
             if (not v:IsBot()) then
                 -- We need to disable cl_playermodel_selector_force, because it messes with SetModel, we'll reset it when the event ends
                 v:ConCommand("cl_playermodel_selector_force 0")
@@ -64,21 +48,17 @@ function randomatWhatItsLikeSetPlayerLikeness()
 
             -- we need  to wait a second for cl_playermodel_selector_force to take effect (and THEN change model)
             timer.Simple(1, function()
-                -- if the player's viewoffset is different than the standard, then...
                 if not (v:GetViewOffset() == standardHeightVector) then
-                    -- So we set their new heights to the default values (which the Duncan model uses)
                     v:SetViewOffset(standardHeightVector)
                     v:SetViewOffsetDucked(standardCrouchedHeightVector)
                 end
 
-                -- Set player number K (in the table) to their respective model
+                -- Set player number K (in the table) to their respective model and set everyone to the chosen player's model
                 playerModels[k] = v:GetModel()
-                -- Sets their model to chosenModel
                 v:SetModel(chosenModel)
 
-                -- if name disguising is enabled...
                 if GetConVar("randomat_whatitslike_disguise"):GetBool() then
-                    -- Remove their names! Traitors still see names though!				
+                    -- Remove names! Traitors still see names though!				
                     v:SetNWBool("disguised", true)
                 end
             end)
@@ -86,16 +66,9 @@ function randomatWhatItsLikeSetPlayerLikeness()
     end
 end
 
--- when the event ends, reset every player's model
 function EVENT:End()
-    -- loop through all players
     for k, v in pairs(player.GetAll()) do
-        -- if the index k in the table playermodels has a model, then...
         if (playerModels[k] ~= nil) then
-            -- we set the player v to the playermodel with index k in the table
-            -- this should invoke the viewheight script from the models and fix viewoffsets (e.g. Zoey's model) 
-            -- this does however first reset their viewmodel in the preparing phase (when they respawn)
-            -- might be glitchy with pointshop items that allow you to get a viewoffset
             v:SetModel(playerModels[k])
         end
 
@@ -130,5 +103,4 @@ function EVENT:GetConVars()
     return checks
 end
 
--- register the event in the randomat!
 Randomat:register(EVENT)
