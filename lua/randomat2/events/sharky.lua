@@ -48,7 +48,6 @@ function EVENT:Begin()
             Randomat:SetRole(ply, ROLE_TRAITOR)
             ply:SetCredits(GetConVar("ttt_credits_starting"):GetInt())
             SendFullStateUpdate()
-            traitorCount = traitorCount + 1
         else
             self:StripRoleWeapons(ply)
             Randomat:SetRole(ply, ROLE_INNOCENT)
