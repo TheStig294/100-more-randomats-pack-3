@@ -34,7 +34,7 @@ _ttt_randomat_redemption_ - Default: 1 - Whether this randomat is enabled
 
 ## 100% Detective Winrate
 Whoever has the highest detective winrate is made the detective, according to the TTT stats mod. Doesn't trigger if there aren't enough players for a detective.\
-/
+\
 _ttt_randomat_detectivewinrate_ - Default: 1 - Whether this randomat is enabled
 
 ## Everyone has their favourites
