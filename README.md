@@ -16,7 +16,7 @@ _ttt_randomat_event_hint_chat_ - Default: 1 - Whether hints should also be put i
 ## Gotta buy 'em all!
 Gives everyone a detective and traitor weapon they haven't bought before, according to the TTT stats mod. If the two weapons take the same slot, only the traitor weapon is given. \
 \
-If every item has been bought at least once, doubles health for each buy menu completed, and lets all 100% complete players take turns in choosing the randomats for the rest of the map!\ 
+If every item has been bought at least once, doubles health for each buy menu completed, and lets all 100% complete players take turns in choosing the randomats for the rest of the map!\
 \
 Notifies the player how complete each buy menu is.\
 \
@@ -33,7 +33,7 @@ Puts someone with their worst traitor partner, according to the TTT stats mod. D
 _ttt_randomat_redemption_ - Default: 1 - Whether this randomat is enabled
 
 ## 100% Detective Winrate
-Whoever has the highest detective winrate is made the detective, according to the TTT stats mod. Doesn't trigger if there aren't enough players for a detective./
+Whoever has the highest detective winrate is made the detective, according to the TTT stats mod. Doesn't trigger if there aren't enough players for a detective.\
 /
 _ttt_randomat_detectivewinrate_ - Default: 1 - Whether this randomat is enabled
 
@@ -146,7 +146,7 @@ Everyone is changed to a Crash Bandicoot playermodel and is forced to use a "Spi
 \
 _ttt_randomat_whoa_ - Default: 1 - Whether this randomat is enabled\
 _randomat_whoa_timer_ - Default: 3 - Time between being given spin attacks\
-_randomat_whoa_strip_ - Default: 1 - The event strips your other weapons=
+_randomat_whoa_strip_ - Default: 1 - The event strips your other weapons\
 _randomat_whoa_weaponid_ - Default: weapon_ttt_whoa_randomat - Id of the weapon given
 
 ## Time Stop
@@ -226,11 +226,11 @@ _randomat_snails_music_ - Default: 1 - Music plays while randomat is active
 
 # Randomats made by "Fate"
 **The mod these randomats come from: [Steam Workshop::[TTT] O Rubber Tree [Randomat]](https://steamcommunity.com/sharedfiles/filedetails/?id=2122924789)**
-O Rubber Tree...
-Forces everyone to only use donconnans
-Changed name from "O Rubber Tree", added description
-
-ttt_randomat_orubbertree - Default: 1 - Whether this randomat is enabled
-randomat_orubbertree_timer - Default: 3 - Time between being given donconnons
-randomat_orubbertree_strip - Default: 1 - The event strips your other weapons
-randomat_orubbertree_weaponid - Default: doncmk2_swep - Id of the weapon given
+## O Rubber Tree...
+Continually gives donconnans to everyone\
+Changed name from "O Rubber Tree", added description\
+\
+_ttt_randomat_orubbertree_ - Default: 1 - Whether this randomat is enabled\
+_randomat_orubbertree_timer_ - Default: 3 - Time between being given donconnons\
+_randomat_orubbertree_strip_ - Default: 1 - The event strips your other weapons\
+_randomat_orubbertree_weaponid_ - Default: doncmk2_swep - Id of the weapon given
