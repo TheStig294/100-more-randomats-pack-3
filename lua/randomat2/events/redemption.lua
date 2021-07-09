@@ -13,7 +13,7 @@ function EVENT:Begin()
     local traitorStats
 
     -- Compatibility with original stats mod, and the one made for Noxx's custom roles
-    if IsValid(stats[id]["TraitorPartners"]) ~= nil then
+    if IsValid(stats[id]["TraitorPartners"]) then
         traitorStats = stats[id]["TraitorPartners"]
     else
         traitorStats = stats[id]["traitorPartners"]
