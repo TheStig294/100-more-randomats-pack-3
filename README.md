@@ -16,7 +16,9 @@ _ttt_randomat_event_hint_chat_ - Default: 1 - Whether hints should also be put i
 ## Gotta buy 'em all!
 Gives everyone a detective and traitor weapon they haven't bought before, according to the TTT stats mod. If the two weapons take the same slot, only the traitor weapon is given. \
 \
-If every item has been bought at least once, doubles health for each buy menu completed, and lets all 100% complete players take turns in choosing the randomats for the rest of the map!\
+If a player has bought all detective or traitor items at least once, they get double health, and an item from the buy menu they haven't completed.\
+If a player has bought all detective AND traitor items at least once, they get to choose a randomat at the start of every round for the rest of the map!\
+If multiple players have bought all items, they take turns in choosing randomats.\
 \
 Notifies the player how complete each buy menu is.\
 \
@@ -33,7 +35,7 @@ Puts someone with their worst traitor partner, according to the TTT stats mod. D
 _ttt_randomat_redemption_ - Default: 1 - Whether this randomat is enabled
 
 ## 100% Detective Winrate
-Whoever has the highest detective winrate is made the detective, according to the TTT stats mod. Doesn't trigger if there aren't enough players for a detective.\
+Whoever has the highest detective winrate is turned into a detective, according to the TTT stats mod.\
 \
 _ttt_randomat_detectivewinrate_ - Default: 1 - Whether this randomat is enabled
 
@@ -44,7 +46,8 @@ If the two items take the same slot, only the most bought of the two is given.\
 _ttt_randomat_favourites_ - Default: 1 - Whether this randomat is enabled
 
 ## What it's like to be ...
-Gives everyone someone's playermodel and favourite traitor and detective weapon, according to the TTT stats mod. If the two weapons take the same slot, only the most bought of the two is given.\
+Gives everyone someone's playermodel and favourite traitor and detective weapon, according to the TTT stats mod.\
+If the two weapons take the same slot, only the most bought of the two is given.\
 \
 _ttt_randomat_whatitslike_ - Default: 1 - Whether this randomat is enabled\
 _randomat_whatitslike_disguise_ - Default: 0 - Hide each player’s name
