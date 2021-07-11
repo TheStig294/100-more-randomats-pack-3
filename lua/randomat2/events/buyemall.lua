@@ -3,11 +3,11 @@ EVENT.Title = "Gotta buy 'em all!"
 EVENT.Description = "Gives a weapon you haven't bought, or a special reward for buying them all!"
 EVENT.id = "buyemall"
 -- Let this randomat trigger again at the start of a new map
-local notTriggered = true
+SetGlobalBool("BuyEmAllRandomatTriggered", false)
 
 function EVENT:Begin()
     -- This randomat can only trigger once per map
-    notTriggered = false
+    SetGlobalBool("BuyEmAllRandomatTriggered", true)
     local data = file.Read("ttt/ttt_total_statistics/stats.txt", "DATA")
     local stats = util.JSONToTable(data)
     -- Functionality of GetDetectiveBuyable() and GetTraitorBuyable() can be found in stig_randomat_base_functions.lua and stig_randomat_client_functions.lua
@@ -103,7 +103,7 @@ end
 
 function EVENT:Condition()
     -- This event is reliant on 'Choose an Event!' existing and being turned on and 'TTT Total Statistics' being installed
-    return notTriggered and Randomat:CanEventRun("choose") and file.Exists("gamemodes/terrortown/entities/entities/ttt_total_statistics/init.lua", "THIRDPARTY")
+    return GetGlobalBool("BuyEmAllRandomatTriggered") == false and Randomat:CanEventRun("choose") and file.Exists("gamemodes/terrortown/entities/entities/ttt_total_statistics/init.lua", "THIRDPARTY")
 end
 
 Randomat:register(EVENT)
