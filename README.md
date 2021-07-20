@@ -122,6 +122,7 @@ _ttt_randomat_rdm_ - Default: 1 - Whether this randomat is enabled
 Everyone can only use an infinite ammo super shotgun as their main weapon\
 \
 _ttt_randomat_supershotgun_ - Default: 1 - Whether this randomat is enabled
+_randomat_supershotgun_weaponid_ - Default: tfa_doom_ssg - Id of the weapon given
 
 ## Snail Time!
 Transforms everyone into a snail\
