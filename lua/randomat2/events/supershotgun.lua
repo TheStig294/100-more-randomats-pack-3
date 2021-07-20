@@ -55,4 +55,23 @@ function EVENT:Condition()
     return weapons.Get(GetConVar("randomat_supershotgun_weaponid"):GetString()) ~= nil
 end
 
+function EVENT:GetConVars()
+    local textboxes = {}
+
+    for _, v in ipairs({"weaponid"}) do
+        local name = "randomat_" .. self.id .. "_" .. v
+
+        if ConVarExists(name) then
+            local convar = GetConVar(name)
+
+            table.insert(textboxes, {
+                cmd = v,
+                dsc = convar:GetHelpText()
+            })
+        end
+    end
+
+    return textboxes
+end
+
 Randomat:register(EVENT)
