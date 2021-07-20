@@ -1,8 +1,14 @@
 local EVENT = {}
-EVENT.Title = "Sudden Death?"
-EVENT.Description = "Infinite super shotguns for all!"
+EVENT.Title = "Infinite Super Shotguns For All!"
 EVENT.id = "supershotgun"
 EVENT.Type = EVENT_TYPE_WEAPON_OVERRIDE
+local defaultSSG = "tfa_doom_ssg"
+
+if weapons.Get(defaultSSG) == nil then
+    defaultSSG = "doom_sshotgun_2016"
+end
+
+CreateConVar("randomat_supershotgun_weaponid", defaultSSG, {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Id of the weapon given")
 
 function EVENT:Begin()
     for _, ent in pairs(ents.GetAll()) do
@@ -25,7 +31,7 @@ function EVENT:Begin()
                     ply:SetFOV(0, 0.2)
                 end
 
-                local wep1 = ply:Give("doom_sshotgun_2016")
+                local wep1 = ply:Give(GetConVar("randomat_supershotgun_weaponid"):GetString())
                 ply:SelectWeapon(wep1)
                 wep1.AllowDrop = false
             end)
@@ -36,7 +42,7 @@ function EVENT:Begin()
         self:AddHook("Think", function()
             for _, v in pairs(self:GetAlivePlayers()) do
                 if IsValid(v:GetActiveWeapon()) then
-                    if v:GetActiveWeapon():GetClass() == "doom_sshotgun_2016" then
+                    if v:GetActiveWeapon():GetClass() == GetConVar("randomat_supershotgun_weaponid"):GetString() then
                         v:GetActiveWeapon():SetClip1(v:GetActiveWeapon().Primary.ClipSize)
                     end
                 end
@@ -46,7 +52,7 @@ function EVENT:Begin()
 end
 
 function EVENT:Condition()
-    return weapons.Get("doom_sshotgun_2016") ~= nil
+    return weapons.Get(GetConVar("randomat_supershotgun_weaponid"):GetString()) ~= nil
 end
 
 Randomat:register(EVENT)

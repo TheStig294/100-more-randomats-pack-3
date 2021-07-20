@@ -118,7 +118,7 @@ Gives everyone an infinite ammo free kill gun, strips all other weapons on the g
 \
 _ttt_randomat_rdm_ - Default: 1 - Whether this randomat is enabled
 
-## Sudden Death?
+## Infinite Super Shotguns For All!
 Everyone can only use an infinite ammo super shotgun as their main weapon\
 \
 _ttt_randomat_supershotgun_ - Default: 1 - Whether this randomat is enabled
