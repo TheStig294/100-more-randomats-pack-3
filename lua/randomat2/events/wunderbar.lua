@@ -5,24 +5,30 @@ EVENT.id = "wunderbar"
 
 local wonderWeapons = {"tfa_acidgat", "tfa_blundergat", "tfa_jetgun", "tfa_raygun", "tfa_raygun_mark2", "tfa_scavenger", "tfa_shrinkray", "tfa_sliquifier", "tfa_staff_wind", "tfa_thundergun", "tfa_vr11", "tfa_wavegun", "tfa_wintershowl", "tfa_wunderwaffe"}
 
+local wonderWeaponsActive = {}
+
+hook.Add("TTTPrepareRound", "WonderWeaponsInstallCheck", function()
+    for i, wep in ipairs(wonderWeapons) do
+        if weapons.Get(wep) ~= nil then
+            table.insert(wonderWeaponsActive, wep)
+        end
+    end
+
+    hook.Remove("TTTPrepareRound", "WonderWeaponsInstallCheck")
+end)
+
 function EVENT:Begin()
     for i, ply in pairs(self:GetAlivePlayers()) do
         timer.Simple(0.1, function()
-            ply:Give(wonderWeapons[math.random(#wonderWeapons)])
+            ply:Give(wonderWeaponsActive[math.random(#wonderWeaponsActive)])
         end)
     end
 end
 
 function EVENT:Condition()
-    local has_wonder_weapons = true
+    if #wonderWeaponsActive == 1 then return false end
 
-    for _, wep in ipairs(wonderWeapons) do
-        if weapons.Get(wep) == nil then
-            has_wonder_weapons = false
-        end
-    end
-
-    return has_wonder_weapons
+    return not table.IsEmpty(wonderWeaponsActive)
 end
 
 Randomat:register(EVENT)
