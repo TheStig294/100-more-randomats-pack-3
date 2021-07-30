@@ -136,6 +136,10 @@ if engine.ActiveGamemode() == "terrortown" then
             SWEP.Kind = WEAPON_EQUIP1
             SWEP.AutoSpawnable = false
             SWEP.Slot = 6
+
+            function SWEP:Equip()
+                self:GetOwner():ChatPrint("WUNDERWAFFE DG-2: Shoots a bolt of lightning that one-shot kills!")
+            end
         end
 
         if class == "tfa_wavegun" then
@@ -170,6 +174,11 @@ if engine.ActiveGamemode() == "terrortown" then
             SWEP.SlotPos = 2
             SWEP.Secondary.DefaultClip = 0
             SWEP.Primary.RPM = 125
+            SWEP.PrintName = "Zap Guns"
+
+            function SWEP:Equip()
+                self:GetOwner():ChatPrint("ZAP GUNS: Duel-wield laser guns, press left or right click to shoot!")
+            end
 
             function SWEP:FireRocket()
                 local vm = self:GetOwner():GetViewModel()
@@ -377,6 +386,10 @@ if engine.ActiveGamemode() == "terrortown" then
             SWEP.Kind = WEAPON_EQUIP1
             SWEP.Slot = 6
 
+            function SWEP:Equip()
+                self:GetOwner():ChatPrint("STAFF OF WIND: Shoots shot-range, high damage blasts of air!")
+            end
+
             function SWEP:DoShot(ppos)
                 if SERVER then
                     local dummy = ents.Create("obj_windstaff_proj")
@@ -441,6 +454,10 @@ if engine.ActiveGamemode() == "terrortown" then
             SWEP.Kind = WEAPON_EQUIP1
             SWEP.AutoSpawnable = false
             SWEP.Slot = 6
+
+            function SWEP:Equip()
+                self:GetOwner():ChatPrint("THE BABY MAKER: Shoots an orb that shrinks anyone shot into a baby! Walking into them kicks them and kills them on landing.")
+            end
 
             function SWEP:PrimaryAttack()
                 if self:CanPrimaryAttack() then
@@ -553,12 +570,16 @@ if engine.ActiveGamemode() == "terrortown" then
 
             SWEP.EquipMenuData = {
                 type = "Wonder Weapon",
-                desc = "Shoots a close-range blast of air, which freezes your victims solid! \n\nAny damage with another weapon while frozen instantly kills!"
+                desc = "Shoots a short-range blast of cold air that freezes anyone to death!"
             }
 
             SWEP.Kind = WEAPON_EQUIP1
             SWEP.AutoSpawnable = false
             SWEP.Slot = 6
+
+            function SWEP:Equip()
+                self:GetOwner():ChatPrint("WINTER'S HOWL: Shoots a short-range blast of cold air that freezes anyone to death!")
+            end
         end
 
         if class == "tfa_thundergun" then
@@ -590,6 +611,10 @@ if engine.ActiveGamemode() == "terrortown" then
             SWEP.Kind = WEAPON_EQUIP1
             SWEP.AutoSpawnable = false
             SWEP.Slot = 6
+
+            function SWEP:Equip()
+                self:GetOwner():ChatPrint("THUNDERGUN: Shoots a massive air blast that kills anyone in a close range!")
+            end
 
             function SWEP:DoShot(ppos)
                 if SERVER then
@@ -671,6 +696,10 @@ if engine.ActiveGamemode() == "terrortown" then
             SWEP.Kind = WEAPON_EQUIP1
             SWEP.AutoSpawnable = false
             SWEP.Slot = 6
+
+            function SWEP:Equip()
+                self:GetOwner():ChatPrint("SLIQUIFIER: Shoots slime balls that instantly kill! If you hit someone or the ground, leaves a slippery puddle of slime.")
+            end
         end
 
         if class == "tfa_scavenger" then
@@ -703,6 +732,10 @@ if engine.ActiveGamemode() == "terrortown" then
             SWEP.AutoSpawnable = false
             SWEP.Slot = 6
             SWEP.ProjectileEntity = "obj_scavenger_proj_modified"
+
+            function SWEP:Equip()
+                self:GetOwner():ChatPrint("SCAVENGER: Shoots an explosive that sticks to players and explodes after a few seconds.")
+            end
         end
 
         if class == "tfa_raygun_mark2" then
@@ -735,6 +768,10 @@ if engine.ActiveGamemode() == "terrortown" then
             SWEP.AutoSpawnable = false
             SWEP.Slot = 6
             SWEP.Primary.Damage = 30
+
+            function SWEP:Equip()
+                self:GetOwner():ChatPrint("RAY GUN MARK II: Shoots a burst-fire of high damage lasers!")
+            end
         end
 
         if class == "tfa_raygun" then
@@ -766,6 +803,10 @@ if engine.ActiveGamemode() == "terrortown" then
             SWEP.Kind = WEAPON_EQUIP1
             SWEP.AutoSpawnable = false
             SWEP.Slot = 6
+
+            function SWEP:Equip()
+                self:GetOwner():ChatPrint("RAYGUN: Shoots high-damage lasers! You take recoil damage if you shoot too close to your target.")
+            end
 
             function SWEP:PrimaryAttack()
                 if not self:CanPrimaryAttack() then return end
@@ -845,6 +886,10 @@ if engine.ActiveGamemode() == "terrortown" then
             local CurTime = CurTime
             local mr, mR = math.random, math.Rand
             local snd, snd1, explo, hit1, hit2 = SWEP.snd, SWEP.snd1, SWEP.explo, SWEP.hit1, SWEP.hit2
+
+            function SWEP:Equip()
+                self:GetOwner():ChatPrint("THE JET GUN: Sucks people in and instantly kills! Overheats if used for too long.")
+            end
 
             function SWEP:PrimaryAttack()
                 if not self:CanPrimaryAttack() then
@@ -1089,6 +1134,10 @@ if engine.ActiveGamemode() == "terrortown" then
             SWEP.Primary.Spread = 0.8
             SWEP.Primary.IronAccuracy = 0.6
             SWEP.Primary.Damage = 50
+
+            function SWEP:Equip()
+                self:GetOwner():ChatPrint("BLUNDERGAT: An incredibly powerful shotgun!")
+            end
         end
 
         if class == "tfa_acidgat" then
@@ -1121,6 +1170,10 @@ if engine.ActiveGamemode() == "terrortown" then
             SWEP.AutoSpawnable = false
             SWEP.Slot = 6
             SWEP.ProjectileEntity = "obj_acidgat_proj_modified"
+
+            function SWEP:Equip()
+                self:GetOwner():ChatPrint("ACID GAT: Shoots a burst of sticky explosives that explode after a delay.")
+            end
         end
 
         if class == "tfa_fusionshotgun" then return false end
