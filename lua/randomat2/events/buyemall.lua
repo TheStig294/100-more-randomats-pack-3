@@ -49,31 +49,40 @@ function EVENT:Begin()
 
         if boughtAllDetective and boughtAllTraitor then
             table.insert(boughtEmAllPlayers, ply)
-            ply:ChatPrint("==CONGRATS! YOU BOUGHT 'EM ALL!==\nYou get to choose randomats at the start of each round!")
-
-            timer.Simple(5, function()
-                Randomat:SmallNotify("Someone has bought 'em all!")
-            end)
+            ply:PrintMessage(HUD_PRINTTALK, "==CONGRATS! YOU BOUGHT 'EM ALL!==\nYou get to choose randomats at the start of each round!")
+            ply:PrintMessage(HUD_PRINTCENTER, "CONGRATS! YOU BOUGHT 'EM ALL!")
         elseif boughtAllDetective and not boughtAllTraitor then
-            ply:SetMaxHealth(ply:GetMaxHealth() * 2)
-            ply:SetHealth(ply:GetMaxHealth())
-            ply:ChatPrint("Congrats! You have bought every detective item, your health has been doubled!")
             -- Give them a traitor weapon they haven't bought before
             -- PrintToGive() takes a weapon's print name, a player and gives them the weapon, found in stig_randomat_base_functions.lua
             PrintToGive(traitorBuyable[math.random(#traitorBuyable)], ply)
-            ply:ChatPrint("However, you haven't bought every traitor item at least once. \n(" .. math.Round((#traitorBought / traitorBuyableCount) * 100) .. "% complete)\nBuy them all for the REAL reward...")
+            ply:ChatPrint("==Traitor items never bought==")
+
+            for j, wep in ipairs(traitorBuyable) do
+                ply:ChatPrint("- " .. wep)
+            end
         elseif not boughtAllDetective and boughtAllTraitor then
-            ply:SetMaxHealth(ply:GetMaxHealth() * 2)
-            ply:SetHealth(ply:GetMaxHealth())
-            ply:ChatPrint("Congrats! You have bought every traitor item, your health has been doubled!")
-            -- Give them a traitor weapon they haven't bought before
+            -- Give them a detective weapon they haven't bought before
             PrintToGive(detectiveBuyable[math.random(#detectiveBuyable)], ply)
-            ply:ChatPrint("You haven't bought every detective item at least once. \n(" .. math.Round((#detectiveBought / detectiveBuyableCount) * 100) .. "% complete)\nBuy them all for the REAL reward...")
+            ply:ChatPrint("==Detective items never bought==")
+
+            for j, wep in ipairs(detectiveBuyable) do
+                ply:ChatPrint("- " .. wep)
+            end
         else
             -- If the player hasn't bought every detective nor traitor item at least once, give them a random detective and traitor item they haven't bought before
             PrintToGive(detectiveBuyable[math.random(#detectiveBuyable)], ply)
             PrintToGive(traitorBuyable[math.random(#traitorBuyable)], ply)
-            ply:ChatPrint("(Detective items: " .. math.Round((#detectiveBought / detectiveBuyableCount) * 100) .. "% complete)\n(Traitor items: " .. math.Round((#traitorBought / traitorBuyableCount) * 100) .. "% complete)")
+            ply:ChatPrint("==Detective items never bought==")
+
+            for j, wep in ipairs(detectiveBuyable) do
+                ply:ChatPrint("- " .. wep)
+            end
+
+            ply:ChatPrint("==Traitor items never bought==")
+
+            for j, wep in ipairs(traitorBuyable) do
+                ply:ChatPrint("- " .. wep)
+            end
         end
     end
 
@@ -82,12 +91,20 @@ function EVENT:Begin()
     local vote = GetConVar("randomat_choose_vote"):GetBool()
 
     if table.IsEmpty(boughtEmAllPlayers) == false then
+        -- Displays a randomat alert and message to chat for everyone displaying which players have bought all weapons
+        local boughtEmAllPlayersString = table.ToString(boughtEmAllPlayers, "Players who bought 'em all:", true)
+
+        timer.Simple(5, function()
+            Randomat:SmallNotify("One or players bought 'em all!")
+            PrintMessage(HUD_PRINTTALK, boughtEmAllPlayersString)
+        end)
+
+        -- At the start of every round, for the rest of the current map, a random player that bought every weapon gets to choose the randomat for that round
         GetConVar("ttt_randomat_auto"):SetBool(false)
         GetConVar("randomat_choose_choices"):SetInt(5)
         -- Only allow the player who the randomat triggers off of to choose randomats
         GetConVar("randomat_choose_vote"):SetBool(false)
 
-        -- At the start of every round, for the rest of the current map, a random player that bought every weapon gets to choose the randomat for that round
         hook.Add("TTTBeginRound", "BoughtEmAllRandomat", function()
             Randomat:SilentTriggerEvent("choose", table.Random(boughtEmAllPlayers))
         end)
