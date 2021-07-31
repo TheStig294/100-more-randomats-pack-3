@@ -15,9 +15,6 @@ function EVENT:Begin()
     local traitorBuyableKeyed = GetTraitorBuyable()
     local detectiveBuyable = table.ClearKeys(detectiveBuyableKeyed)
     local traitorBuyable = table.ClearKeys(traitorBuyableKeyed)
-    -- Get the no. of detective/traitor weapons, used for the percentage complete printed to chat
-    local detectiveBuyableCount = #detectiveBuyable
-    local traitorBuyableCount = #traitorBuyable
     local boughtEmAllPlayers = {}
 
     for i, ply in pairs(self:GetPlayers()) do
