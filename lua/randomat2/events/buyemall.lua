@@ -96,6 +96,10 @@ function EVENT:Begin()
             PrintMessage(HUD_PRINTTALK, boughtEmAllPlayersString)
         end)
 
+        timer.Simple(10, function()
+            Randomat:SmallNotify("They now choose a randomat at the start of every round, for the rest of the map!")
+        end)
+
         -- At the start of every round, for the rest of the current map, a random player that bought every weapon gets to choose the randomat for that round
         GetConVar("ttt_randomat_auto"):SetBool(false)
         GetConVar("randomat_choose_choices"):SetInt(5)
