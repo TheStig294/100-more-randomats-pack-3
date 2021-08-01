@@ -92,7 +92,7 @@ function EVENT:Begin()
         local boughtEmAllPlayersString = table.ToString(boughtEmAllPlayers, "Players who bought 'em all:", true)
 
         timer.Simple(5, function()
-            Randomat:SmallNotify("One or players bought 'em all!")
+            Randomat:SmallNotify("One or more players bought 'em all!")
             PrintMessage(HUD_PRINTTALK, boughtEmAllPlayersString)
         end)
 
