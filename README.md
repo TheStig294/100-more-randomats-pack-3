@@ -68,11 +68,6 @@ Being AFK kills you.\
 \
 _ttt_randomat_afk_ - Default: 1 - Whether this randomat is enabled
 
-## Wunderbar!
-Everyone gets a random COD Zombies wonder weapon!\
-\
-_ttt_randomat_wunderbar_ - Default: 1 - Whether this randomat is enabled
-
 ## Reach for the sky
 Everyone gets a jetpack\
 \
