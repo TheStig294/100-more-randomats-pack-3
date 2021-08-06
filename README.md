@@ -19,7 +19,7 @@ Gives everyone a detective and traitor weapon they haven't bought before, accord
 If a player has bought all detective AND traitor items at least once, they get to choose a randomat at the start of every round for the rest of the map!\
 If multiple players have bought all items, they take turns in choosing randomats.\
 \
-Notifies the player how complete each buy menu is.\
+A list of all detective and traitor weapons you are yet to buy is displayed in the chat.\
 \
 _ttt_randomat_buyemall_ - Default: 1 - Whether this randomat is enabled
 
