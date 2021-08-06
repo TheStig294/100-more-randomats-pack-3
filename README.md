@@ -174,6 +174,11 @@ Everyone gets a guard dog\
 \
 _ttt_randomat_woof_ - Default: 1 - Whether this randomat is enabled
 
+## Wunderbar!
+Everyone gets a random COD Zombies wonder weapon!\
+\
+_ttt_randomat_wunderbar_ - Default: 1 - Whether this randomat is enabled
+
 
 
 # Randomats made by "nanz"
