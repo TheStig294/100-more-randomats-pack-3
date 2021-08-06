@@ -16,7 +16,6 @@ _ttt_randomat_event_hint_chat_ - Default: 1 - Whether hints should also be put i
 ## Gotta buy 'em all!
 Gives everyone a detective and traitor weapon they haven't bought before, according to the TTT stats mod. If the two weapons take the same slot, only the traitor weapon is given. \
 \
-If a player has bought all detective or traitor items at least once, they get double health, and an item from the buy menu they haven't completed.\
 If a player has bought all detective AND traitor items at least once, they get to choose a randomat at the start of every round for the rest of the map!\
 If multiple players have bought all items, they take turns in choosing randomats.\
 \
