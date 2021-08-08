@@ -456,14 +456,14 @@ if engine.ActiveGamemode() == "terrortown" then
             SWEP.Primary.DefaultClip = GetConVar("ttt_lightningstaff_ammo"):GetInt()
             -- SWEP.EquipMenuData = {
             --     type = "Wonder Weapon",
-            --     desc = "Rapidly shoots plasma balls that deal moderate damage"
+            --     desc = "Rapidly shoots plasma balls!"
             -- }
             SWEP.Kind = WEAPON_EQUIP1
             SWEP.AutoSpawnable = false
             SWEP.Slot = 6
 
             function SWEP:Equip()
-                self:GetOwner():ChatPrint("STAFF OF LIGHTNING: Rapidly shoots plasma balls that deal moderate damage")
+                self:GetOwner():ChatPrint("STAFF OF LIGHTNING: Rapidly shoots plasma balls!")
             end
 
             hook.Add("EntityTakeDamage", "LightningStaffDamageHack", function(ent, dmg)
