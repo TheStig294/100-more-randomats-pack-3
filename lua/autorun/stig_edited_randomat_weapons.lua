@@ -385,6 +385,14 @@ if engine.ActiveGamemode() == "terrortown" then
             end
 
             RunConsoleCommand("wintershowl_freezeplayers", "1")
+
+            hook.Add("EntityTakeDamage", "WintershowlDamageHack", function(ent, dmg)
+                if dmg:GetInflictor() ~= NULL and dmg:GetInflictor():GetClass() == "tfa_wintershowl" and ent ~= NULL and ent:IsPlayer() then
+                    timer.Simple(0.1, function()
+                        ent:Freeze(true)
+                    end)
+                end
+            end)
         end
 
         if class == "tfa_thundergun" then
