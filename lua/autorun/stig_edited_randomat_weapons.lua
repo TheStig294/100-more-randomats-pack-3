@@ -391,6 +391,10 @@ if engine.ActiveGamemode() == "terrortown" then
                     timer.Simple(0.1, function()
                         ent:Freeze(true)
                     end)
+
+                    timer.Simple(6, function()
+                        ent:Freeze(false)
+                    end)
                 end
             end)
         end
