@@ -298,14 +298,21 @@ if engine.ActiveGamemode() == "terrortown" then
                     end
 
                     timer.Simple(0, function()
-                        hook.Add("Think", "BabyMakerDemonicSummoningBugFix", function()
-                            ent:SetNWBool("IsBaby", false)
-                            ent:SetNWBool("ShouldKickBaby", false)
-                            ent:SetNWBool("BabyOnGround", false)
-                            timer.Remove("BabyHitGround" .. ent:EntIndex())
+                        hook.Add("Think", "BabyMakerRespawnFix" .. ent:EntIndex(), function()
+                            if ent ~= NULL then
+                                ent:SetNWBool("IsBaby", false)
+                                ent:SetNWBool("ShouldKickBaby", false)
+                                ent:SetNWBool("BabyOnGround", false)
+                                timer.Remove("BabyHitGround" .. ent:EntIndex())
 
-                            if ent:Alive() and not ent:IsSpec() then
-                                hook.Remove("Think", "BabyMakerDemonicSummoningBugFix")
+                                if ent:Alive() and not ent:IsSpec() then
+                                    hook.Remove("Think", "BabyMakerRespawnFix" .. ent:EntIndex())
+                                    ent:SetModelScale(1)
+
+                                    if ent:LookupBone("ValveBiped.Bip01_Head1") ~= nil then
+                                        ent:ManipulateBoneScale(ent:LookupBone("ValveBiped.Bip01_Head1"), Vector(1, 1, 1))
+                                    end
+                                end
                             end
                         end)
                     end)
