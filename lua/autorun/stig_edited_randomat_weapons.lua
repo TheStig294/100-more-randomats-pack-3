@@ -540,7 +540,7 @@ if engine.ActiveGamemode() == "terrortown" then
         end
 
         if class == "tfa_scavenger" then
-            CreateConVar("ttt_scavenger_ammo", "4", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Starting ammo of the scavenger", 0)
+            CreateConVar("ttt_scavenger_ammo", "3", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Starting ammo of the scavenger", 0)
 
             CreateConVar("ttt_scavenger_clip", "3", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Magazine size of the scavenger", 0)
 
