@@ -126,6 +126,7 @@ end
 
 function EVENT:Condition()
     if Randomat:IsEventActive("slam") or Randomat:IsEventActive("prophunt") or Randomat:IsEventActive("grave") then return false end
+    if not file.Exists("models/bandicoot/bandicoot.mdl", "THIRDPARTY") then return false end
     local weaponid = GetConVar("randomat_whoa_weaponid"):GetString()
 
     return util.WeaponForClass(weaponid) ~= nil
