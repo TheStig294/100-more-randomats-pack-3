@@ -2,8 +2,9 @@ local standardHeightVector = Vector(0, 0, 64)
 local standardCrouchedHeightVector = Vector(0, 0, 28)
 local playerModels = {}
 local remainingModels = {}
+local playerColors = {}
 
-local yogsModels = {"models/darthsidius_christmas/emperor_palpatine.mdl", "models/dwarf_christmas/riftdwarf.mdl", "models/darthsidius_christmas/emperor_palpatine.mdl", "models/elsa_christmas/player_elsa.mdl", "models/kermit_christmas/kermit.mdl", "models/left_shark_christmas/left_shark.mdl", "models/lich_king_christmas/lich_king_wow_masked.mdl", "models/mercy_christmas/tfa_ow_mercy.mdl", "models/pcmr_christmas/yahtzee.mdl"}
+local yogsModels = {"models/darthsidius_christmas/emperor_palpatine.mdl", "models/dwarf_christmas/riftdwarf.mdl", "models/darthsidius_christmas/emperor_palpatine.mdl", "models/kermit_christmas/kermit.mdl", "models/left_shark_christmas/left_shark.mdl", "models/lich_king_christmas/lich_king_wow_masked.mdl", "models/mercy_christmas/tfa_ow_mercy.mdl", "models/pcmr_christmas/yahtzee.mdl"}
 
 local EVENT = {}
 EVENT.Title = "Jingle Jam"
@@ -65,6 +66,7 @@ function EVENT:End()
             -- this does however first reset their viewmodel in the preparing phase (when they respawn)
             -- might be glitchy with pointshop items that allow you to get a viewoffset
             v:SetModel(playerModels[k])
+            v:SetPlayerColor(playerColors[k])
         end
 
         -- we reset the cl_playermodel_selector_force to 1, otherwise TTT will reset their playermodels on a new round start (to default models!)
