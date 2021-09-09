@@ -299,7 +299,7 @@ if engine.ActiveGamemode() == "terrortown" then
 
                     timer.Simple(0, function()
                         hook.Add("Think", "BabyMakerRespawnFix" .. ent:EntIndex(), function()
-                            if ent ~= NULL then
+                            if IsValid(ent) then
                                 ent:SetNWBool("IsBaby", false)
                                 ent:SetNWBool("ShouldKickBaby", false)
                                 ent:SetNWBool("BabyOnGround", false)
@@ -316,6 +316,20 @@ if engine.ActiveGamemode() == "terrortown" then
                             end
                         end)
                     end)
+
+                    if CLIENT then
+                        hook.Add("Think", "KickBabyGunClientOverride", function()
+                            hook.Remove("Think", "KickBabyGunClient")
+
+                            for k, v in pairs(ents.FindInSphere(LocalPlayer():GetPos(), 36)) do
+                                if v:GetNWBool("IsBaby") and v:GetNWBool("ShouldKickBaby") and v ~= LocalPlayer() and LocalPlayer():Alive() and not LocalPlayer():IsSpec() then
+                                    net.Start("nzBabyKicked", false)
+                                    net.WriteEntity(v)
+                                    net.SendToServer()
+                                end
+                            end
+                        end)
+                    end
                 end
             end)
         end
