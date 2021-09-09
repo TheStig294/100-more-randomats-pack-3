@@ -802,4 +802,14 @@ if engine.ActiveGamemode() == "terrortown" then
             end)
         end
     end)
+
+    hook.Add("PreRegisterSENT", "WonderEntitiesModified", function(ENT, class)
+        if class == "obj_humangun_proj" then
+            function ENT:Think()
+                if self.LifeTime and CurTime() > self.LifeTime then
+                    self:Remove()
+                end
+            end
+        end
+    end)
 end
