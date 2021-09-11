@@ -305,14 +305,34 @@ if engine.ActiveGamemode() == "terrortown" then
                                 ent:SetNWBool("ShouldKickBaby", false)
                                 ent:SetNWBool("BabyOnGround", false)
                                 timer.Remove("BabyHitGround" .. ent:EntIndex())
+                                hook.Remove("Think", "BabyMakerRespawnFix" .. ent:EntIndex())
 
-                                if ent:Alive() and not ent:IsSpec() then
-                                    hook.Remove("Think", "BabyMakerRespawnFix" .. ent:EntIndex())
+                                if ent:IsPlayer() and (ent:IsSpec() or not ent:Alive()) then
                                     ent:SetModelScale(1)
 
                                     if ent:LookupBone("ValveBiped.Bip01_Head1") ~= nil then
                                         ent:ManipulateBoneScale(ent:LookupBone("ValveBiped.Bip01_Head1"), Vector(1, 1, 1))
                                     end
+
+                                    ent:SetViewOffset(Vector(0, 0, 64))
+                                end
+
+                                if not timer.Exists("BabyMakerJesterKickFix") then
+                                    timer.Create("BabyMakerJesterKickFix", 3, 1, function()
+                                        if ent:IsPlayer() and ent:Alive() and not ent:IsSpec() then
+                                            ent:SetModelScale(1, 0.5)
+                                            ent:SetHealth(ent:GetNWInt("backuphealth"))
+
+                                            if ent:LookupBone("ValveBiped.Bip01_Head1") ~= nil then
+                                                ent:ManipulateBoneScale(ent:LookupBone("ValveBiped.Bip01_Head1"), Vector(1, 1, 1))
+                                            end
+
+                                            ent:EmitSound("weapons/shrinkray/effects/evt_unshrink.ogg")
+                                            ParticleEffectAttach("babygun_ring_inverted", PATTACH_POINT_FOLLOW, v, 1)
+                                            ent:SetViewOffset(Vector(0, 0, 64))
+                                            ent:SetCollisionGroup(COLLISION_GROUP_PLAYER)
+                                        end
+                                    end)
                                 end
                             end
                         end)
