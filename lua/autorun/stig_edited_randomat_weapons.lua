@@ -478,9 +478,13 @@ if engine.ActiveGamemode() == "terrortown" then
 
             hook.Add("EntityTakeDamage", "ThundergunDamageHack", function(ent, dmg)
                 if dmg:GetDamageType() == DMG_SONIC and dmg:GetAttacker() ~= NULL and dmg:GetAttacker():IsPlayer() and dmg:GetAttacker():GetActiveWeapon() ~= NULL and dmg:GetAttacker():GetActiveWeapon():GetClass() == "tfa_thundergun" then
-                    dmg:SetInflictor(dmg:GetAttacker():GetActiveWeapon())
+                    local attacker = dmg:GetAttacker()
+                    local aimVector = attacker:GetAimVector()
+                    dmg:SetInflictor(attacker:GetActiveWeapon())
                     dmg:SetDamage(GetConVar("ttt_thundergun_damage"):GetFloat())
                     dmg:SetDamageType(DMG_BLAST)
+                    dmg:SetDamageForce(attacker:GetAimVector() * 2000)
+                    ent:SetVelocity(ent:GetVelocity() + Vector(aimVector.x, aimVector.y, math.max(1, aimVector.z + .35)) * math.Rand(500 * .8, 500 * 1.2) * 2)
                 end
             end)
         end
