@@ -466,14 +466,14 @@ if engine.ActiveGamemode() == "terrortown" then
             SWEP.Primary.DefaultClip = GetConVar("ttt_thundergun_ammo"):GetInt()
             -- SWEP.EquipMenuData = {
             --     type = "Wonder Weapon",
-            --     desc = "Shoots a massive air blast that kills anyone in a close range."
+            --     desc = "Shoots a massive air blast that sends anyone in a close range flying!"
             -- }
             SWEP.Kind = WEAPON_EQUIP1
             SWEP.AutoSpawnable = false
             SWEP.Slot = 6
 
             function SWEP:Equip()
-                self:GetOwner():ChatPrint("THUNDERGUN: Shoots a massive air blast that kills anyone in a close range!")
+                self:GetOwner():ChatPrint("THUNDERGUN: Shoots a massive air blast that sends anyone in a close range flying!")
             end
 
             hook.Add("EntityTakeDamage", "ThundergunDamageHack", function(ent, dmg)
