@@ -187,7 +187,6 @@ Everyone is continually given home run bats!\
 Changed name from "Batter Up!"\
 \
 _ttt_randomat_homerun_ - Default: 1 - Whether this randomat is enabled\
-_randomat_homerun_timer_ - Default: 3 - Time between being given bats\
 _randomat_homerun_strip_ - Default: 1 - The event strips your other weapons\
 _randomat_homerun_weaponid_ - Default: weapon_ttt_homebat - Id of the weapon given
 
