@@ -7,7 +7,7 @@ if randomatRandomSeed then
     math.randomseed(os.time())
 
     -- Pre-emptively calculating unused random numbers to improve the randomness when math.random() is actually used
-    for i = 1, 2000 do
+    for i = 1, 4000 do
         math.random()
     end
 
@@ -197,7 +197,7 @@ end
 
 --Hard-coded list of maps known to not have AI meshes, randomats that give out weapons using AI will not trigger on these maps
 function MapHasAI()
-    local maps = {"gm_artisanshome", "gm_michaelshouse", "gm_rayman2_fairyglade_a6", "dm_christmas_in_the_suburbs", "dm_overwatch", "animal_crossing", "thefirstmap_final", "rp_lordaeron", "ttt_fallingwater", "ttt_halloween", "ttt_ile", "ttt_islandstreets", "ttt_minecraft_b5-40", "ttt_starwars_final", "ttt_upstate", "ttt_riverside_b3", "ttt_silenthill", "ttt_waterworld_remastered_2020", "ttt_winter_project", "ttt_woodshop"}
+    local maps = {"gm_michaelshouse", "dm_christmas_in_the_suburbs", "dm_overwatch", "thefirstmap_final", "rp_lordaeron", "ttt_halloween", "ttt_minecraft_b5-40", "ttt_starwars_final", "ttt_riverside_b3", "ttt_woodshop"}
 
     local mapHasAI = true
 
