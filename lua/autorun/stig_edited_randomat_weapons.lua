@@ -286,9 +286,29 @@ if engine.ActiveGamemode() == "terrortown" then
                 self:GetOwner():ChatPrint("THE BABY MAKER: Shoots an orb that shrinks anyone it hits!\nThis reduces them to 1 health. Walking into anyone while shrunk kills them.")
             end
 
+            -- Immediately resets spectators hit by the baby maker orb, preventing them from coming back as babies if they somehow then respawn
+            hook.Add("PlayerPostThink", "BabyMakerSpectatorFix", function(ply)
+                if (ply:GetNWBool("IsBaby") or ply:GetNWBool("ShouldKickBaby") or ply:GetNWBool("BabyOnGround")) and ply:IsSpec() and not ply:Alive() then
+                    ply:SetNWBool("IsBaby", false)
+                    ply:SetNWBool("ShouldKickBaby", false)
+                    ply:SetNWBool("BabyOnGround", false)
+                    timer.Remove("BabyHitGround" .. ply:EntIndex())
+                    ply:SetModelScale(1)
+
+                    if ply:LookupBone("ValveBiped.Bip01_Head1") ~= nil then
+                        ply:ManipulateBoneScale(ply:LookupBone("ValveBiped.Bip01_Head1"), Vector(1, 1, 1))
+                    end
+
+                    ply:SetViewOffset(Vector(0, 0, 64))
+                end
+            end)
+
+            -- The main damage hack that lets the baby maker function, runs as soon as as a shrunk player hits the ground
             hook.Add("EntityTakeDamage", "BabyMakerDamageHack", function(ent, dmg)
                 if ent:GetNWBool("IsBaby") then
+                    -- Babies are immune to crush/prop damage
                     if IsValid(ent) and ent:IsPlayer() and dmg:GetDamageType() == DMG_CRUSH then return true end
+                    -- Setting an attacker and inflictor so TTT doesn't error
                     local attacker = dmg:GetAttacker()
                     dmg:SetDamageType(DMG_CLUB)
                     dmg:SetAttacker(attacker)
@@ -298,6 +318,7 @@ if engine.ActiveGamemode() == "terrortown" then
                         dmg:SetInflictor(attacker:GetWeapon("tfa_shrinkray"))
                     end
 
+                    -- Removing the baby maker effects, as these aren't reset when a player respawns
                     timer.Simple(0, function()
                         hook.Add("Think", "BabyMakerRespawnFix" .. ent:EntIndex(), function()
                             if IsValid(ent) then
@@ -317,6 +338,8 @@ if engine.ActiveGamemode() == "terrortown" then
                                     ent:SetViewOffset(Vector(0, 0, 64))
                                 end
 
+                                -- If a player incapable of dealing damage kicks a baby, they will survive
+                                -- This ensures the baby maker reset effects then happen as normal
                                 if not timer.Exists("BabyMakerJesterKickFix") then
                                     timer.Create("BabyMakerJesterKickFix", 3, 1, function()
                                         if ent:IsPlayer() and ent:Alive() and not ent:IsSpec() then
@@ -341,6 +364,7 @@ if engine.ActiveGamemode() == "terrortown" then
             end)
 
             if CLIENT then
+                -- Preventing spectators and dead players from kicking babies...
                 hook.Add("Think", "KickBabyGunClientOverride", function()
                     hook.Remove("Think", "KickBabyGunClient")
 
@@ -391,6 +415,10 @@ if engine.ActiveGamemode() == "terrortown" then
                     self:OnPaP()
                 end)
             end
+
+            game.AddParticles("particles/humangun.pcf")
+            PrecacheParticleSystem("vr11_muzzle_pap")
+            PrecacheParticleSystem("vr11_muzzle")
         end
 
         if class == "tfa_wintershowl" then
@@ -700,6 +728,12 @@ if engine.ActiveGamemode() == "terrortown" then
                     dmg:SetDamageType(DMG_SONIC)
                 end
             end)
+
+            game.AddParticles("particles/raygun.pcf")
+            PrecacheParticleSystem("raygun_impact")
+            PrecacheParticleSystem("raygun_impact_pap")
+            PrecacheParticleSystem("raygun_trail")
+            PrecacheParticleSystem("raygun_trail_pap")
         end
 
         if class == "tfa_paralyzer" then return false end
