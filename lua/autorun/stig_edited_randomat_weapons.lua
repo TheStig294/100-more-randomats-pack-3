@@ -112,9 +112,9 @@ if engine.ActiveGamemode() == "terrortown" then
 
             CreateConVar("ttt_wunderwaffe_clip", "3", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Magazine size of the wunderwaffe", 0)
 
-            -- CreateConVar("ttt_wunderwaffe_detective", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Whether a detective can by the wunderwaffe", 0, 1)
-            -- CreateConVar("ttt_wunderwaffe_traitor", "1", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Whether a traitor can by the wunderwaffe", 0, 1)
-            CreateConVar("ttt_wunderwaffe_disable", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Disable the wunderwaffe", 0, 1)
+            -- CreateConVar("ttt_wunderwaffe_detective", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Whether a detective can by the wunderwaffe", 0, 1)
+            -- CreateConVar("ttt_wunderwaffe_traitor", "1", {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Whether a traitor can by the wunderwaffe", 0, 1)
+            CreateConVar("ttt_wunderwaffe_disable", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Disable the wunderwaffe", 0, 1)
 
             CreateConVar("ttt_wunderwaffe_damage", "1000", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Damage of the wunderwaffe", 0)
 
@@ -156,9 +156,9 @@ if engine.ActiveGamemode() == "terrortown" then
 
             CreateConVar("ttt_wavegun_clip", "16", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Magazine size of the wavegun", 0)
 
-            -- CreateConVar("ttt_wavegun_detective", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Whether a detective can by the wavegun", 0, 1)
-            -- CreateConVar("ttt_wavegun_traitor", "1", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Whether a traitor can by the wavegun", 0, 1)
-            CreateConVar("ttt_wavegun_disable", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Disable the wavegun", 0, 1)
+            -- CreateConVar("ttt_wavegun_detective", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Whether a detective can by the wavegun", 0, 1)
+            -- CreateConVar("ttt_wavegun_traitor", "1", {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Whether a traitor can by the wavegun", 0, 1)
+            CreateConVar("ttt_wavegun_disable", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Disable the wavegun", 0, 1)
 
             CreateConVar("ttt_wavegun_damage", "20", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Damage of the wavegun, will be multiplied by 2, e.g. set this to 20, = 40 damage", 0)
 
@@ -204,9 +204,9 @@ if engine.ActiveGamemode() == "terrortown" then
 
             CreateConVar("ttt_windstaff_clip", "3", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Magazine size of the windstaff", 0)
 
-            -- CreateConVar("ttt_windstaff_detective", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Whether a detective can by the windstaff", 0, 1)
-            -- CreateConVar("ttt_windstaff_traitor", "1", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Whether a traitor can by the windstaff", 0, 1)
-            CreateConVar("ttt_windstaff_disable", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Disable the windstaff", 0, 1)
+            -- CreateConVar("ttt_windstaff_detective", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Whether a detective can by the windstaff", 0, 1)
+            -- CreateConVar("ttt_windstaff_traitor", "1", {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Whether a traitor can by the windstaff", 0, 1)
+            CreateConVar("ttt_windstaff_disable", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Disable the windstaff", 0, 1)
 
             CreateConVar("ttt_windstaff_damage", "50", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Damage of the windstaff, attacks at a longer range deal 1/2 damage", 0)
 
@@ -256,9 +256,9 @@ if engine.ActiveGamemode() == "terrortown" then
 
             CreateConVar("ttt_shrinkray_clip", "5", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Magazine size of the shrinkray", 0)
 
-            -- CreateConVar("ttt_shrinkray_detective", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Whether a detective can by the shrinkray", 0, 1)
-            -- CreateConVar("ttt_shrinkray_traitor", "1", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Whether a traitor can by the shrinkray", 0, 1)
-            CreateConVar("ttt_shrinkray_disable", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Disable the shrinkray", 0, 1)
+            -- CreateConVar("ttt_shrinkray_detective", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Whether a detective can by the shrinkray", 0, 1)
+            -- CreateConVar("ttt_shrinkray_traitor", "1", {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Whether a traitor can by the shrinkray", 0, 1)
+            CreateConVar("ttt_shrinkray_disable", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Disable the shrinkray", 0, 1)
 
             if GetConVar("ttt_shrinkray_disable"):GetBool() then return false end
             -- if GetConVar("ttt_shrinkray_detective"):GetBool() and GetConVar("ttt_shrinkray_traitor"):GetBool() then
@@ -384,9 +384,9 @@ if engine.ActiveGamemode() == "terrortown" then
 
             CreateConVar("ttt_vr11_clip", "3", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Magazine size of the vr11", 0)
 
-            -- CreateConVar("ttt_vr11_detective", "1", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Whether a detective can by the vr11", 0, 1)
-            -- CreateConVar("ttt_vr11_traitor", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Whether a traitor can by the vr11", 0, 1)
-            CreateConVar("ttt_vr11_disable", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Disable the vr11", 0, 1)
+            -- CreateConVar("ttt_vr11_detective", "1", {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Whether a detective can by the vr11", 0, 1)
+            -- CreateConVar("ttt_vr11_traitor", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Whether a traitor can by the vr11", 0, 1)
+            CreateConVar("ttt_vr11_disable", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Disable the vr11", 0, 1)
 
             if GetConVar("ttt_vr11_disable"):GetBool() then return false end
             -- if GetConVar("ttt_vr11_detective"):GetBool() and GetConVar("ttt_vr11_traitor"):GetBool() then
@@ -426,9 +426,9 @@ if engine.ActiveGamemode() == "terrortown" then
 
             CreateConVar("ttt_wintershowl_clip", "4", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Magazine size of the wintershowl", 0)
 
-            -- CreateConVar("ttt_wintershowl_detective", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Whether a detective can by the wintershowl", 0, 1)
-            -- CreateConVar("ttt_wintershowl_traitor", "1", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Whether a traitor can by the wintershowl", 0, 1)
-            CreateConVar("ttt_wintershowl_disable", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Disable the wintershowl", 0, 1)
+            -- CreateConVar("ttt_wintershowl_detective", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Whether a detective can by the wintershowl", 0, 1)
+            -- CreateConVar("ttt_wintershowl_traitor", "1", {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Whether a traitor can by the wintershowl", 0, 1)
+            CreateConVar("ttt_wintershowl_disable", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Disable the wintershowl", 0, 1)
 
             if GetConVar("ttt_wintershowl_disable"):GetBool() then return false end
             -- if GetConVar("ttt_wintershowl_detective"):GetBool() and GetConVar("ttt_wintershowl_traitor"):GetBool() then
@@ -474,9 +474,9 @@ if engine.ActiveGamemode() == "terrortown" then
 
             CreateConVar("ttt_thundergun_clip", "2", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Magazine size of the thundergun", 0)
 
-            -- CreateConVar("ttt_thundergun_detective", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Whether a detective can by the thundergun", 0, 1)
-            -- CreateConVar("ttt_thundergun_traitor", "1", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Whether a traitor can by the thundergun", 0, 1)
-            CreateConVar("ttt_thundergun_disable", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Disable the thundergun", 0, 1)
+            -- CreateConVar("ttt_thundergun_detective", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Whether a detective can by the thundergun", 0, 1)
+            -- CreateConVar("ttt_thundergun_traitor", "1", {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Whether a traitor can by the thundergun", 0, 1)
+            CreateConVar("ttt_thundergun_disable", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Disable the thundergun", 0, 1)
 
             CreateConVar("ttt_thundergun_damage", "1000", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Damage of the thundergun", 0)
 
@@ -522,9 +522,9 @@ if engine.ActiveGamemode() == "terrortown" then
 
             CreateConVar("ttt_lightningstaff_clip", "12", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Magazine size of the lightningstaff", 0)
 
-            -- CreateConVar("ttt_lightningstaff_detective", "1", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Whether a detective can by the lightningstaff", 0, 1)
-            -- CreateConVar("ttt_lightningstaff_traitor", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Whether a traitor can by the lightningstaff", 0, 1)
-            CreateConVar("ttt_lightningstaff_disable", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Disable the lightningstaff", 0, 1)
+            -- CreateConVar("ttt_lightningstaff_detective", "1", {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Whether a detective can by the lightningstaff", 0, 1)
+            -- CreateConVar("ttt_lightningstaff_traitor", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Whether a traitor can by the lightningstaff", 0, 1)
+            CreateConVar("ttt_lightningstaff_disable", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Disable the lightningstaff", 0, 1)
 
             CreateConVar("ttt_lightningstaff_damage", "30", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Damage of the lightningstaff", 0)
 
@@ -568,9 +568,9 @@ if engine.ActiveGamemode() == "terrortown" then
 
             CreateConVar("ttt_sliquifier_clip", "5", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Magazine size of the sliquifier", 0)
 
-            -- CreateConVar("ttt_sliquifier_detective", "1", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Whether a detective can by the sliquifier", 0, 1)
-            -- CreateConVar("ttt_sliquifier_traitor", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Whether a traitor can by the sliquifier", 0, 1)
-            CreateConVar("ttt_sliquifier_disable", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Disable the sliquifier", 0, 1)
+            -- CreateConVar("ttt_sliquifier_detective", "1", {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Whether a detective can by the sliquifier", 0, 1)
+            -- CreateConVar("ttt_sliquifier_traitor", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Whether a traitor can by the sliquifier", 0, 1)
+            CreateConVar("ttt_sliquifier_disable", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Disable the sliquifier", 0, 1)
 
             CreateConVar("ttt_sliquifier_damage", "1000", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Damage of the sliquifier", 0)
 
@@ -611,9 +611,9 @@ if engine.ActiveGamemode() == "terrortown" then
 
             CreateConVar("ttt_scavenger_clip", "3", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Magazine size of the scavenger", 0)
 
-            -- CreateConVar("ttt_scavenger_detective", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Whether a detective can by the scavenger", 0, 1)
-            -- CreateConVar("ttt_scavenger_traitor", "1", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Whether a traitor can by the scavenger", 0, 1)
-            CreateConVar("ttt_scavenger_disable", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Disable the scavenger", 0, 1)
+            -- CreateConVar("ttt_scavenger_detective", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Whether a detective can by the scavenger", 0, 1)
+            -- CreateConVar("ttt_scavenger_traitor", "1", {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Whether a traitor can by the scavenger", 0, 1)
+            CreateConVar("ttt_scavenger_disable", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Disable the scavenger", 0, 1)
 
             CreateConVar("ttt_scavenger_damage", "1000", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Damage of the scavenger", 0)
 
@@ -654,9 +654,9 @@ if engine.ActiveGamemode() == "terrortown" then
 
             CreateConVar("ttt_raygun_mark2_clip", "21", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Magazine size of the raygun_mark2", 0)
 
-            -- CreateConVar("ttt_raygun_mark2_detective", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Whether a detective can by the raygun_mark2", 0, 1)
-            -- CreateConVar("ttt_raygun_mark2_traitor", "1", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Whether a traitor can by the raygun_mark2", 0, 1)
-            CreateConVar("ttt_raygun_mark2_disable", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Disable the raygun_mark2", 0, 1)
+            -- CreateConVar("ttt_raygun_mark2_detective", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Whether a detective can by the raygun_mark2", 0, 1)
+            -- CreateConVar("ttt_raygun_mark2_traitor", "1", {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Whether a traitor can by the raygun_mark2", 0, 1)
+            CreateConVar("ttt_raygun_mark2_disable", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Disable the raygun_mark2", 0, 1)
 
             CreateConVar("ttt_raygun_mark2_damage", "30", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Damage of the raygun_mark2", 0)
 
@@ -691,9 +691,9 @@ if engine.ActiveGamemode() == "terrortown" then
 
             CreateConVar("ttt_raygun_clip", "20", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Magazine size of the raygun", 0)
 
-            -- CreateConVar("ttt_raygun_detective", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Whether a detective can by the raygun", 0, 1)
-            -- CreateConVar("ttt_raygun_traitor", "1", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Whether a traitor can by the raygun", 0, 1)
-            CreateConVar("ttt_raygun_disable", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Disable the raygun", 0, 1)
+            -- CreateConVar("ttt_raygun_detective", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Whether a detective can by the raygun", 0, 1)
+            -- CreateConVar("ttt_raygun_traitor", "1", {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Whether a traitor can by the raygun", 0, 1)
+            CreateConVar("ttt_raygun_disable", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Disable the raygun", 0, 1)
 
             CreateConVar("ttt_raygun_damage", "30", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Damage of the raygun", 0)
 
@@ -739,9 +739,9 @@ if engine.ActiveGamemode() == "terrortown" then
         if class == "tfa_paralyzer" then return false end
 
         if class == "tfa_jetgun" then
-            -- CreateConVar("ttt_jetgun_detective", "1", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Whether a detective can by the jetgun", 0, 1)
-            -- CreateConVar("ttt_jetgun_traitor", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Whether a traitor can by the jetgun", 0, 1)
-            CreateConVar("ttt_jetgun_disable", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Disable the jetgun", 0, 1)
+            -- CreateConVar("ttt_jetgun_detective", "1", {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Whether a detective can by the jetgun", 0, 1)
+            -- CreateConVar("ttt_jetgun_traitor", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Whether a traitor can by the jetgun", 0, 1)
+            CreateConVar("ttt_jetgun_disable", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Disable the jetgun", 0, 1)
 
             if GetConVar("ttt_jetgun_disable"):GetBool() then return false end
             -- if GetConVar("ttt_jetgun_detective"):GetBool() and GetConVar("ttt_jetgun_traitor"):GetBool() then
@@ -783,9 +783,9 @@ if engine.ActiveGamemode() == "terrortown" then
 
             CreateConVar("ttt_blundergat_clip", "1", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Magazine size of the blundergat", 0)
 
-            -- CreateConVar("ttt_blundergat_detective", "1", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Whether a detective can by the blundergat", 0, 1)
-            -- CreateConVar("ttt_blundergat_traitor", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Whether a traitor can by the blundergat", 0, 1)
-            CreateConVar("ttt_blundergat_disable", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Disable the blundergat", 0, 1)
+            -- CreateConVar("ttt_blundergat_detective", "1", {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Whether a detective can by the blundergat", 0, 1)
+            -- CreateConVar("ttt_blundergat_traitor", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Whether a traitor can by the blundergat", 0, 1)
+            CreateConVar("ttt_blundergat_disable", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Disable the blundergat", 0, 1)
 
             CreateConVar("ttt_blundergat_damage", "50", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Damage of the blundergat, per bullet", 0)
 
@@ -822,9 +822,9 @@ if engine.ActiveGamemode() == "terrortown" then
 
             CreateConVar("ttt_acidgat_clip", "3", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Magazine size of the acidgat", 0)
 
-            -- CreateConVar("ttt_acidgat_detective", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Whether a detective can by the acidgat", 0, 1)
-            -- CreateConVar("ttt_acidgat_traitor", "1", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Whether a traitor can by the acidgat", 0, 1)
-            CreateConVar("ttt_acidgat_disable", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Disable the acidgat", 0, 1)
+            -- CreateConVar("ttt_acidgat_detective", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Whether a detective can by the acidgat", 0, 1)
+            -- CreateConVar("ttt_acidgat_traitor", "1", {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Whether a traitor can by the acidgat", 0, 1)
+            CreateConVar("ttt_acidgat_disable", "0", {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Disable the acidgat", 0, 1)
 
             CreateConVar("ttt_acidgat_damage", "40", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Damage of the acidgat, per explosive (x3)", 0)
 
