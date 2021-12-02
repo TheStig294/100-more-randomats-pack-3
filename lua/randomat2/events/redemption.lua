@@ -74,6 +74,7 @@ function EVENT:Begin()
 end
 
 function EVENT:Condition()
+    -- First check there are at least 2 traitors and the stats mod is installed
     local traitorCount = 0
 
     for i, ply in pairs(self:GetAlivePlayers()) do
@@ -81,9 +82,28 @@ function EVENT:Condition()
             traitorCount = traitorCount + 1
         end
     end
-    -- Trigger when there is more than 1 traitor, and 'TTT Total Statistics' is installed
 
-    return traitorCount > 1 and file.Exists("gamemodes/terrortown/entities/entities/ttt_total_statistics/init.lua", "THIRDPARTY")
+    if not (traitorCount >= 2 and file.Exists("gamemodes/terrortown/entities/entities/ttt_total_statistics/init.lua", "THIRDPARTY")) then return false end
+    -- Next check the stats needed for this randomat actually exist
+    local data = file.Read("ttt/ttt_total_statistics/stats.txt", "DATA")
+    local stats = util.JSONToTable(data)
+    local chosenTraitor = table.Random(self:GetAlivePlayers())
+    local id = chosenTraitor:SteamID()
+    local traitorStats
+
+    -- Compatibility with original stats mod, and the one made for Noxx's custom roles
+    if stats[id]["TraitorPartners"] ~= nil then
+        traitorStats = stats[id]["TraitorPartners"]
+    else
+        traitorStats = stats[id]["traitorPartners"]
+    end
+
+    -- Getting the winrates of everyone, if anyone's doesn't exist, stop the event from running
+    for i, ply in pairs(self:GetAlivePlayers()) do
+        if not (traitorStats[ply:SteamID()] and traitorStats[ply:SteamID()]) then return false end
+    end
+
+    return true
 end
 
 Randomat:register(EVENT)
