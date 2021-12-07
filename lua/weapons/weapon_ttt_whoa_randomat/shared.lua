@@ -59,7 +59,7 @@ function SWEP:PrimaryAttack()
 
     -- Play the crash bandicoot spin attack sound
     if SERVER then
-        self:GetOwner():EmitSound(Sound("whoa/whoa.wav"))
+        self:GetOwner():EmitSound(Sound("whoa/whoa.mp3"))
     end
 
     -- Set the player to start spinning

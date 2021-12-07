@@ -89,7 +89,7 @@ if engine.ActiveGamemode() == "terrortown" then
                     end)
                 end
 
-                local deploy_sound = Sound("uno/deflect.wav")
+                local deploy_sound = Sound("uno/deflect.mp3")
 
                 timer.Simple(0.1, function()
                     if self:IsWeaponVisible() then
