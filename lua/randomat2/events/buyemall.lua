@@ -17,6 +17,29 @@ function EVENT:Begin()
     local traitorBuyable = table.ClearKeys(traitorBuyableKeyed)
     local boughtEmAllPlayers = {}
 
+    -- Removing all unbuyable detective and traitor weapons from the 'not bought before' lists, removed by Custom Roles buy menu editing
+    if istable(WEPS.ExcludeWeapons[ROLE_DETECTIVE]) then
+        for i, wepExclude in ipairs(WEPS.ExcludeWeapons[ROLE_DETECTIVE]) do
+            for j, wep in ipairs(detectiveBuyable) do
+                if wep == detectiveBuyableKeyed[wepExclude] then
+                    table.RemoveByValue(detectiveBuyable, wep)
+                    break
+                end
+            end
+        end
+    end
+
+    if istable(WEPS.ExcludeWeapons[ROLE_TRAITOR]) then
+        for i, wepExclude in ipairs(WEPS.ExcludeWeapons[ROLE_TRAITOR]) do
+            for j, wep in ipairs(traitorBuyable) do
+                if wep == traitorBuyableKeyed[wepExclude] then
+                    table.RemoveByValue(traitorBuyable, wep)
+                    break
+                end
+            end
+        end
+    end
+
     for i, ply in pairs(self:GetPlayers()) do
         local boughtAllDetective = false
         local boughtAllTraitor = false
