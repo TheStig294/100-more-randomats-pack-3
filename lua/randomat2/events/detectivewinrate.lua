@@ -70,7 +70,7 @@ end
 
 function EVENT:Condition()
     -- First check the stats mod is installed
-    -- if not file.Exists("gamemodes/terrortown/entities/entities/ttt_total_statistics/init.lua", "THIRDPARTY") then return false end
+    if not file.Exists("gamemodes/terrortown/entities/entities/ttt_total_statistics/init.lua", "THIRDPARTY") then return false end
     -- Next check the stats file actually exists
     if not file.Exists("ttt/ttt_total_statistics/stats.txt", "DATA") then return false end
     -- Next check the stats this randomat uses exist
