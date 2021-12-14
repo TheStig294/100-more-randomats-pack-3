@@ -11,9 +11,10 @@ function EVENT:Begin()
 
     -- Grabbing everyone's detective winrate, 'Detective' is capitalised in the old version of TTT Total Statistics
     for i, ply in pairs(self:GetAlivePlayers()) do
-        if stats[ply:SteamID()]["DetectiveWins"] ~= nil then
+        -- And check detective rounds are not 0 so we're not dividing by 0
+        if stats[ply:SteamID()] and stats[ply:SteamID()]["DetectiveWins"] and stats[ply:SteamID()]["DetectiveRounds"] ~= 0 then
             detectiveStats[stats[ply:SteamID()]["DetectiveWins"] / stats[ply:SteamID()]["DetectiveRounds"]] = ply:Nick()
-        else
+        elseif stats[ply:SteamID()] and stats[ply:SteamID()]["detectiveWins"] and stats[ply:SteamID()]["detectiveRounds"] ~= 0 then
             detectiveStats[stats[ply:SteamID()]["detectiveWins"] / stats[ply:SteamID()]["detectiveRounds"]] = ply:Nick()
         end
     end
@@ -68,8 +69,38 @@ function EVENT:Begin()
 end
 
 function EVENT:Condition()
-    -- Trigger when 'TTT Total Statistics' is installed
-    return file.Exists("gamemodes/terrortown/entities/entities/ttt_total_statistics/init.lua", "THIRDPARTY")
+    -- First check the stats mod is installed
+    -- if not file.Exists("gamemodes/terrortown/entities/entities/ttt_total_statistics/init.lua", "THIRDPARTY") then return false end
+    -- Next check the stats file actually exists
+    if not file.Exists("ttt/ttt_total_statistics/stats.txt", "DATA") then return false end
+    -- Next check the stats this randomat uses exist
+    local data = file.Read("ttt/ttt_total_statistics/stats.txt", "DATA")
+    local stats = util.JSONToTable(data)
+    local validStatsPlayers = self:GetAlivePlayers()
+
+    -- Getting a table of all players with valid stats
+    for i, ply in pairs(self:GetAlivePlayers()) do
+        local invalidStats = false
+
+        if not (stats[ply:SteamID()]) then
+            invalidStats = true
+        end
+
+        if not ((stats[ply:SteamID()]["DetectiveWins"] and stats[ply:SteamID()]["DetectiveRounds"]) or (stats[ply:SteamID()]["detectiveWins"] and stats[ply:SteamID()]["detectiveRounds"])) then
+            invalidStats = true
+        end
+
+        if stats[ply:SteamID()]["DetectiveRounds"] == 0 or stats[ply:SteamID()]["detectiveRounds"] == 0 then
+            invalidStats = true
+        end
+
+        if invalidStats then
+            table.RemoveByValue(validStatsPlayers, ply)
+        end
+    end
+    -- So long as SOMEONE has a valid detective winrate, this event can run
+
+    return not table.IsEmpty(validStatsPlayers)
 end
 
 Randomat:register(EVENT)
