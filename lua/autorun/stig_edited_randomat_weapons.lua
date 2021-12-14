@@ -773,8 +773,29 @@ if engine.ActiveGamemode() == "terrortown" then
                 end)
             end
 
-            function SWEP:PreDrop()
-                timer.Remove(self:GetOwner():EntIndex() .. "jetgun_reload")
+            if CLIENT then
+                local function OnRemove()
+                    SWEP:OnRemove()
+                end
+
+                function SWEP:OnRemove()
+                    if not IsValid(self) then return end
+                    if not IsValid(self:GetOwner()) then return end
+                    if not IsValid(self:GetOwner():GetViewModel()) then return end
+                    OnRemove()
+                end
+            end
+
+            if SERVER then
+                local function OnRemove()
+                    SWEP:OnRemove()
+                end
+
+                function SWEP:OnRemove()
+                    if not IsValid(self) then return end
+                    if not IsValid(self:GetOwner()) then return end
+                    OnRemove()
+                end
             end
         end
 
