@@ -293,7 +293,7 @@ if engine.ActiveGamemode() == "terrortown" then
             function SWEP:RenderParticleEffects()
                 if not IsValid(self) then return end
                 if not IsValid(self:GetOwner()) then return end
-                if not IsValid(self:GetViewModel()) then return end
+                if not IsValid(self:GetOwner():GetViewModel()) then return end
                 RenderParticleEffects()
             end
 
