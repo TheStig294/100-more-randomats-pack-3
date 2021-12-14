@@ -84,6 +84,8 @@ function EVENT:Condition()
     end
 
     if not (traitorCount >= 2 and file.Exists("gamemodes/terrortown/entities/entities/ttt_total_statistics/init.lua", "THIRDPARTY")) then return false end
+    -- Next check the stats file exists
+    if not file.Exists("ttt/ttt_total_statistics/stats.txt", "DATA") then return false end
     -- Next check the stats needed for this randomat actually exist
     local data = file.Read("ttt/ttt_total_statistics/stats.txt", "DATA")
     local stats = util.JSONToTable(data)
