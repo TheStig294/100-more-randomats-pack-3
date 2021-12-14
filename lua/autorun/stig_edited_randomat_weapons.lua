@@ -286,6 +286,17 @@ if engine.ActiveGamemode() == "terrortown" then
                 self:GetOwner():ChatPrint("THE BABY MAKER: Shoots an orb that shrinks anyone it hits!\nThis reduces them to 1 health. Walking into anyone while shrunk kills them.")
             end
 
+            local function RenderParticleEffects()
+                SWEP:RenderParticleEffects()
+            end
+
+            function SWEP:RenderParticleEffects()
+                if not IsValid(self) then return end
+                if not IsValid(self:GetOwner()) then return end
+                if not IsValid(self:GetViewModel()) then return end
+                RenderParticleEffects()
+            end
+
             -- Immediately resets spectators hit by the baby maker orb, preventing them from coming back as babies if they somehow then respawn
             hook.Add("PlayerPostThink", "BabyMakerSpectatorFix", function(ply)
                 if (ply:GetNWBool("IsBaby") or ply:GetNWBool("ShouldKickBaby") or ply:GetNWBool("BabyOnGround")) and ply:IsSpec() and not ply:Alive() then
