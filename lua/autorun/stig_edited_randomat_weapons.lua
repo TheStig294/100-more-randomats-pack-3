@@ -884,11 +884,17 @@ if engine.ActiveGamemode() == "terrortown" then
     end)
 
     hook.Add("PreRegisterSENT", "WonderEntitiesModified", function(ENT, class)
-        if class == "obj_humangun_proj" then
+        if class == "obj_humangun_proj" and SERVER then
             function ENT:Think()
                 if self.LifeTime and CurTime() > self.LifeTime then
                     self:Remove()
                 end
+            end
+        end
+
+        if class == "obj_whowl_proj" and CLIENT then
+            function ENT:Think()
+                -- Fixes trying to remove the projectile on the client, causing a lua error
             end
         end
     end)
