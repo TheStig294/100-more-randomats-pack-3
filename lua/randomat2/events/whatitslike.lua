@@ -47,7 +47,7 @@ function EVENT:Begin()
             end
 
             -- we need  to wait a second for cl_playermodel_selector_force to take effect (and THEN change model)
-            timer.Simple(0.1, function()
+            timer.simple(1, function()
                 if not (v:GetViewOffset() == standardHeightVector) then
                     v:SetViewOffset(standardHeightVector)
                     v:SetViewOffsetDucked(standardCrouchedHeightVector)
