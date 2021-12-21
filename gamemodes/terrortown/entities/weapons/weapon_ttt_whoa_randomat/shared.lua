@@ -95,7 +95,12 @@ end
 
 -- Prevent any model from being drawn for this weapon
 function SWEP:Deploy()
-    self:GetOwner():DrawWorldModel(false)
+    local owner = self:GetOwner()
+
+    if IsValid(owner) then
+        owner:DrawWorldModel(false)
+    end
+
     self:DrawShadow(false)
 
     return true
