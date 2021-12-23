@@ -101,6 +101,13 @@ function EVENT:Begin()
 
         return IsValid(wep) and WEPS.GetClass(wep) == GetConVar("randomat_whoa_weaponid"):GetString()
     end)
+
+    -- Sets someone's playermodel again when respawning, as force playermodel is off
+    self:AddHook("PlayerSpawn", function(ply)
+        timer.Simple(1, function()
+            ply:SetModel("models/bandicoot/bandicoot.mdl")
+        end)
+    end)
 end
 
 function EVENT:End()
