@@ -26,7 +26,7 @@ function EVENT:Begin()
     local traitorItemName = table.GetWinningKey(traitorStats)
 
     -- Give them their most bought weapon first
-    for i, ply in pairs(EVENT:GetAlivePlayers()) do
+    for i, ply in pairs(self:GetAlivePlayers()) do
         timer.Simple(0.1, function()
             if detectiveStats[detectiveItemName] >= traitorStats[traitorItemName] then
                 PrintToGive(detectiveItemName, ply)
@@ -69,6 +69,10 @@ function EVENT:Begin()
     self:AddHook("PlayerSpawn", function(ply)
         timer.Simple(1, function()
             ply:SetModel(chosenModel)
+
+            if GetConVar("randomat_whatitslike_disguise"):GetBool() then
+                ply:SetNWBool("disguised", true)
+            end
         end)
     end)
 end
