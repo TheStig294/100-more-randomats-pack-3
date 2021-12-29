@@ -45,7 +45,7 @@ function EVENT:Begin()
         if is_item or not GetConVar("randomat_homerun_strip"):GetBool() then return end
         ply:AddCredits(1)
         ply:PrintMessage(HUD_PRINTCENTER, "Passive items only!")
-        ply:ChatPrint("You can only buy passive items during this randomat!\nYour credit has been refunded.")
+        ply:ChatPrint("You can only buy passive items during " .. self.Title .. "\nYour credit has been refunded.")
     end)
 end
 
