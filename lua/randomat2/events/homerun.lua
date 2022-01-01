@@ -38,14 +38,18 @@ function EVENT:Begin()
     self:AddHook("PlayerCanPickupWeapon", function(ply, wep)
         if not GetConVar("randomat_homerun_strip"):GetBool() then return end
 
-        return IsValid(wep) and (WEPS.GetClass(wep) == GetConVar("randomat_homerun_weaponid"):GetString() or wep.CanBuy ~= nil)
+        return IsValid(wep) and WEPS.GetClass(wep) == GetConVar("randomat_homerun_weaponid"):GetString()
     end)
 
-    self:AddHook("TTTOrderedEquipment", function(ply, equipment, is_item)
-        if is_item or not GetConVar("randomat_homerun_strip"):GetBool() then return end
-        ply:AddCredits(1)
-        ply:PrintMessage(HUD_PRINTCENTER, "Passive items only!")
-        ply:ChatPrint("You can only buy passive items during " .. self.Title .. "\nYour credit has been refunded.")
+    self:AddHook("TTTCanOrderEquipment", function(ply, id, is_item)
+        if not IsValid(ply) then return end
+
+        if not is_item then
+            ply:PrintMessage(HUD_PRINTCENTER, "Passive items only!")
+            ply:ChatPrint("You can only buy passive items during '" .. Randomat:GetEventTitle(EVENT) .. "'\nYour purchase has been refunded.")
+
+            return false
+        end
     end)
 end
 
