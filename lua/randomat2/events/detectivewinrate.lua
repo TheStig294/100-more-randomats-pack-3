@@ -24,15 +24,14 @@ function EVENT:Begin()
     table.sort(bestDetectiveTable)
     local bestDetectiveWinRate = bestDetectiveTable[#bestDetectiveTable]
     local bestDetectiveNickname = detectiveStats[bestDetectiveWinRate]
-    local detectiveChanged = false
 
     -- Turn a current detective into an innocent, if there is one
     for i, ply in pairs(self:GetAlivePlayers()) do
-        if ply:GetRole() == ROLE_DETECTIVE and detectiveChanged == false then
+        if Randomat:IsGoodDetectiveLike(ply) then
             Randomat:SetRole(ply, ROLE_INNOCENT)
             self:StripRoleWeapons(ply)
             SendFullStateUpdate()
-            detectiveChanged = true
+            break
         end
     end
 
@@ -58,7 +57,7 @@ function EVENT:Begin()
             Randomat:SetRole(ply, ROLE_TRAITOR)
             ply:SetCredits(GetConVar("ttt_credits_starting"):GetInt())
             SendFullStateUpdate()
-            traitorChanged = false
+            break
         end
     end
 
