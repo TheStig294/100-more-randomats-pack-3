@@ -13,6 +13,11 @@ hook.Add("PreRegisterSWEP", "TimeStopRandomatGetStopFunction", function(swep, cl
             swep:StartTime()
             swep:OnRemove()
         end
+
+        if not file.Exists("randomat/timestop_disabled.txt", "DATA") then
+            RunConsoleCommand("ttt_randomat_timestop", "0")
+            file.Write("randomat/timestop_disabled.txt", "")
+        end
     end
 end)
 
