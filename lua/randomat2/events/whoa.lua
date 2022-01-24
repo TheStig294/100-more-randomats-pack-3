@@ -17,8 +17,8 @@ EVENT.Type = EVENT_TYPE_WEAPON_OVERRIDE
 function EVENT:HandleRoleWeapons(ply)
     -- Convert all bad guys to traitors so we don't have to worry about fighting with special weapon replacement logic
     if Randomat:IsTraitorTeam(ply) or Randomat:IsMonsterTeam(ply) or ply:GetRole() == ROLE_KILLER then
-        Randomat:SetRole(ply, ROLE_TRAITOR)
         self:StripRoleWeapons(ply)
+        Randomat:SetRole(ply, ROLE_TRAITOR)
 
         return true
     end

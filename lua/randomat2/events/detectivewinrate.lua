@@ -28,8 +28,8 @@ function EVENT:Begin()
     -- Turn a current detective into an innocent, if there is one
     for i, ply in pairs(self:GetAlivePlayers()) do
         if Randomat:IsGoodDetectiveLike(ply) then
-            Randomat:SetRole(ply, ROLE_INNOCENT)
             self:StripRoleWeapons(ply)
+            Randomat:SetRole(ply, ROLE_INNOCENT)
             SendFullStateUpdate()
             break
         end
@@ -44,8 +44,8 @@ function EVENT:Begin()
                 traitorChanged = true
             end
 
-            Randomat:SetRole(ply, ROLE_DETECTIVE)
             self:StripRoleWeapons(ply)
+            Randomat:SetRole(ply, ROLE_DETECTIVE)
             ply:SetCredits(GetConVar("ttt_det_credits_starting"):GetInt())
             SendFullStateUpdate()
         end
@@ -54,6 +54,7 @@ function EVENT:Begin()
     -- If a traitor was made the detective, change a random non-traitor, non-detective into traitor
     for i, ply in pairs(self:GetAlivePlayers(true)) do
         if traitorChanged and not Randomat:IsTraitorTeam(ply) and not Randomat:IsDetectiveLike(ply) then
+            self:StripRoleWeapons(ply)
             Randomat:SetRole(ply, ROLE_TRAITOR)
             ply:SetCredits(GetConVar("ttt_credits_starting"):GetInt())
             SendFullStateUpdate()
