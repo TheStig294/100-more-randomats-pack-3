@@ -7,7 +7,7 @@ function EVENT:Begin()
     for i, ply in pairs(self:GetAlivePlayers()) do
         timer.Simple(0.1, function()
             ply:GiveEquipmentItem(tonumber(EQUIP_DEMONIC_POSSESSION))
-            ply.DemonicPossession = true
+            Randomat:CallShopHooks(true, EQUIP_DEMONIC_POSSESSION, ply)
         end)
     end
 end

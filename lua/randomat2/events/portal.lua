@@ -6,6 +6,7 @@ EVENT.id = "portal"
 function EVENT:Begin()
     for i, ply in pairs(self:GetAlivePlayers(true)) do
         ply:Give("weapon_portalgun")
+        Randomat:CallShopHooks(false, "weapon_portalgun", ply)
     end
 end
 

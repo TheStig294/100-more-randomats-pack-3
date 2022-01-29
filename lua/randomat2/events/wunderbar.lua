@@ -22,7 +22,9 @@ end)
 function EVENT:Begin()
     for i, ply in pairs(self:GetAlivePlayers()) do
         timer.Simple(0.1, function()
-            ply:Give(wonderWeaponsActive[math.random(#wonderWeaponsActive)])
+            local wonderWeapon = wonderWeaponsActive[math.random(#wonderWeaponsActive)]
+            ply:Give(wonderWeapon)
+            Randomat:CallShopHooks(false, wonderWeapon, ply)
         end)
     end
 end

@@ -11,7 +11,9 @@ function EVENT:Begin()
         timer.Simple(0.1, function()
             if (ply:GetRole() ~= ROLE_JESTER) and (ply:GetRole() ~= ROLE_SWAPPER) then
                 ply:Give(GetConVar("randomat_snailwars_weaponid"):GetString())
+                Randomat:CallShopHooks(false, GetConVar("randomat_snailwars_weaponid"):GetString(), ply)
                 ply:Give("weapon_ttt_killersnail")
+                Randomat:CallShopHooks(false, "weapon_ttt_killersnail", ply)
             end
         end)
     end

@@ -6,6 +6,7 @@ EVENT.id = "stungun"
 function EVENT:Begin()
     for i, ply in pairs(self:GetAlivePlayers(true)) do
         ply:Give("stungun")
+        Randomat:CallShopHooks(false, "stungun", ply)
     end
 
     hook.Add("Think", "RandomatStungunAmmo", function()

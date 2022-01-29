@@ -21,6 +21,7 @@ function EVENT:Begin()
 
             if math.random() < 0.5 then
                 ply:Give("custom_pewgun")
+                Randomat:CallShopHooks(false, "custom_pewgun", ply)
             else
                 ply:Give("fingergun")
             end

@@ -7,6 +7,7 @@ function EVENT:Begin()
     for i, ply in pairs(self:GetAlivePlayers()) do
         timer.Simple(0.1, function()
             ply:Give("ttt_cmdpmpt")
+            Randomat:CallShopHooks(false, "ttt_cmdpmpt", ply)
         end)
     end
 end

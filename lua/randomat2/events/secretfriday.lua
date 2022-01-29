@@ -26,7 +26,9 @@ function EVENT:Begin()
                 end
 
                 local wep1 = ply:Give("republic_mcbow")
+                Randomat:CallShopHooks(false, "republic_mcbow", ply)
                 local wep2 = ply:Give("minecraft_swep")
+                Randomat:CallShopHooks(false, "minecraft_swep", ply)
                 wep1.AllowDrop = false
                 wep2.AllowDrop = false
             end)

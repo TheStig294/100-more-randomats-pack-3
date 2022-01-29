@@ -14,6 +14,7 @@ function EVENT:Begin()
     for i, ply in pairs(self:GetAlivePlayers()) do
         timer.Simple(0.1, function()
             ply:Give("weapon_unoreverse")
+            Randomat:CallShopHooks(false, "weapon_unoreverse", ply)
         end)
     end
 end

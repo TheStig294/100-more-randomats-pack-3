@@ -10,8 +10,10 @@ function EVENT:Begin()
         timer.Simple(0.1, function()
             if ply == jetpackPlayer then
                 ply:Give("weapon_ttt_jetpackspawner")
+                Randomat:CallShopHooks(false, "weapon_ttt_jetpackspawner", ply)
             else
                 ply:Give("weapon_ttt_homingpigeon")
+                Randomat:CallShopHooks(false, "weapon_ttt_homingpigeon", ply)
             end
         end)
     end
