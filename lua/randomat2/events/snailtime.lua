@@ -1,5 +1,3 @@
-local standardHeightVector = Vector(0, 0, 64)
-local standardCrouchedHeightVector = Vector(0, 0, 28)
 local playerModels = {}
 
 local snailModels = {"models/TSBB/Animals/Snail.mdl", "models/TSBB/Animals/Snail2.mdl", "models/TSBB/Animals/Snail3.mdl"}

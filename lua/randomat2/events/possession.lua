@@ -6,7 +6,7 @@ EVENT.id = "possession"
 function EVENT:Begin()
     for i, ply in pairs(self:GetAlivePlayers()) do
         timer.Simple(0.1, function()
-            ply:GiveEquipmentItem(tonumber(GetEquipmentItem(ROLE_DETECTIVE, EQUIP_DEMONIC_POSSESSION).id))
+            ply:GiveEquipmentItem(tonumber(EQUIP_DEMONIC_POSSESSION))
             ply.DemonicPossession = true
         end)
     end

@@ -10,10 +10,8 @@ function EVENT:Begin()
 
     hook.Add("Think", "RandomatStungunAmmo", function()
         for i, ply in pairs(self:GetAlivePlayers(true)) do
-            if ply:GetActiveWeapon() ~= NULL then
-                if ply:GetActiveWeapon():GetClass() == "stungun" then
-                    ply:GetActiveWeapon():SetClip1(ply:GetActiveWeapon().Primary.ClipSize)
-                end
+            if IsValid(ply:GetActiveWeapon()) and ply:GetActiveWeapon():GetClass() == "stungun" then
+                ply:GetActiveWeapon():SetClip1(ply:GetActiveWeapon().Primary.ClipSize)
             end
         end
     end)
