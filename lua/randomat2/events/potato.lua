@@ -1,6 +1,6 @@
 local EVENT = {}
 EVENT.Title = "Hot Potato!"
-EVENT.Description = "Someone has the hot potato, pass it on or else you explode!"
+EVENT.Description = "Someone has the hot potato, melee someone with it before you explode!"
 EVENT.id = "potato"
 EVENT.Type = EVENT_TYPE_WEAPON_OVERRIDE
 
