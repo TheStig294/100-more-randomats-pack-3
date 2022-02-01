@@ -1,6 +1,6 @@
 local EVENT = {}
 EVENT.Title = "Everyone has their favourites"
-EVENT.Description = "Gives your most bought traitor + detective item, unless they take the same slot"
+EVENT.Description = "Gives your most bought traitor item, and your most bought detective item, unless they take the same slot"
 EVENT.id = "favourites"
 
 function EVENT:Begin()

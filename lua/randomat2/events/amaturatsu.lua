@@ -1,6 +1,6 @@
 local EVENT = {}
 EVENT.Title = "Careful where you look..."
-EVENT.Description = "Everyone has an amaterasu"
+EVENT.Description = "Everyone has an amaterasu!"
 EVENT.id = "amaterasu"
 
 function EVENT:Begin()

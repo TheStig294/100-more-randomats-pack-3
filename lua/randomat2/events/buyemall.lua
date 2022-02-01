@@ -1,6 +1,6 @@
 local EVENT = {}
 EVENT.Title = "Gotta buy 'em all!"
-EVENT.Description = "Gives a weapon you haven't bought, or a special reward for buying them all!"
+EVENT.Description = "Get something you haven't bought before, or a special reward for buying everything at least once!"
 EVENT.id = "buyemall"
 -- Let this randomat trigger again at the start of a new map
 SetGlobalBool("BuyEmAllRandomatTriggered", false)
