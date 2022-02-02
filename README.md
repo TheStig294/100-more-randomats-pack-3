@@ -179,6 +179,11 @@ Everyone gets a random COD Zombies wonder weapon!\
 \
 _ttt_randomat_wunderbar_ - Default: 1 - Whether this randomat is enabled
 
+## One Puuuuunch!
+Gives everyone One Punch fists!\
+\
+_ttt_randomat_onepunch_ - Default: 1 - Whether this randomat is enabled
+
 
 
 # Randomats made by "nanz"
