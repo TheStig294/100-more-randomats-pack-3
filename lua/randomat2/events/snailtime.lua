@@ -96,7 +96,15 @@ function EVENT:End()
 end
 
 function EVENT:Condition()
-    return weapons.Get("weapon_ttt_killersnail") ~= nil
+    local modelsExist = true
+
+    for i, model in ipairs(snailModels) do
+        if not file.Exists(model, "GAME") then
+            modelsExist = false
+        end
+    end
+
+    return modelsExist
 end
 
 function EVENT:GetConVars()
