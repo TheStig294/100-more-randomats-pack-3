@@ -3,6 +3,8 @@ local standardHeightVector = Vector(0, 0, 64)
 local standardCrouchedHeightVector = Vector(0, 0, 28)
 local playerModels = {}
 local EVENT = {}
+util.AddNetworkString("WhatItsLikeRandomatHideNames")
+util.AddNetworkString("WhatItsLikeRandomatEnd")
 EVENT.Title = ""
 EVENT.id = "whatitslike"
 EVENT.Description = "Everyone gets someone's playermodel and favourite traitor + detective weapon"
@@ -57,12 +59,18 @@ function EVENT:Begin()
                 playerModels[k] = v:GetModel()
                 v:SetModel(chosenModel)
 
-                if GetConVar("randomat_whatitslike_disguise"):GetBool() then
-                    -- Remove names! Traitors still see names though!				
+                -- if name disguising is enabled...
+                if not CR_VERSION and GetConVar("randomat_whatitslike_disguise"):GetBool() then
+                    -- Remove their names! Traitors still see names though!				
                     v:SetNWBool("disguised", true)
                 end
             end)
         end
+    end
+
+    if CR_VERSION and GetConVar("randomat_whatitslike_disguise"):GetBool() then
+        net.Start("WhatItsLikeRandomatHideNames")
+        net.Broadcast()
     end
 
     -- Sets someone's playermodel again when respawning, as force playermodel is off
@@ -70,7 +78,7 @@ function EVENT:Begin()
         timer.Simple(1, function()
             ply:SetModel(chosenModel)
 
-            if GetConVar("randomat_whatitslike_disguise"):GetBool() then
+            if not CR_VERSION and GetConVar("randomat_whatitslike_disguise"):GetBool() then
                 ply:SetNWBool("disguised", true)
             end
         end)
@@ -87,6 +95,11 @@ function EVENT:End()
         v:ConCommand("cl_playermodel_selector_force 1")
         -- clear the model table to avoid setting wrong models (e.g. disconnected players)
         table.Empty(playerModels)
+    end
+
+    if CR_VERSION then
+        net.Start("WhatItsLikeRandomatEnd")
+        net.Broadcast()
     end
 end
 
