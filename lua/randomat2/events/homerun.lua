@@ -53,6 +53,20 @@ function EVENT:Begin()
     end)
 end
 
+function EVENT:End()
+    for i, ent in ipairs(ents.FindByClass(GetConVar("randomat_homerun_weaponid"):GetString())) do
+        ent:Remove()
+    end
+
+    if GetConVar("randomat_homerun_strip"):GetBool() then
+        for i, ply in ipairs(self:GetAlivePlayers()) do
+            ply:Give("weapon_zm_improvised")
+            ply:Give("weapon_zm_carry")
+            ply:Give("weapon_ttt_unarmed")
+        end
+    end
+end
+
 function EVENT:Condition()
     return weapons.Get(GetConVar("randomat_homerun_weaponid"):GetString()) ~= nil
 end
