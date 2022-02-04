@@ -166,10 +166,10 @@ Everyone gets a guard dog\
 \
 _ttt_randomat_woof_ - Default: 1 - Whether this randomat is enabled
 
-## Wunderbar!
+## Mystery box
 Everyone gets a random COD Zombies wonder weapon!\
 \
-_ttt_randomat_wunderbar_ - Default: 1 - Whether this randomat is enabled
+_ttt_randomat_mysterybox_ - Default: 1 - Whether this randomat is enabled
 
 ## One Puuuuunch!
 Gives everyone One Punch fists!\
