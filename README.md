@@ -139,14 +139,6 @@ Gives someone a jetpack and everyone else a homing pigeon.\
 \
 _ttt_randomat_jetswings_ - Default: 1 - Whether this randomat is enabled
 
-## Whoa!
-Everyone is changed to a Crash Bandicoot playermodel and is forced to use a "Spin Attack" weapon.\
-\
-_ttt_randomat_whoa_ - Default: 1 - Whether this randomat is enabled\
-_randomat_whoa_timer_ - Default: 3 - Time between being given spin attacks\
-_randomat_whoa_strip_ - Default: 1 - The event strips your other weapons\
-_randomat_whoa_weaponid_ - Default: weapon_ttt_whoa_randomat - Id of the weapon given
-
 ## Time Stop
 All moving objects on the map freeze in place for 60 seconds, except for players.\
 NOTE: This randomat is disabled by default as it can cause issues with players becoming stuck. If this randomat is enabled you may need to know how to teleport players out of places where they cannot get out.\
