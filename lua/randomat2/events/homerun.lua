@@ -20,6 +20,7 @@ function EVENT:Begin()
             if #ply:GetWeapons() ~= 1 or (IsValid(activeWeapon) and activeWeapon:GetClass() ~= GetConVar("randomat_homerun_weaponid"):GetString()) then
                 if GetConVar("randomat_homerun_strip"):GetBool() then
                     ply:StripWeapons()
+                    ply:SetFOV(0, 0.2)
                 end
 
                 local givenBat = ply:Give(GetConVar("randomat_homerun_weaponid"):GetString())

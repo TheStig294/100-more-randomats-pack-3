@@ -20,6 +20,7 @@ function EVENT:Begin()
             if table.Count(ply:GetWeapons()) ~= 1 or (table.Count(ply:GetWeapons()) == 1 and ply:GetActiveWeapon():GetClass() ~= "doncmk2_swep") then
                 if GetConVar("randomat_orubbertree_strip"):GetBool() then
                     ply:StripWeapons()
+                    ply:SetFOV(0, 0.2)
                 end
 
                 ply:Give(GetConVar("randomat_orubbertree_weaponid"):GetString())
