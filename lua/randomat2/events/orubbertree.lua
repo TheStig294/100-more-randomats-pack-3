@@ -37,4 +37,53 @@ function EVENT:Condition()
     return weapons.Get(GetConVar("randomat_orubbertree_weaponid"):GetString()) ~= nil
 end
 
+function EVENT:GetConVars()
+    local sliders = {}
+
+    for _, v in ipairs({"timer"}) do
+        local name = "randomat_" .. self.id .. "_" .. v
+
+        if ConVarExists(name) then
+            local convar = GetConVar(name)
+
+            table.insert(sliders, {
+                cmd = v,
+                dsc = convar:GetHelpText()
+            })
+        end
+    end
+
+    local checks = {}
+
+    for _, v in ipairs({"strip"}) do
+        local name = "randomat_" .. self.id .. "_" .. v
+
+        if ConVarExists(name) then
+            local convar = GetConVar(name)
+
+            table.insert(checks, {
+                cmd = v,
+                dsc = convar:GetHelpText()
+            })
+        end
+    end
+
+    local textboxes = {}
+
+    for _, v in ipairs({"weaponid"}) do
+        local name = "randomat_" .. self.id .. "_" .. v
+
+        if ConVarExists(name) then
+            local convar = GetConVar(name)
+
+            table.insert(textboxes, {
+                cmd = v,
+                dsc = convar:GetHelpText()
+            })
+        end
+    end
+
+    return sliders, checks, textboxes
+end
+
 Randomat:register(EVENT)
