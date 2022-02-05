@@ -10,7 +10,7 @@ EVENT.id = "whatitslike"
 EVENT.Description = "Everyone gets someone's playermodel and favourite traitor + detective weapon"
 EVENT.AltTitle = "What it's like to be ..."
 
-CreateConVar("randomat_whatitslike_disguise", 0, {FCVAR_NOTIFY, FCVAR_ARCHIVE}, "Player names hidden when randomat is active.")
+CreateConVar("randomat_whatitslike_disguise", 0, {FCVAR_NOTIFY, FCVAR_ARCHIVE}, "Hide player names")
 
 function EVENT:Begin()
     local randomPly = table.Random(player.GetAll())
