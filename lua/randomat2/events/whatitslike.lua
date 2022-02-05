@@ -124,7 +124,7 @@ function EVENT:GetConVars()
         end
     end
 
-    return checks
+    return nil, checks
 end
 
 Randomat:register(EVENT)
