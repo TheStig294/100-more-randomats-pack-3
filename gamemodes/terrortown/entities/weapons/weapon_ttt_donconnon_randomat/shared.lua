@@ -1,12 +1,15 @@
 AddCSLuaFile()
 SWEP.Base = "doncmk2_swep"
 SWEP.PrintName = "Baby Donconnon"
-SWEP.DonconDamage = GetConVar("randomat_donconnons_damage"):GetFloat()
-SWEP.DonconSpeed = GetConVar("randomat_donconnons_speed"):GetFloat()
-SWEP.DonconRange = GetConVar("randomat_donconnons_range"):GetFloat()
-SWEP.DonconScale = GetConVar("randomat_donconnons_scale"):GetFloat() -- Size of Doncon
-SWEP.DonconTurn = GetConVar("randomat_donconnons_turn"):GetFloat() -- How fast Homing Doncon will rotate to face target. Keep very low.
-SWEP.LockOnDecayTime = GetConVar("randomat_donconnons_lockondecaytime"):GetFloat() -- How much time for lock on to decay.
+
+if SERVER then
+    SWEP.DonconDamage = GetConVar("randomat_donconnons_damage"):GetFloat()
+    SWEP.DonconSpeed = GetConVar("randomat_donconnons_speed"):GetFloat()
+    SWEP.DonconRange = GetConVar("randomat_donconnons_range"):GetFloat()
+    SWEP.DonconScale = GetConVar("randomat_donconnons_scale"):GetFloat() -- Size of Doncon
+    SWEP.DonconTurn = GetConVar("randomat_donconnons_turn"):GetFloat() -- How fast Homing Doncon will rotate to face target. Keep very low.
+    SWEP.LockOnDecayTime = GetConVar("randomat_donconnons_lockondecaytime"):GetFloat() -- How much time for lock on to decay.
+end
 
 function SWEP:PrimaryAttack()
     self:EmitSound("donc_fire")
