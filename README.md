@@ -228,11 +228,11 @@ _randomat_snails_music_ - Default: 1 - Music plays while randomat is active
 **The mod these randomats come from: [Steam Workshop::[TTT] O Rubber Tree [Randomat]](https://steamcommunity.com/sharedfiles/filedetails/?id=2122924789)**
 ## O Rubber Tree...
 Continually gives donconnans to everyone\
-Changed name from "O Rubber Tree", added description\
+Changed name from "O Rubber Tree", added description, made doncon projectiles much smaller, faster and one-shot, added convars to change donconnon stats, no longer strips all weapons by default, fixed donconnons eventually stopping being given out\
 \
 _ttt_randomat_orubbertree_ - Default: 1 - Whether this randomat is enabled\
-_randomat_orubbertree_timer_ - Default: 3 - Time between being given donconnons\
-_randomat_orubbertree_strip_ - Default: 1 - The event strips your other weapons\
+_randomat_orubbertree_timer_ - Default: 5 - Time between being given donconnons\
+_randomat_orubbertree_strip_ - Default: 0 - The event strips your other weapons\
 _randomat_orubbertree_weaponid_ - Default: weapon_ttt_donconnon_randomat - Id of the weapon given\
 _randomat_donconnons_damage_ - Default: 1000 - Donconnon Damage\
 _randomat_donconnons_speed_ - Default: 350 - Donconnon Speed\
