@@ -233,4 +233,10 @@ Changed name from "O Rubber Tree", added description\
 _ttt_randomat_orubbertree_ - Default: 1 - Whether this randomat is enabled\
 _randomat_orubbertree_timer_ - Default: 3 - Time between being given donconnons\
 _randomat_orubbertree_strip_ - Default: 1 - The event strips your other weapons\
-_randomat_orubbertree_weaponid_ - Default: doncmk2_swep - Id of the weapon given
+_randomat_orubbertree_weaponid_ - Default: weapon_ttt_donconnon_randomat - Id of the weapon given\
+_randomat_donconnons_damage_ - Default: 1000 - Donconnon Damage\
+_randomat_donconnons_speed_ - Default: 350 - Donconnon Speed\
+_randomat_donconnons_range_ - Default: 2000 - Donconnon Range\
+_randomat_donconnons_scale_ - Default: 0.1 - Donconnon Size\
+_randomat_donconnons_turn_ - Default: 0 - Donconnon Homing turn speed, set to 0 to disable homing\
+_randomat_donconnons_lockondecaytime_ - Default: 15 - Seconds until homing stop
