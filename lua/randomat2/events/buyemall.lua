@@ -144,7 +144,8 @@ end
 
 function EVENT:Condition()
     -- This event is reliant on 'Choose an Event!' existing and being turned on and 'TTT Total Statistics' being installed
-    return GetGlobalBool("BuyEmAllRandomatTriggered") == false and Randomat:CanEventRun("choose") and file.Exists("gamemodes/terrortown/entities/entities/ttt_total_statistics/init.lua", "THIRDPARTY")
+    -- Also this event doesn't work with custom roles' roleweapons system, where items that can't be bought may be required to trigger this event's "reward"
+    return GetGlobalBool("BuyEmAllRandomatTriggered") == false and Randomat:CanEventRun("choose") and file.Exists("gamemodes/terrortown/entities/entities/ttt_total_statistics/init.lua", "THIRDPARTY") and not (CR_VERSION and file.Exists("roleweapons", "DATA"))
 end
 
 Randomat:register(EVENT)
