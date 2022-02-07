@@ -104,7 +104,7 @@ function EVENT:GetConVars()
         end
     end
 
-    return nil, checks
+    return {}, checks
 end
 
 -- register the event in the randomat!
