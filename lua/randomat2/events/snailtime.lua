@@ -99,8 +99,9 @@ function EVENT:Condition()
     local modelsExist = true
 
     for i, model in ipairs(snailModels) do
-        if not file.Exists(model, "GAME") then
+        if not util.IsValidModel(model) then
             modelsExist = false
+            break
         end
     end
 

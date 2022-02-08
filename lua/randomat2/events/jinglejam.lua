@@ -80,8 +80,9 @@ function EVENT:Condition()
     local has_models = true
 
     for _, mdl in ipairs(yogsModels) do
-        if file.Exists(mdl, "THIRDPARTY") == false then
+        if not util.IsValidModel(mdl) then
             has_models = false
+            break
         end
     end
 
