@@ -1,6 +1,6 @@
 local EVENT = {}
 EVENT.Title = "Gotta buy 'em all!"
-EVENT.Description = "Get something you haven't bought before, or a special reward for buying everything at least once!"
+EVENT.Description = "Get something you haven't bought before, or a special reward for buying 'em all!"
 EVENT.id = "buyemall"
 -- Let this randomat trigger again at the start of a new map
 SetGlobalBool("BuyEmAllRandomatTriggered", false)
@@ -144,8 +144,7 @@ end
 
 function EVENT:Condition()
     -- This event is reliant on 'Choose an Event!' existing and being turned on and 'TTT Total Statistics' being installed
-    -- Also this event doesn't work with custom roles' roleweapons system, where items that can't be bought may be required to trigger this event's "reward"
-    return GetGlobalBool("BuyEmAllRandomatTriggered") == false and Randomat:CanEventRun("choose") and file.Exists("gamemodes/terrortown/entities/entities/ttt_total_statistics/init.lua", "THIRDPARTY") and not (CR_VERSION and file.Exists("roleweapons", "DATA"))
+    return GetGlobalBool("BuyEmAllRandomatTriggered") == false and Randomat:CanEventRun("choose") and file.Exists("gamemodes/terrortown/entities/entities/ttt_total_statistics/init.lua", "THIRDPARTY")
 end
 
 Randomat:register(EVENT)
