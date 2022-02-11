@@ -11,8 +11,6 @@ EVENT.Title = "Jingle Jam"
 EVENT.Description = "Everyone gets a Yogscast Christmas playermodel!"
 EVENT.id = "jinglejam"
 
-CreateConVar("randomat_jinglejam_disguise", 1, {FCVAR_NOTIFY, FCVAR_ARCHIVE}, "Player names hidden when randomat is active.")
-
 function EVENT:Begin()
     --Adding the colour table to a different table so if more than 12 people are playing, the choosable colours are able to be reset
     table.Add(remainingModels, yogsModels)
@@ -87,25 +85,6 @@ function EVENT:Condition()
     end
 
     return has_models
-end
-
-function EVENT:GetConVars()
-    local checks = {}
-
-    for _, v in pairs({"disguise"}) do
-        local name = "randomat_" .. self.id .. "_" .. v
-
-        if ConVarExists(name) then
-            local convar = GetConVar(name)
-
-            table.insert(checks, {
-                cmd = v,
-                dsc = convar:GetHelpText()
-            })
-        end
-    end
-
-    return {}, checks
 end
 
 -- register the event in the randomat!
