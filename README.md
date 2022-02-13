@@ -142,7 +142,9 @@ Gives someone a jetpack and everyone else a homing pigeon.\
 \
 _ttt_randomat_jetswings_ - Default: 1 - Whether this randomat is enabled\
 \
-Requires: https://steamcommunity.com/sharedfiles/filedetails/?id=1735229517, https://steamcommunity.com/sharedfiles/filedetails/?id=620936792
+Requires:\
+https://steamcommunity.com/sharedfiles/filedetails/?id=1735229517 \
+https://steamcommunity.com/sharedfiles/filedetails/?id=620936792
 
 ## Jingle Jam
 Everyone gets a random Yogscast Christmas playermodel!\
@@ -222,7 +224,9 @@ Strips everyone of their floor weapons, if they've picked up any, and gives eith
 \
 _ttt_randomat_pewbangpow_ - Default: 1 - Whether this randomat is enabled\
 \
-Requires: https://steamcommunity.com/sharedfiles/filedetails/?id=2236046949, https://steamcommunity.com/sharedfiles/filedetails/?id=2329744756
+Requires:\
+https://steamcommunity.com/sharedfiles/filedetails/?id=2236046949 \
+https://steamcommunity.com/sharedfiles/filedetails/?id=2329744756
 
 ## RELEASE THE SNAILS!
 Spawns snails that follow players around, killing you if they reach you. Plays “threatening” music for a while.\
@@ -263,7 +267,9 @@ Everyone gets a minecraft bow and minecraft block weapon. All other weapons are 
 \
 _ttt_randomat_secretfriday_ - Default: 1 - Whether this randomat is enabled\
 \
-Requires: https://steamcommunity.com/sharedfiles/filedetails/?id=2311866661, https://steamcommunity.com/sharedfiles/filedetails/?id=2311859098
+Requires:\
+https://steamcommunity.com/sharedfiles/filedetails/?id=2311866661 \
+https://steamcommunity.com/sharedfiles/filedetails/?id=2311859098
 
 ## Sharky and Palp!
 Puts someone with their best traitor partner, according to the TTT stats mod. Doesn't trigger if there aren't at least two living traitors already in the round.\
@@ -285,7 +291,9 @@ Everyone gets a freeze gun and snail gun.\
 \
 _ttt_randomat_snailwars_ - Default: 1 - Whether this randomat is enabled\
 \
-Requires: https://steamcommunity.com/sharedfiles/filedetails/?id=2151761122, https://steamcommunity.com/sharedfiles/filedetails/?id=1817717513
+Requires:\
+https://steamcommunity.com/sharedfiles/filedetails/?id=2151761122 \
+https://steamcommunity.com/sharedfiles/filedetails/?id=1817717513
 
 ## Time Stop
 All moving objects on the map freeze in place for 60 seconds, except for players.\
