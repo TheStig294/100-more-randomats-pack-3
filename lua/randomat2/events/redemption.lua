@@ -7,7 +7,17 @@ function EVENT:Begin()
     -- The stats data is recorded from another mod, 'TTT Total Statistics'
     local data = file.Read("ttt/ttt_total_statistics/stats.txt", "DATA")
     local stats = util.JSONToTable(data)
-    local chosenTraitor = table.Random(self:GetAlivePlayers())
+    local chosenTraitor
+
+    for i, ply in pairs(self:GetAlivePlayers(true)) do
+        local id = ply:SteamID()
+
+        if stats[id] and (stats[id]["TraitorPartners"] or stats[id]["traitorPartners"]) then
+            chosenTraitor = ply
+            break
+        end
+    end
+
     local id = chosenTraitor:SteamID()
     local nickname = chosenTraitor:Nick()
     local traitorStats
@@ -89,23 +99,19 @@ function EVENT:Condition()
     -- Next check the stats needed for this randomat actually exist
     local data = file.Read("ttt/ttt_total_statistics/stats.txt", "DATA")
     local stats = util.JSONToTable(data)
-    local chosenTraitor = table.Random(self:GetAlivePlayers())
-    local id = chosenTraitor:SteamID()
-    local traitorStats
+    local validStats = false
 
-    -- Compatibility with original stats mod, and the one made for Noxx's custom roles
-    if stats[id]["TraitorPartners"] ~= nil then
-        traitorStats = stats[id]["TraitorPartners"]
-    else
-        traitorStats = stats[id]["traitorPartners"]
-    end
-
-    -- Getting the winrates of everyone, if anyone's doesn't exist, stop the event from running
+    -- Getting the winrates of everyone, if not enough exist, stop the event from running
     for i, ply in pairs(self:GetAlivePlayers()) do
-        if not (traitorStats[ply:SteamID()] and traitorStats[ply:SteamID()]) then return false end
+        local id = ply:SteamID()
+
+        if stats[id] and (stats[id]["TraitorPartners"] or stats[id]["traitorPartners"]) then
+            validStats = true
+            break
+        end
     end
 
-    return true
+    return validStats
 end
 
 Randomat:register(EVENT)
