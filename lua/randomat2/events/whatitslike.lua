@@ -1,7 +1,3 @@
--- the normal viewmodel offsets a playermodel's view is
-local standardHeightVector = Vector(0, 0, 64)
-local standardCrouchedHeightVector = Vector(0, 0, 28)
-local playerModels = {}
 local EVENT = {}
 util.AddNetworkString("WhatItsLikeRandomatHideNames")
 util.AddNetworkString("WhatItsLikeRandomatEnd")
@@ -20,6 +16,8 @@ function EVENT:Begin()
     local data = file.Read("ttt/ttt_total_statistics/stats.txt", "DATA")
     local stats = util.JSONToTable(data)
     local chosenModel = randomPly:GetModel()
+    local chosenViewOffset = randomPly:GetViewOffset()
+    local chosenViewOffsetDucked = randomPly:GetViewOffsetDucked()
     local id = randomPly:SteamID()
     -- Get the chosen player's most bought detective/traitor weapon
     local detectiveStats = stats[id]["DetectiveEquipment"]
@@ -40,31 +38,13 @@ function EVENT:Begin()
         end)
     end
 
-    for k, v in pairs(player.GetAll()) do
-        if v:Alive() and not v:IsSpec() then
-            -- bots do not have the following command, so it's unnecessary
-            if (not v:IsBot()) then
-                -- We need to disable cl_playermodel_selector_force, because it messes with SetModel, we'll reset it when the event ends
-                v:ConCommand("cl_playermodel_selector_force 0")
-            end
+    for k, ply in pairs(player.GetAll()) do
+        ForceSetPlayermodel(ply, chosenModel, chosenViewOffset, chosenViewOffsetDucked)
 
-            -- we need  to wait a second for cl_playermodel_selector_force to take effect (and THEN change model)
-            timer.Simple(1, function()
-                if not (v:GetViewOffset() == standardHeightVector) then
-                    v:SetViewOffset(standardHeightVector)
-                    v:SetViewOffsetDucked(standardCrouchedHeightVector)
-                end
-
-                -- Set player number K (in the table) to their respective model and set everyone to the chosen player's model
-                playerModels[k] = v:GetModel()
-                v:SetModel(chosenModel)
-
-                -- if name disguising is enabled...
-                if not CR_VERSION and GetConVar("randomat_whatitslike_disguise"):GetBool() then
-                    -- Remove their names! Traitors still see names though!				
-                    v:SetNWBool("disguised", true)
-                end
-            end)
+        -- if name disguising is enabled...
+        if not CR_VERSION and GetConVar("randomat_whatitslike_disguise"):GetBool() then
+            -- Remove their names! Traitors still see names though!				
+            ply:SetNWBool("disguised", true)
         end
     end
 
@@ -73,10 +53,10 @@ function EVENT:Begin()
         net.Broadcast()
     end
 
-    -- Sets someone's playermodel again when respawning, as force playermodel is off
+    -- Sets someone's playermodel again when respawning
     self:AddHook("PlayerSpawn", function(ply)
         timer.Simple(1, function()
-            ply:SetModel(chosenModel)
+            ForceSetPlayermodel(ply, chosenModel, chosenViewOffset, chosenViewOffsetDucked)
 
             if not CR_VERSION and GetConVar("randomat_whatitslike_disguise"):GetBool() then
                 ply:SetNWBool("disguised", true)
@@ -86,16 +66,7 @@ function EVENT:Begin()
 end
 
 function EVENT:End()
-    for k, v in pairs(player.GetAll()) do
-        if (playerModels[k] ~= nil) then
-            v:SetModel(playerModels[k])
-        end
-
-        -- we reset the cl_playermodel_selector_force to 1, otherwise TTT will reset their playermodels on a new round start (to default models!)
-        v:ConCommand("cl_playermodel_selector_force 1")
-        -- clear the model table to avoid setting wrong models (e.g. disconnected players)
-        table.Empty(playerModels)
-    end
+    ForceResetAllPlayermodels()
 
     if CR_VERSION then
         net.Start("WhatItsLikeRandomatEnd")

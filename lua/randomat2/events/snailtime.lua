@@ -1,47 +1,63 @@
-local playerModels = {}
-
-local snailModels = {"models/TSBB/Animals/Snail.mdl", "models/TSBB/Animals/Snail2.mdl", "models/TSBB/Animals/Snail3.mdl"}
-
 local EVENT = {}
-
-CreateConVar("randomat_snailtime_health", 1, {FCVAR_NOTIFY, FCVAR_ARCHIVE}, "Player health as a snail", 1, 100)
-
 EVENT.Title = "Snail Time!"
 EVENT.Description = "Everyone is transformed a snail and set to 1 health"
 EVENT.id = "snailtime"
-local snaitTimeTriggered = false
+
+CreateConVar("randomat_snailtime_health", 1, {FCVAR_NOTIFY, FCVAR_ARCHIVE}, "Player health as a snail", 1, 100)
+
+local snailModels = {"models/TSBB/Animals/Snail.mdl", "models/TSBB/Animals/Snail2.mdl", "models/TSBB/Animals/Snail3.mdl"}
+
+local snailTimeTriggered = false
+local maxHealth = {}
 
 function EVENT:Begin()
-    snaitTimeTriggered = true
+    snailTimeTriggered = true
     local hp = GetConVar("randomat_snailtime_health"):GetFloat()
+    local sc = 0.1 -- player scale factor
+    local sp = 0.5 -- player speed factor
+    local playerModels = {}
+    maxHealth = {}
 
-    -- Gets all players...
-    for k, v in pairs(player.GetAll()) do
-        -- if they're alive and not in spectator mode
-        if v:Alive() and not v:IsSpec() then
-            -- and not a bot (bots do not have the following command, so it's unnecessary)
-            if (not v:IsBot()) then
-                -- We need to disable cl_playermodel_selector_force, because it messes with SetModel, we'll reset it when the event ends
-                v:ConCommand("cl_playermodel_selector_force 0")
-            end
-
-            -- we need  to wait a second for cl_playermodel_selector_force to take effect (and THEN change model)
-            timer.Simple(1, function()
-                -- Set player number K (in the table) to their respective model
-                playerModels[k] = v:GetModel()
-                -- Sets their model to chosenModel
-                v:SetModel(table.Random(snailModels))
-                local oldmax = v:GetMaxHealth()
-                v:SetMaxHealth(hp)
-                v:SetHealth(math.Clamp(hp * v:Health() / oldmax, 1, hp))
-                v:SetWalkSpeed(100)
-                initialRunSpeed = v:GetRunSpeed()
-                v:SetRunSpeed(100)
-            end)
-        end
+    for k, ply in pairs(player.GetAll()) do
+        local snailModel = snailModels[math.random(1, #snailModels)]
+        playerModels[ply] = snailModel
+        maxHealth[ply] = ply:GetMaxHealth()
+        ForceSetPlayermodel(ply, snailModel)
     end
 
-    local sc = 0.1 --scale factor
+    -- Caps player HP
+    timer.Create("RdmtSnailsHp", 1, 0, function()
+        for _, ply in ipairs(self:GetAlivePlayers()) do
+            if ply:Health() > math.floor(hp) then
+                ply:SetHealth(math.floor(hp))
+            end
+
+            ply:SetMaxHealth(math.floor(hp))
+        end
+    end)
+
+    -- Scales the player speed on clients
+    for k, ply in pairs(player.GetAll()) do
+        net.Start("RdmtSetSpeedMultiplier")
+        net.WriteFloat(sp)
+        net.WriteString("RdmtSnailsSpeed")
+        net.Send(ply)
+    end
+
+    -- Scales the player speed on the server
+    self:AddHook("TTTSpeedMultiplier", function(ply, mults)
+        if not ply:Alive() or ply:IsSpec() then return end
+        table.insert(mults, sp)
+    end)
+
+    -- Sets a player's model to a snail if they respawn
+    self:AddHook("PlayerSpawn", function(ply)
+        timer.Simple(1, function()
+            if playerModels[ply] then
+                ForceSetPlayermodel(ply, playerModels[ply])
+            end
+        end)
+    end)
 
     hook.Add("Think", "SnailTimeThink", function()
         for k, ply in pairs(player.GetAll()) do
@@ -57,41 +73,27 @@ end
 
 -- when the event ends, reset every player's model
 function EVENT:End()
-    if snaitTimeTriggered then
-        snaitTimeTriggered = false
+    if snailTimeTriggered then
+        snailTimeTriggered = false
+        ForceResetAllPlayermodels()
         hook.Remove("Think", "SnailTimeThink")
+        timer.Remove("RdmtSnailsHp")
+        -- Reset the player speed on the client
+        net.Start("RdmtRemoveSpeedMultiplier")
+        net.WriteString("RdmtSnailsSpeed")
+        net.Broadcast()
 
-        -- loop through all players
-        for k, v in pairs(player.GetAll()) do
-            -- if the index k in the table playermodels has a model, then...
-            if (playerModels[k] ~= nil) then
-                -- we set the player v to the playermodel with index k in the table
-                -- this should invoke the viewheight script from the models and fix viewoffsets (e.g. Zoey's model) 
-                -- this does however first reset their viewmodel in the preparing phase (when they respawn)
-                -- might be glitchy with pointshop items that allow you to get a viewoffset
-                v:SetModel(playerModels[k])
+        -- Resetting player hitbox, ability to climb stairs...
+        for _, ply in pairs(player.GetAll()) do
+            ply:ResetHull()
+            ply:SetStepSize(18)
+            ply:DrawWorldModel(true)
+
+            if maxHealth[ply] then
+                ply:SetMaxHealth(maxHealth[ply])
+                ply:SetHealth(maxHealth[ply])
             end
-
-            -- we reset the cl_playermodel_selector_force to 1, otherwise TTT will reset their playermodels on a new round start (to default models!)
-            v:ConCommand("cl_playermodel_selector_force 1")
-            v:DrawWorldModel(true)
-            v:SetWalkSpeed(200)
-            v:SetRunSpeed(initialRunSpeed)
-            -- clear the model table to avoid setting wrong models (e.g. disconnected players)
-            table.Empty(playerModels)
         end
-
-        hook.Add("TTTPrepareRound", "SnailRandomatFix", function()
-            for k, ply in pairs(player.GetAll()) do
-                ply:SetModelScale(1, 0)
-                ply:SetViewOffset(Vector(0, 0, 64))
-                ply:SetViewOffsetDucked(Vector(0, 0, 32))
-                ply:ResetHull()
-                ply:SetStepSize(18)
-            end
-
-            hook.Remove("TTTPrepareRound", "SnailRandomatFix")
-        end)
     end
 end
 
