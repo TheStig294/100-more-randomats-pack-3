@@ -1,9 +1,9 @@
+CreateConVar("randomat_snailtime_health", 1, {FCVAR_NOTIFY, FCVAR_ARCHIVE}, "Player health as a snail", 1, 100)
+
 local EVENT = {}
 EVENT.Title = "Snail Time!"
-EVENT.Description = "Everyone is transformed a snail and set to 1 health"
+EVENT.Description = "Everyone is transformed a snail and set to " .. GetConVar("randomat_snailtime_health"):GetInt() .. " health"
 EVENT.id = "snailtime"
-
-CreateConVar("randomat_snailtime_health", 1, {FCVAR_NOTIFY, FCVAR_ARCHIVE}, "Player health as a snail", 1, 100)
 
 local snailModels = {"models/TSBB/Animals/Snail.mdl", "models/TSBB/Animals/Snail2.mdl", "models/TSBB/Animals/Snail3.mdl"}
 
@@ -12,6 +12,7 @@ local maxHealth = {}
 
 function EVENT:Begin()
     snailTimeTriggered = true
+    self.Description = "Everyone is transformed a snail and set to " .. GetConVar("randomat_snailtime_health"):GetInt() .. " health"
     local hp = GetConVar("randomat_snailtime_health"):GetFloat()
     local sc = 0.1 -- player scale factor
     local sp = 0.5 -- player speed factor
