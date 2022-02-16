@@ -24,7 +24,14 @@ function EVENT:Begin()
         playerModels[ply] = snailModel
         maxHealth[ply] = ply:GetMaxHealth()
         ForceSetPlayermodel(ply, snailModel)
+
+        if IsBodyDependentRole(ply) then
+            self:StripRoleWeapons(ply)
+            SetToBasicRole(ply)
+        end
     end
+
+    SendFullStateUpdate()
 
     -- Caps player HP
     timer.Create("RdmtSnailsHp", 1, 0, function()
@@ -98,7 +105,17 @@ function EVENT:End()
     end
 end
 
+-- Checking if someone is a body dependent role and if it isn't at the start of the round, prevent the event from running
 function EVENT:Condition()
+    local bodyDependentRoleExists = false
+
+    for _, ply in ipairs(self:GetAlivePlayers()) do
+        if IsBodyDependentRole(ply) then
+            bodyDependentRoleExists = true
+            break
+        end
+    end
+
     local modelsExist = true
 
     for i, model in ipairs(snailModels) do
@@ -108,7 +125,7 @@ function EVENT:Condition()
         end
     end
 
-    return modelsExist
+    return modelsExist and (Randomat:GetRoundCompletePercent() < 5 or not bodyDependentRoleExists)
 end
 
 function EVENT:GetConVars()

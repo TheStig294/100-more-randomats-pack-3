@@ -12,7 +12,48 @@ if GetConVar("randomat_homerun_strip"):GetBool() then
     EVENT.Type = EVENT_TYPE_WEAPON_OVERRIDE
 end
 
+function EVENT:HandleRoleWeapons(ply)
+    local updated = false
+
+    -- Convert all bad guys to traitors so we don't have to worry about fighting with special weapon replacement logic
+    if (Randomat:IsTraitorTeam(ply) and ply:GetRole() ~= ROLE_TRAITOR) or Randomat:IsMonsterTeam(ply) or Randomat:IsIndependentTeam(ply) then
+        Randomat:SetRole(ply, ROLE_TRAITOR)
+        updated = true
+    elseif Randomat:IsJesterTeam(ply) then
+        Randomat:SetRole(ply, ROLE_INNOCENT)
+        updated = true
+    end
+
+    -- Remove role weapons from anyone on the traitor team now
+    if Randomat:IsTraitorTeam(ply) then
+        self:StripRoleWeapons(ply)
+    end
+
+    return updated
+end
+
 function EVENT:Begin()
+    -- Removing role weapons and changing problematic roles to basic ones
+    for _, ply in ipairs(self:GetAlivePlayers()) do
+        self:HandleRoleWeapons(ply)
+    end
+
+    SendFullStateUpdate()
+
+    timer.Create("HomerunRoleChangeTimer", 1, 0, function()
+        local updated = false
+
+        for _, ply in ipairs(self:GetAlivePlayers()) do
+            -- Workaround the case where people can respawn as Zombies while this is running
+            updated = updated or self:HandleRoleWeapons(ply)
+        end
+
+        -- If anyone's role changed, send the update
+        if updated then
+            SendFullStateUpdate()
+        end
+    end)
+
     self:AddHook("Think", function()
         for i, ply in pairs(self:GetAlivePlayers()) do
             local activeWeapon = ply:GetActiveWeapon()
@@ -55,6 +96,8 @@ function EVENT:Begin()
 end
 
 function EVENT:End()
+    timer.Remove("HomerunRoleChangeTimer")
+
     for i, ent in ipairs(ents.FindByClass(GetConVar("randomat_homerun_weaponid"):GetString())) do
         ent:Remove()
     end
