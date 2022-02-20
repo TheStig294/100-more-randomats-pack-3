@@ -33,7 +33,7 @@ function EVENT:Begin()
 
     -- Getting the winrates of everyone but the chosen player, while they were partnered with the chosen player
     for i, ply in pairs(self:GetAlivePlayers()) do
-        if ply:SteamID() ~= id then
+        if traitorStats[ply:SteamID()] and ply:SteamID() ~= id then
             traitorWinRates[traitorStats[ply:SteamID()]["Wins"] / traitorStats[ply:SteamID()]["Rounds"]] = ply:Nick()
         end
     end
