@@ -14,7 +14,7 @@ end
 -- Setup all entries for every player as they connect
 -- This *should* ensure all players have every needed key in the stats table, so we should never try to index a nil value in the table
 hook.Add("PlayerInitialSpawn", "RandomatStatsFillPlayerIDs", function(ply, transition)
-    local ID = ply:SteamID()
+    local ID = util.SteamIDFrom64(ply:SteamID64())
 
     if not randomatPlayerStats[ID] then
         randomatPlayerStats[ID] = {}
@@ -27,7 +27,7 @@ end)
 
 -- Keeps track of the number of times any player has bought any one buy menu item
 hook.Add("TTTOrderedEquipment", "RandomatStatsOrderedEquipment", function(ply, equipment, is_item)
-    local ID = ply:SteamID()
+    local ID = util.SteamIDFrom64(ply:SteamID64())
 
     -- Passive items are indexed by their print name, if it exists
     if is_item then
