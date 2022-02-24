@@ -56,8 +56,8 @@ hook.Add("TTTOrderedEquipment", "RandomatStatsOrderedEquipment", function(ply, e
     end
 end)
 
--- Record all stats in file when server shuts down/changes maps
-hook.Add("ShutDown", "RecordStigRandomatStats", function(winType)
+-- Record all stats in the stats file when server shuts down/changes maps
+hook.Add("ShutDown", "RecordStigRandomatStats", function()
     fileContent = util.TableToJSON(randomatPlayerStats)
     file.Write("randomat/playerstats.txt", fileContent)
 end)
