@@ -25,7 +25,7 @@ function EVENT:Begin()
         local ID = util.SteamIDFrom64(ply:SteamID64())
         local equipmentStats = table.Copy(stats[ID]["EquipmentItems"])
         -- Set every player's buy count of the radar and body armour to 1 to prevent these from always being a player's most bought item
-        -- Also effectively sets the player's most bought item to the body armour as a fail-safe if the player has never bought anything before
+        -- Also effectively sets the player's most bought item to the body armour and radar as a fail-safe if the player has never bought anything before
         equipmentStats["item_radar"] = 1
         equipmentStats["item_armor"] = 1
         local wepKind = 10
@@ -37,12 +37,13 @@ function EVENT:Begin()
             local is_item = weapons.Get(mostBoughtItem) == nil
 
             if is_item then
-                local foundItem = false
+                local detectiveItem = false
+                local traitorItem = false
 
                 for _, equipment in ipairs(EquipmentItems[ROLE_DETECTIVE]) do
                     if equipment.name == mostBoughtItem then
                         if equipment.id then
-                            foundItem = true
+                            detectiveItem = true
                             mostBoughtItem = equipment.id
                         end
 
@@ -50,11 +51,11 @@ function EVENT:Begin()
                     end
                 end
 
-                if not foundItem then
+                if not detectiveItem then
                     for _, equipment in ipairs(EquipmentItems[ROLE_TRAITOR]) do
                         if equipment.name == mostBoughtItem then
                             if equipment.id then
-                                foundItem = true
+                                traitorItem = true
                                 mostBoughtItem = equipment.id
                             end
 
@@ -64,11 +65,12 @@ function EVENT:Begin()
                 end
 
                 -- If the item can't be found, give them a radar as a fallback
-                if not foundItem then
+                if not (detectiveItem or traitorItem) then
                     mostBoughtItem = EQUIP_RADAR
                 end
 
-                ply:GiveEquipmentItem(tonumber(mostBoughtItem))
+                mostBoughtItem = math.floor(tonumber(mostBoughtItem))
+                ply:GiveEquipmentItem(mostBoughtItem)
             else
                 local wep = ply:Give(mostBoughtItem)
                 -- Giving all weapons a unique weapon kind so players can always get all weapons
@@ -76,10 +78,18 @@ function EVENT:Begin()
                 wepKind = wepKind + 1
             end
 
-            -- Calls all expected shop hooks for things like automatically starting the radar if a player was given one,
-            -- and greying out icons in the player's shop
+            local detectiveBuyable = GetDetectiveBuyable()
+            local traitorBuyable = GetTraitorBuyable()
+
             timer.Simple(0.1, function()
+                -- Calls all expected shop hooks for things like automatically starting the radar if a player was given one,
+                -- and greying out icons in the player's shop
                 Randomat:CallShopHooks(is_item, mostBoughtItem, ply)
+                -- Number indexes in non-sequential tables are actually strings, so we need to convert passive item IDs to strings
+                -- if we are to use the detective/traitor buyable tables from lua/autorun/stig_randomat_base_functions.lua
+                mostBoughtItem = tostring(mostBoughtItem)
+                local name = detectiveBuyable[mostBoughtItem] or traitorBuyable[mostBoughtItem] or "item"
+                ply:ChatPrint("You received a " .. name .. "!")
             end)
         end
     end

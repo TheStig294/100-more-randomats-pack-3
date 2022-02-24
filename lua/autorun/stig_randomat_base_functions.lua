@@ -50,6 +50,8 @@ local function RenameWeps(name)
         return "Radar"
     elseif name == "item_armor" then
         return "Body Armor"
+    elseif name == "item_disg" then
+        return "Disguiser"
     elseif name == "dragon_elites_name" then
         return "Dragon Elites"
     elseif name == "silenced_m4a1_name" then
