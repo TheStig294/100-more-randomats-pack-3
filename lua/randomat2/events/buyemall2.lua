@@ -25,74 +25,38 @@ function EVENT:Begin()
     -- The stats data is recorded from another lua file, lua/autorun/server/stig_randomat_player_stats.lua
     local stats = randomatPlayerStats
     -- Functionality of GetDetectiveBuyable() and GetTraitorBuyable() can be found in stig_randomat_base_functions.lua and stig_randomat_client_functions.lua
-    local detectiveBuyableKeyed = GetDetectiveBuyable()
-    local traitorBuyableKeyed = GetTraitorBuyable()
-    local detectiveBuyable = table.ClearKeys(detectiveBuyableKeyed)
-    local traitorBuyable = table.ClearKeys(traitorBuyableKeyed)
+    local detectiveBuyable = table.ClearKeys(GetDetectiveBuyable())
+    local traitorBuyable = table.ClearKeys(GetTraitorBuyable())
+    local buyableEquipment = table.Merge(detectiveBuyable, traitorBuyable)
     local boughtEmAllPlayers = {}
 
     for _, ply in pairs(self:GetAlivePlayers()) do
-        local boughtAllDetective = false
-        local boughtAllTraitor = false
         local ID = util.SteamIDFrom64(ply:SteamID64())
-        -- Grab tables of all detective/traitor items the player has ever bought
-        local detectiveBought = table.GetKeys(stats[ID]["DetectiveEquipment"])
-        local traitorBought = table.GetKeys(stats[ID]["TraitorEquipment"])
+        local equipmentStats = table.Copy(stats[ID]["EquipmentItems"])
+        local boughtEquipment = table.GetKeys(equipmentStats)
+        local unboughtEquipment = table.Copy(buyableEquipment)
 
-        -- Remove all bought weapons from the possible list of weapons to give out
-        for k = 1, #detectiveBought do
-            table.RemoveByValue(detectiveBuyable, detectiveBought[k])
+        -- Remove all bought weapons from the unboughtEquipment table
+        for _, equipment in ipairs(boughtEquipment) do
+            table.RemoveByValue(unboughtEquipment, equipment)
         end
 
-        for k = 1, #traitorBought do
-            table.RemoveByValue(traitorBuyable, traitorBought[k])
-        end
-
-        -- Check if the player has bought all of either detective or traitor items at least once
-        if table.IsEmpty(detectiveBuyable) then
-            boughtAllDetective = true
-        end
-
-        if table.IsEmpty(traitorBuyable) then
-            boughtAllTraitor = true
-        end
-
-        if boughtAllDetective and boughtAllTraitor then
-            table.insert(boughtEmAllPlayers, ply)
-            ply:PrintMessage(HUD_PRINTTALK, "==CONGRATS! YOU BOUGHT 'EM ALL!==\nYou get to choose randomats at the start of each round!")
+        if table.IsEmpty(unboughtEquipment) then
+            ply:PrintMessage(HUD_PRINTTALK, "==CONGRATS! YOU BOUGHT 'EM ALL!==\nYou get to choose the randomat at the start of each round!")
             ply:PrintMessage(HUD_PRINTCENTER, "CONGRATS! YOU BOUGHT 'EM ALL!")
-        elseif boughtAllDetective and not boughtAllTraitor then
-            -- Give them a traitor weapon they haven't bought before
-            -- PrintToGive() takes a weapon's print name, a player and gives them the weapon, found in stig_randomat_base_functions.lua
-            PrintToGive(traitorBuyable[math.random(#traitorBuyable)], ply)
-            ply:ChatPrint("==Traitor items never bought==")
+            -- This table is needed in case multiple players bought everything
+            -- in which case, a random player will be chosen out of each of them to choose a randomat at the start of each round
+            table.insert(boughtEmAllPlayers, ply)
+            continue
+        end
 
-            for _, wep in ipairs(traitorBuyable) do
-                ply:ChatPrint("- " .. wep)
-            end
-        elseif not boughtAllDetective and boughtAllTraitor then
-            -- Give them a detective weapon they haven't bought before
-            PrintToGive(detectiveBuyable[math.random(#detectiveBuyable)], ply)
-            ply:ChatPrint("==Detective items never bought==")
+        -- Shuffle the table and only give out as many items as the player has unbought
+        -- So if the player has 1 unbought item, they should get 1 item
+        local itemCount = math.min(GetConVar("randomat_buyemall2_given_items_count"):GetInt(), table.Count(unboughtEquipment))
+        table.Shuffle(unboughtEquipment)
 
-            for _, wep in ipairs(detectiveBuyable) do
-                ply:ChatPrint("- " .. wep)
-            end
-        else
-            -- If the player hasn't bought every detective nor traitor item at least once, give them a random detective and traitor item they haven't bought before
-            PrintToGive(detectiveBuyable[math.random(#detectiveBuyable)], ply)
-            PrintToGive(traitorBuyable[math.random(#traitorBuyable)], ply)
-            ply:ChatPrint("==Detective items never bought==")
-
-            for _, wep in ipairs(detectiveBuyable) do
-                ply:ChatPrint("- " .. wep)
-            end
-
-            ply:ChatPrint("==Traitor items never bought==")
-
-            for _, wep in ipairs(traitorBuyable) do
-                ply:ChatPrint("- " .. wep)
-            end
+        for i = 1, itemCount do
+            GiveEquipmentByIdOrClass(ply, unboughtEquipment[i])
         end
     end
 

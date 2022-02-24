@@ -312,3 +312,6 @@ function MapHasProps()
 
     return propCount > 5
 end
+
+function GiveEquipmentByIdOrClass(ply, item)
+end
