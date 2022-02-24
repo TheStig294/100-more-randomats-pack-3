@@ -25,9 +25,9 @@ function EVENT:Begin()
     -- The stats data is recorded from another lua file, lua/autorun/server/stig_randomat_player_stats.lua
     local stats = randomatPlayerStats
     -- Functionality of GetDetectiveBuyable() and GetTraitorBuyable() can be found in stig_randomat_base_functions.lua and stig_randomat_client_functions.lua
-    local detectiveBuyable = table.ClearKeys(GetDetectiveBuyable())
-    local traitorBuyable = table.ClearKeys(GetTraitorBuyable())
-    local buyableEquipment = table.Merge(detectiveBuyable, traitorBuyable)
+    local detectiveBuyable = GetDetectiveBuyable()
+    local traitorBuyable = GetTraitorBuyable()
+    local buyableEquipment = table.GetKeys(table.Merge(detectiveBuyable, traitorBuyable))
     local boughtEmAllPlayers = {}
 
     for _, ply in pairs(self:GetAlivePlayers()) do
@@ -35,6 +35,18 @@ function EVENT:Begin()
         local equipmentStats = table.Copy(stats[ID]["EquipmentItems"])
         local boughtEquipment = table.GetKeys(equipmentStats)
         local unboughtEquipment = table.Copy(buyableEquipment)
+
+        for i, equipment in ipairs(unboughtEquipment) do
+            local item = tonumber(equipment)
+
+            if item then
+                local name = GetEquipmentItemById(math.floor(item)).name
+
+                if name then
+                    unboughtEquipment[i] = name
+                end
+            end
+        end
 
         -- Remove all bought weapons from the unboughtEquipment table
         for _, equipment in ipairs(boughtEquipment) do
@@ -62,16 +74,15 @@ function EVENT:Begin()
         end
     end
 
-    local chooseChoices = GetConVar("randomat_choose_choices"):GetInt()
-    local chooseVote = GetConVar("randomat_choose_vote"):GetBool()
-
     if not table.IsEmpty(boughtEmAllPlayers) then
         -- Displays a randomat alert and message to chat for everyone displaying which players have bought all weapons
-        local boughtEmAllPlayersString = table.ToString(boughtEmAllPlayers, "Players who bought 'em all:", true)
-
         timer.Simple(5, function()
             Randomat:SmallNotify("One or more players bought 'em all!")
-            PrintMessage(HUD_PRINTTALK, boughtEmAllPlayersString)
+            PrintMessage(HUD_PRINTTALK, "Players who have bought every item at least once:")
+
+            for _, ply in ipairs(boughtEmAllPlayers) do
+                PrintMessage(HUD_PRINTTALK, ply:Nick())
+            end
         end)
 
         timer.Simple(10, function()
@@ -80,25 +91,17 @@ function EVENT:Begin()
 
         -- At the start of every round, for the rest of the current map, a random player that bought every weapon gets to choose the randomat for that round
         hook.Add("TTTRandomatShouldAuto", "BuyEmAllPreventAutoRandomat", function(id, owner) return false end)
-        GetConVar("randomat_choose_choices"):SetInt(5)
-        -- Only allow the player who the randomat triggers off of to choose randomats
-        GetConVar("randomat_choose_vote"):SetBool(false)
 
         hook.Add("TTTBeginRound", "BoughtEmAllRandomat", function()
-            Randomat:SilentTriggerEvent("choose", table.Random(boughtEmAllPlayers))
-        end)
-
-        -- Once the map is changing or the server is being shut down, all convars are reset
-        hook.Add("ShutDown", "BoughtEmAllConVarReset", function()
-            GetConVar("randomat_choose_choices"):SetInt(chooseChoices)
-            GetConVar("randomat_choose_vote"):SetBool(chooseVote)
+            Randomat:SilentTriggerEvent("choose", table.Random(boughtEmAllPlayers), false, false)
         end)
     end
 end
 
 function EVENT:Condition()
-    -- This event is reliant on 'Choose an Event!' existing, and can only trigger once a map
-    return Randomat:CanEventRun("choose") and not eventTriggered
+    -- This event is reliant on 'Choose an Event!' existing, can only trigger once a map, 
+    -- and uses GetDetective/TraitorBuyable(), so this event cannot run before those functions are ready to use
+    return Randomat:CanEventRun("choose") and DoneSendingDetectiveTraitorBuyable() and not eventTriggered
 end
 
 function EVENT:GetConVars()

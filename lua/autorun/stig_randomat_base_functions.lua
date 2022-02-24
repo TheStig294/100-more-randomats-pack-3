@@ -70,51 +70,49 @@ local function RenameWeps(name)
     end
 end
 
---Net messages for the randomats relying on 'TTT Total Statistics'
 if SERVER then
     util.AddNetworkString("RandomatDetectiveWeaponsList")
     util.AddNetworkString("RandomatTraitorWeaponsList")
     util.AddNetworkString("Randomat_SendDetectiveEquipmentName")
     util.AddNetworkString("Randomat_SendTraitorEquipmentName")
-end
-
-if SERVER then
+    util.AddNetworkString("Randomat_DoneSendingDetectiveItems")
+    util.AddNetworkString("Randomat_DoneSendingTraitorItems")
     detectiveBuyable = {}
     traitorBuyable = {}
 
     --At the start of the first round of a map, ask the first connected client for the printnames of all detective and traitor weapons
     --Used by randomats that use 'TTT Total Statistics'
     --Needed since 'TTT Total Statistics' stores weapon stats identifying weapons by printnames, not classnames
-    hook.Add("TTTPrepareRound", "RandomatGetBuyMenuLists", function()
+    hook.Add("TTTBeginRound", "RandomatGetBuyMenuLists", function()
         net.Start("RandomatDetectiveWeaponsList")
         net.Send(Entity(1))
         net.Start("RandomatTraitorWeaponsList")
         net.Send(Entity(1))
-        hook.Remove("TTTPrepareRound", "RandomatGetBuyMenuLists")
+        hook.Remove("TTTBeginRound", "RandomatGetBuyMenuLists")
     end)
+
+    local doneDetectiveItems = false
 
     net.Receive("Randomat_SendDetectiveEquipmentName", function(len, ply)
         tbl = string.Split(net.ReadString(), ",")
         local name = RenameWeps(tbl[1])
-        local error = net.ReadBool()
-
-        if error then
-            print("Failed to find equipment (" .. name .. ") for 'Gotta Buy 'em all!' randomat")
-        else
-            detectiveBuyable[tbl[2]] = name
-        end
+        detectiveBuyable[tbl[2]] = name
     end)
+
+    net.Receive("Randomat_DoneSendingDetectiveItems", function()
+        doneDetectiveItems = true
+    end)
+
+    local doneTraitorItems = false
 
     net.Receive("Randomat_SendTraitorEquipmentName", function(len, ply)
         tbl = string.Split(net.ReadString(), ",")
         local name = RenameWeps(tbl[1])
-        local error = net.ReadBool()
+        traitorBuyable[tbl[2]] = name
+    end)
 
-        if error then
-            print("Failed to find equipment (" .. name .. ") for 'Gotta Buy 'em all!' randomat")
-        else
-            traitorBuyable[tbl[2]] = name
-        end
+    net.Receive("Randomat_DoneSendingTraitorItems", function()
+        doneTraitorItems = true
     end)
 
     function GetDetectiveBuyable()
@@ -123,6 +121,10 @@ if SERVER then
 
     function GetTraitorBuyable()
         return traitorBuyable
+    end
+
+    function DoneSendingDetectiveTraitorBuyable()
+        return doneDetectiveItems and doneTraitorItems
     end
 end
 
@@ -268,7 +270,8 @@ function MapHasProps()
 end
 
 function GiveEquipmentByIdOrClass(ply, equipment, wepKind)
-    local is_item = weapons.Get(equipment) == nil
+    local weapon = weapons.Get(equipment)
+    local is_item = not weapon
 
     if is_item then
         local detectiveItem = false
@@ -306,14 +309,16 @@ function GiveEquipmentByIdOrClass(ply, equipment, wepKind)
         equipment = math.floor(tonumber(equipment))
         ply:GiveEquipmentItem(equipment)
     else
-        local wep = ply:Give(equipment)
-
-        -- Giving equipment a specified weapon kind, if set
-        -- Mostly used for ensuring players always get the weapon to give,
-        -- else they may have a weapon that already takes up the slot the weapon we're trying to give does
+        -- If a weapon is already taking up the slot of the weapon we're trying to give, change the slot it takes up! (If we want that, i.e. wepKind is defined)
         if wepKind then
-            wep.Kind = wepKind
+            for _, wep in ipairs(ply:GetWeapons()) do
+                if wep.Kind and weapon.Kind and wep.Kind == weapon.Kind then
+                    wep.Kind = wepKind
+                end
+            end
         end
+
+        ply:Give(equipment)
     end
 
     timer.Simple(0.1, function()
