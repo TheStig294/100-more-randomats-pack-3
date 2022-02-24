@@ -25,8 +25,16 @@ hook.Add("PlayerInitialSpawn", "RandomatStatsFillPlayerIDs", function(ply, trans
     end
 end)
 
+local boughtItemEvents = {"favourites2", "buyemall2", "whatitslike2"}
+
 -- Keeps track of the number of times any player has bought any one buy menu item
 hook.Add("TTTOrderedEquipment", "RandomatStatsOrderedEquipment", function(ply, equipment, is_item)
+    -- Don't record bought items during randomats that rely on this stat, else 
+    -- everyone's most bought items will be self-perpetuating
+    for _, event in ipairs(boughtItemEvents) do
+        if Randomat:IsEventActive(event) then return end
+    end
+
     local ID = util.SteamIDFrom64(ply:SteamID64())
 
     -- Passive items are indexed by their print name, if it exists
