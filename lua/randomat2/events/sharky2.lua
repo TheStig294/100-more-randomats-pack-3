@@ -6,82 +6,82 @@ EVENT.id = "sharky2"
 function EVENT:Begin()
     -- The stats data is recorded from another lua file, lua/autorun/server/stig_randomat_player_stats.lua
     local stats = randomatPlayerStats
-    local chosenTraitor
-
-    for _, ply in pairs(self:GetAlivePlayers(true)) do
-        local ID = ply:SteamID()
-
-        if stats[ID] and (stats[ID]["TraitorPartners"] or stats[ID]["traitorPartners"]) then
-            chosenTraitor = ply
-            break
-        end
-    end
-
+    local alivePlayers = self:GetAlivePlayers(true)
+    local chosenTraitor = alivePlayers[1]
     local ID = chosenTraitor:SteamID()
-    local nickname = chosenTraitor:Nick()
-    local traitorStats
-
-    -- Compatibility with original stats mod, and the one made for Noxx's custom roles
-    if stats[ID]["TraitorPartners"] ~= nil then
-        traitorStats = stats[ID]["TraitorPartners"]
-    else
-        traitorStats = stats[ID]["traitorPartners"]
-    end
-
+    local traitorPartnerWins = table.Copy(stats[ID]["TraitorPartnerWins"])
+    local traitorPartnerRounds = table.Copy(stats[ID]["TraitorPartnerRounds"])
     local traitorWinRates = {}
 
     -- Getting the winrates of everyone but the chosen player, while they were partnered with the chosen player
-    for i, ply in pairs(self:GetAlivePlayers()) do
+    for _, ply in pairs(self:GetAlivePlayers()) do
         local plyID = ply:SteamID()
 
-        if traitorStats[plyID] and plyID ~= ID then
-            traitorWinRates[traitorStats[plyID]["Wins"] / traitorStats[plyID]["Rounds"]] = ply:Nick()
+        if traitorPartnerWins[plyID] and traitorPartnerRounds[plyID] and plyID ~= ID then
+            traitorWinRates[ply] = traitorPartnerWins[plyID] / traitorPartnerRounds[plyID]
         end
     end
 
-    -- Finding the chosen player's best partner
-    local bestTraitorWinRateTable = table.GetKeys(traitorWinRates)
-    table.sort(bestTraitorWinRateTable)
-    local bestTraitorWinRate = bestTraitorWinRateTable[#bestTraitorWinRateTable]
-    local bestTraitorNickname = traitorWinRates[bestTraitorWinRate]
-    -- Counting the number of traitors so that number is preserved after the chosen player and their worst partner are made traitors
-    local traitorCount = 0
+    local chosenPartner
 
-    for _, ply in pairs(self:GetAlivePlayers()) do
+    if table.IsEmpty(traitorWinRates) then
+        -- If the chosen player hasn't been a traitor with anyone yet, pick a random player
+        chosenPartner = alivePlayers[2]
+    else
+        -- Else, finding the chosen player's best partner
+        chosenPartner = table.GetWinningKey(traitorWinRates)
+    end
+
+    -- Setting the chosen player and their best partner to be traitors
+    -- First, re-select everyone's roles so a player not being a detective anymore isn't suspicious
+    SelectRoles()
+    -- Now counting the number of traitors alive, so their number is preserved
+    local originalTraitorCount = 0
+
+    for _, ply in ipairs(alivePlayers) do
         if Randomat:IsTraitorTeam(ply) then
+            originalTraitorCount = originalTraitorCount + 1
+        end
+    end
+
+    -- Set the role of the chosen traitors to ordinary traitors, if they aren't a traitor already
+    for _, ply in ipairs({chosenTraitor, chosenPartner}) do
+        if not Randomat:IsTraitorTeam(ply) then
+            self:StripRoleWeapons(ply)
+            Randomat:SetRole(ply, ROLE_TRAITOR)
+            ply:SetDefaultCredits()
+        end
+    end
+
+    -- Setting the roles of everyone else to innocent, if there are now more traitors than when everyone's roles were re-selected
+    local traitorCount = 2
+
+    for _, ply in ipairs(alivePlayers) do
+        if Randomat:IsTraitorTeam(ply) and ply ~= chosenTraitor and ply ~= chosenPartner then
             traitorCount = traitorCount + 1
+
+            if traitorCount > originalTraitorCount then
+                self:StripRoleWeapons(ply)
+                Randomat:SetRole(ply, ROLE_INNOCENT)
+                ply:SetDefaultCredits()
+            end
         end
     end
 
-    -- Setting the chosen player and their best partner to be the traitors
-    for _, ply in pairs(self:GetAlivePlayers()) do
-        if ply:Nick() == nickname or ply:Nick() == bestTraitorNickname then
-            self:StripRoleWeapons(ply)
-            Randomat:SetRole(ply, ROLE_TRAITOR)
-            ply:SetCredits(GetConVar("ttt_credits_starting"):GetInt())
-            SendFullStateUpdate()
-        else
-            self:StripRoleWeapons(ply)
-            Randomat:SetRole(ply, ROLE_INNOCENT)
-            SendFullStateUpdate()
-        end
-    end
-
-    -- Randomly choosing non-traitors to be the remaining traitors
-    for _, ply in pairs(self:GetAlivePlayers(true)) do
-        if traitorCount > 2 and Randomat:IsTraitorTeam(ply) == false then
-            self:StripRoleWeapons(ply)
-            Randomat:SetRole(ply, ROLE_TRAITOR)
-            ply:SetCredits(GetConVar("ttt_credits_starting"):GetInt())
-            SendFullStateUpdate()
-            traitorCount = traitorCount - 1
-        end
-    end
+    -- Updating everyone's displayed roles
+    SendFullStateUpdate()
 
     -- Displaying the traitors' winrate
     timer.Simple(5, function()
-        self:SmallNotify("The traitors have a " .. math.Round(bestTraitorWinRate * 100) .. "% win rate!")
+        -- If a random player was chosen, display a 100% winrate as a fallback
+        self:SmallNotify("The traitors have a " .. math.Round((traitorWinRates[chosenPartner] or 1) * 100) .. "% win rate!")
     end)
+end
+
+-- This event tries to index self:GetAlivePlayers() up to 4 unique players
+-- So, at least 4 players need to be alive for this event not to error
+function EVENT:Condition()
+    return #self:GetAlivePlayers() >= 4
 end
 
 Randomat:register(EVENT)
