@@ -31,7 +31,7 @@ function EVENT:Begin()
     local boughtEmAllPlayers = {}
 
     for _, ply in pairs(self:GetAlivePlayers()) do
-        local ID = util.SteamIDFrom64(ply:SteamID64())
+        local ID = ply:SteamID()
         local equipmentStats = table.Copy(stats[ID]["EquipmentItems"])
         local boughtEquipment = table.GetKeys(equipmentStats)
         local unboughtEquipment = table.Copy(buyableEquipment)

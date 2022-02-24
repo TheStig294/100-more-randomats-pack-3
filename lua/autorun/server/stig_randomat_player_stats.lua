@@ -14,7 +14,7 @@ end
 -- Setup all entries for every player as they connect
 -- This *should* ensure all players have every needed key in the stats table, so we should never try to index a nil value in the table
 hook.Add("PlayerInitialSpawn", "RandomatStatsFillPlayerIDs", function(ply, transition)
-    local ID = util.SteamIDFrom64(ply:SteamID64())
+    local ID = ply:SteamID()
 
     if not randomatPlayerStats[ID] then
         randomatPlayerStats[ID] = {}
@@ -22,6 +22,22 @@ hook.Add("PlayerInitialSpawn", "RandomatStatsFillPlayerIDs", function(ply, trans
 
     if not randomatPlayerStats[ID]["EquipmentItems"] then
         randomatPlayerStats[ID]["EquipmentItems"] = {}
+    end
+
+    if not randomatPlayerStats[ID]["DetectiveWins"] then
+        randomatPlayerStats[ID]["DetectiveWins"] = 0
+    end
+
+    if not randomatPlayerStats[ID]["DetectiveRounds"] then
+        randomatPlayerStats[ID]["DetectiveRounds"] = 0
+    end
+
+    if not randomatPlayerStats[ID]["TraitorPartnerWins"] then
+        randomatPlayerStats[ID]["TraitorPartnerWins"] = {}
+    end
+
+    if not randomatPlayerStats[ID]["TraitorPartnerRounds"] then
+        randomatPlayerStats[ID]["TraitorPartnerRounds"] = {}
     end
 end)
 
@@ -35,7 +51,7 @@ hook.Add("TTTOrderedEquipment", "RandomatStatsOrderedEquipment", function(ply, e
         if Randomat:IsEventActive(event) then return end
     end
 
-    local ID = util.SteamIDFrom64(ply:SteamID64())
+    local ID = ply:SteamID()
 
     -- Passive items are indexed by their print name, if it exists
     if is_item then
@@ -64,8 +80,59 @@ hook.Add("TTTOrderedEquipment", "RandomatStatsOrderedEquipment", function(ply, e
     end
 end)
 
+-- Record player wins at the end of each round
+hook.Add("TTTEndRound", "RandomatStatsRoundWinners", function(winType)
+    local traitors = {}
+
+    for _, ply in ipairs(player.GetAll()) do
+        local ID = ply:SteamID()
+
+        if Randomat:IsGoodDetectiveLike(ply) then
+            if randomatPlayerStats[ID]["DetectiveRounds"] then
+                randomatPlayerStats[ID]["DetectiveRounds"] = randomatPlayerStats[ID]["DetectiveRounds"] + 1
+            else
+                randomatPlayerStats[ID]["DetectiveRounds"] = 1
+            end
+
+            if winType == WIN_INNOCENT then
+                if randomatPlayerStats[ID]["DetectiveWins"] then
+                    randomatPlayerStats[ID]["DetectiveWins"] = randomatPlayerStats[ID]["DetectiveWins"] + 1
+                else
+                    randomatPlayerStats[ID]["DetectiveWins"] = 1
+                end
+            end
+        elseif Randomat:IsTraitorTeam(ply) then
+            table.insert(traitors, ply)
+        end
+    end
+
+    for _, traitor in ipairs(traitors) do
+        local ID = traitor:SteamID()
+
+        for _, traitorPartner in ipairs(traitors) do
+            if traitor ~= traitorPartner then
+                local partnerID = traitorPartner:SteamID()
+
+                if randomatPlayerStats[ID]["TraitorPartnerRounds"][partnerID] then
+                    randomatPlayerStats[ID]["TraitorPartnerRounds"][partnerID] = randomatPlayerStats[ID]["TraitorPartnerRounds"][partnerID] + 1
+                else
+                    randomatPlayerStats[ID]["TraitorPartnerRounds"][partnerID] = 1
+                end
+
+                if winType == WIN_TRAITOR then
+                    if randomatPlayerStats[ID]["TraitorPartnerWins"][partnerID] then
+                        randomatPlayerStats[ID]["TraitorPartnerWins"][partnerID] = randomatPlayerStats[ID]["TraitorPartnerWins"][partnerID] + 1
+                    else
+                        randomatPlayerStats[ID]["TraitorPartnerWins"][partnerID] = 1
+                    end
+                end
+            end
+        end
+    end
+end)
+
 -- Record all stats in the stats file when server shuts down/changes maps
 hook.Add("ShutDown", "RecordStigRandomatStats", function()
-    fileContent = util.TableToJSON(randomatPlayerStats)
+    fileContent = util.TableToJSON(randomatPlayerStats, true)
     file.Write("randomat/playerstats.txt", fileContent)
 end)

@@ -22,7 +22,7 @@ function EVENT:Begin()
     local stats = randomatPlayerStats
 
     for _, ply in pairs(self:GetAlivePlayers()) do
-        local ID = util.SteamIDFrom64(ply:SteamID64())
+        local ID = ply:SteamID()
         local equipmentStats = table.Copy(stats[ID]["EquipmentItems"])
         -- Set every player's buy count of the radar and body armour to 1 to prevent these from always being a player's most bought item
         -- Also effectively sets the player's most bought item to the body armour and radar as a fail-safe if the player has never bought anything before
