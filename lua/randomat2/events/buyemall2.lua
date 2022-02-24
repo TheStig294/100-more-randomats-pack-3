@@ -86,7 +86,7 @@ function EVENT:Begin()
         end)
 
         timer.Simple(10, function()
-            Randomat:SmallNotify("They now choose a randomat at the start of every round, for the rest of the map!")
+            Randomat:SmallNotify("They now get to choose a randomat at the start of every round, for the rest of the map!")
         end)
 
         -- At the start of every round, for the rest of the current map, a random player that bought every weapon gets to choose the randomat for that round
