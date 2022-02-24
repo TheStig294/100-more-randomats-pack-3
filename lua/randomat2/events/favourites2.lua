@@ -33,64 +33,9 @@ function EVENT:Begin()
 
         for i = 1, itemCount do
             local mostBoughtItem = table.GetWinningKey(equipmentStats)
+            GiveEquipmentByIdOrClass(ply, mostBoughtItem, wepKind)
             equipmentStats[mostBoughtItem] = 0
-            local is_item = weapons.Get(mostBoughtItem) == nil
-
-            if is_item then
-                local detectiveItem = false
-                local traitorItem = false
-
-                for _, equipment in ipairs(EquipmentItems[ROLE_DETECTIVE]) do
-                    if equipment.name == mostBoughtItem then
-                        if equipment.id then
-                            detectiveItem = true
-                            mostBoughtItem = equipment.id
-                        end
-
-                        break
-                    end
-                end
-
-                if not detectiveItem then
-                    for _, equipment in ipairs(EquipmentItems[ROLE_TRAITOR]) do
-                        if equipment.name == mostBoughtItem then
-                            if equipment.id then
-                                traitorItem = true
-                                mostBoughtItem = equipment.id
-                            end
-
-                            break
-                        end
-                    end
-                end
-
-                -- If the item can't be found, give them a radar as a fallback
-                if not (detectiveItem or traitorItem) then
-                    mostBoughtItem = EQUIP_RADAR
-                end
-
-                mostBoughtItem = math.floor(tonumber(mostBoughtItem))
-                ply:GiveEquipmentItem(mostBoughtItem)
-            else
-                local wep = ply:Give(mostBoughtItem)
-                -- Giving all weapons a unique weapon kind so players can always get all weapons
-                wep.Kind = wepKind
-                wepKind = wepKind + 1
-            end
-
-            local detectiveBuyable = GetDetectiveBuyable()
-            local traitorBuyable = GetTraitorBuyable()
-
-            timer.Simple(0.1, function()
-                -- Calls all expected shop hooks for things like automatically starting the radar if a player was given one,
-                -- and greying out icons in the player's shop
-                Randomat:CallShopHooks(is_item, mostBoughtItem, ply)
-                -- Number indexes in non-sequential tables are actually strings, so we need to convert passive item IDs to strings
-                -- if we are to use the detective/traitor buyable tables from lua/autorun/stig_randomat_base_functions.lua
-                mostBoughtItem = tostring(mostBoughtItem)
-                local name = detectiveBuyable[mostBoughtItem] or traitorBuyable[mostBoughtItem] or "item"
-                ply:ChatPrint("You received a " .. name .. "!")
-            end)
+            wepKind = wepKind + 1
         end
     end
 end

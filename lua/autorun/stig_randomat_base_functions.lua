@@ -126,52 +126,6 @@ if SERVER then
     end
 end
 
---Gives a weapon by its print name
---Only supports items installed on the first connected client, available to either the detective or traitor (for passive items they must also have a valid id)
---Used by randomats reading stats data from 'TTT Total Statistics', e.g. 'Everyone has their favourites'
-function PrintToGive(name, ply)
-    local traitorWeapon = table.KeyFromValue(traitorBuyable, name)
-    local detectiveWeapon = table.KeyFromValue(detectiveBuyable, name)
-
-    -- First try giving the equipment as a weapon, if the ID found isn't a number (and therefore isn't an equipment ID)
-    if traitorWeapon ~= nil and not isnumber(tonumber(traitorWeapon)) then
-        ply:Give(traitorWeapon)
-        Randomat:CallShopHooks(false, traitorWeapon, ply)
-    elseif detectiveWeapon ~= nil and not isnumber(tonumber(detectiveWeapon)) then
-        ply:Give(detectiveWeapon)
-        Randomat:CallShopHooks(false, detectiveWeapon, ply)
-    else
-        -- Else try giving the weapon as a passive item in the detective or traitor buy menus
-        local itemFound = false
-
-        for _, equ in ipairs(EquipmentItems[ROLE_TRAITOR]) do
-            if equ.name == name and isnumber(tonumber(equ.id)) then
-                id = equ.id
-                ply:GiveEquipmentItem(tonumber(id))
-                Randomat:CallShopHooks(true, id, ply)
-                itemFound = true
-                break
-            end
-        end
-
-        if itemFound then return end
-
-        for _, equ in ipairs(EquipmentItems[ROLE_DETECTIVE]) do
-            if equ.name == name and isnumber(tonumber(equ.id)) then
-                id = equ.id
-                ply:GiveEquipmentItem(tonumber(id))
-                Randomat:CallShopHooks(true, id, ply)
-                itemFound = true
-                break
-            end
-        end
-
-        if itemFound then return end
-        -- If that fails, simply print a message in chat to the player
-        ply:ChatPrint("The equipment '" .. name .. "' you were supposed to be given wasn't found...")
-    end
-end
-
 -- Returns whether or not the current map has a navmesh. Used for randomats that use ai-based weapons that need a navmesh to work, such as the guard dog or killer snail randomats
 function MapHasAI()
     return file.Exists("maps/" .. game.GetMap() .. ".nav", "GAME")
@@ -313,5 +267,63 @@ function MapHasProps()
     return propCount > 5
 end
 
-function GiveEquipmentByIdOrClass(ply, item)
+function GiveEquipmentByIdOrClass(ply, equipment, wepKind)
+    local is_item = weapons.Get(equipment) == nil
+
+    if is_item then
+        local detectiveItem = false
+        local traitorItem = false
+
+        for _, equ in ipairs(EquipmentItems[ROLE_DETECTIVE]) do
+            if equ.name == equipment then
+                if equ.id then
+                    detectiveItem = true
+                    equipment = equ.id
+                end
+
+                break
+            end
+        end
+
+        if not detectiveItem then
+            for _, equ in ipairs(EquipmentItems[ROLE_TRAITOR]) do
+                if equ.name == equipment then
+                    if equ.id then
+                        traitorItem = true
+                        equipment = equ.id
+                    end
+
+                    break
+                end
+            end
+        end
+
+        -- If the item can't be found, give them a radar as a fallback
+        if not (detectiveItem or traitorItem) then
+            equipment = EQUIP_RADAR
+        end
+
+        equipment = math.floor(tonumber(equipment))
+        ply:GiveEquipmentItem(equipment)
+    else
+        local wep = ply:Give(equipment)
+
+        -- Giving equipment a specified weapon kind, if set
+        -- Mostly used for ensuring players always get the weapon to give,
+        -- else they may have a weapon that already takes up the slot the weapon we're trying to give does
+        if wepKind then
+            wep.Kind = wepKind
+        end
+    end
+
+    timer.Simple(0.1, function()
+        -- Calls all expected shop hooks for things like automatically starting the radar if a player was given one,
+        -- and greying out icons in the player's shop
+        Randomat:CallShopHooks(is_item, equipment, ply)
+        -- Number indexes in non-sequential tables are actually strings, so we need to convert passive item IDs to strings
+        -- if we are to use the detective/traitor buyable tables from lua/autorun/stig_randomat_base_functions.lua
+        equipment = tostring(equipment)
+        local name = detectiveBuyable[equipment] or traitorBuyable[equipment] or "item"
+        ply:ChatPrint("You received a " .. name .. "!")
+    end)
 end

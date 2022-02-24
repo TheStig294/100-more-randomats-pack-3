@@ -54,9 +54,11 @@ function EVENT:Begin()
         -- So if the player has 1 unbought item, they should get 1 item
         local itemCount = math.min(GetConVar("randomat_buyemall2_given_items_count"):GetInt(), table.Count(unboughtEquipment))
         table.Shuffle(unboughtEquipment)
+        local wepKind = 10
 
         for i = 1, itemCount do
-            GiveEquipmentByIdOrClass(ply, unboughtEquipment[i])
+            GiveEquipmentByIdOrClass(ply, unboughtEquipment[i], wepKind)
+            wepKind = wepKind + 1
         end
     end
 
