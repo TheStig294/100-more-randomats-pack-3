@@ -42,7 +42,7 @@ function EVENT:Begin()
         end
 
         if table.IsEmpty(unboughtEquipment) then
-            ply:PrintMessage(HUD_PRINTTALK, "==CONGRATS! YOU BOUGHT 'EM ALL!==\nYou get to choose the randomat at the start of each round!")
+            ply:PrintMessage(HUD_PRINTTALK, "==CONGRATS! YOU BOUGHT 'EM ALL!==\nYou get to choose a randomat at the start of each round!")
             ply:PrintMessage(HUD_PRINTCENTER, "CONGRATS! YOU BOUGHT 'EM ALL!")
             -- This table is needed in case multiple players bought everything
             -- in which case, a random player will be chosen out of each of them to choose a randomat at the start of each round
@@ -62,9 +62,8 @@ function EVENT:Begin()
         end
     end
 
-    local autoRandomat = GetConVar("ttt_randomat_auto"):GetBool()
-    local choices = GetConVar("randomat_choose_choices"):GetInt()
-    local vote = GetConVar("randomat_choose_vote"):GetBool()
+    local chooseChoices = GetConVar("randomat_choose_choices"):GetInt()
+    local chooseVote = GetConVar("randomat_choose_vote"):GetBool()
 
     if not table.IsEmpty(boughtEmAllPlayers) then
         -- Displays a randomat alert and message to chat for everyone displaying which players have bought all weapons
@@ -76,11 +75,11 @@ function EVENT:Begin()
         end)
 
         timer.Simple(10, function()
-            Randomat:SmallNotify("They now choose the randomat at the start of every round, for the rest of the map!")
+            Randomat:SmallNotify("They now choose a randomat at the start of every round, for the rest of the map!")
         end)
 
         -- At the start of every round, for the rest of the current map, a random player that bought every weapon gets to choose the randomat for that round
-        GetConVar("ttt_randomat_auto"):SetBool(false)
+        hook.Add("TTTRandomatShouldAuto", "BuyEmAllPreventAutoRandomat", function(id, owner) return false end)
         GetConVar("randomat_choose_choices"):SetInt(5)
         -- Only allow the player who the randomat triggers off of to choose randomats
         GetConVar("randomat_choose_vote"):SetBool(false)
@@ -91,9 +90,8 @@ function EVENT:Begin()
 
         -- Once the map is changing or the server is being shut down, all convars are reset
         hook.Add("ShutDown", "BoughtEmAllConVarReset", function()
-            GetConVar("ttt_randomat_auto"):SetBool(autoRandomat)
-            GetConVar("randomat_choose_choices"):SetInt(choices)
-            GetConVar("randomat_choose_vote"):SetBool(vote)
+            GetConVar("randomat_choose_choices"):SetInt(chooseChoices)
+            GetConVar("randomat_choose_vote"):SetBool(chooseVote)
         end)
     end
 end
