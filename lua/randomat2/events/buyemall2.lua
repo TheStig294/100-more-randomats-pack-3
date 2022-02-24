@@ -1,6 +1,19 @@
 local EVENT = {}
+
+CreateConVar("randomat_buyemall2_given_items_count", "2", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "How many items to give out", 1, 10)
+
+local function GetDescription()
+    local count = GetConVar("randomat_buyemall2_given_items_count"):GetInt()
+
+    if count == 1 then
+        return "Get an item you've never bought before, but what happens when you buy 'em all?"
+    else
+        return "Get " .. GetConVar("randomat_buyemall2_given_items_count"):GetInt() .. " items you've never bought before, but what happens when you buy 'em all?"
+    end
+end
+
 EVENT.Title = "Gotta actually buy 'em all!"
-EVENT.Description = "Get something you haven't bought before, or a special reward for buying 'em all!"
+EVENT.Description = GetDescription()
 EVENT.id = "buyemall2"
 -- Let this randomat trigger again at the start of a new map
 local eventTriggered = false
@@ -8,6 +21,7 @@ local eventTriggered = false
 function EVENT:Begin()
     -- This randomat can only trigger once per map
     eventTriggered = true
+    self.Description = GetDescription()
     -- The stats data is recorded from another lua file, lua/autorun/server/stig_randomat_player_stats.lua
     local stats = randomatPlayerStats
     -- Functionality of GetDetectiveBuyable() and GetTraitorBuyable() can be found in stig_randomat_base_functions.lua and stig_randomat_client_functions.lua
@@ -17,14 +31,13 @@ function EVENT:Begin()
     local traitorBuyable = table.ClearKeys(traitorBuyableKeyed)
     local boughtEmAllPlayers = {}
 
-    for i, ply in pairs(self:GetAlivePlayers()) do
+    for _, ply in pairs(self:GetAlivePlayers()) do
         local boughtAllDetective = false
         local boughtAllTraitor = false
-        -- Use SteamID(), not SteamID64() as that's how players are indexed in the stats data file
-        local id = ply:SteamID()
+        local ID = util.SteamIDFrom64(ply:SteamID64())
         -- Grab tables of all detective/traitor items the player has ever bought
-        local detectiveBought = table.GetKeys(stats[id]["DetectiveEquipment"])
-        local traitorBought = table.GetKeys(stats[id]["TraitorEquipment"])
+        local detectiveBought = table.GetKeys(stats[ID]["DetectiveEquipment"])
+        local traitorBought = table.GetKeys(stats[ID]["TraitorEquipment"])
 
         -- Remove all bought weapons from the possible list of weapons to give out
         for k = 1, #detectiveBought do
@@ -54,7 +67,7 @@ function EVENT:Begin()
             PrintToGive(traitorBuyable[math.random(#traitorBuyable)], ply)
             ply:ChatPrint("==Traitor items never bought==")
 
-            for j, wep in ipairs(traitorBuyable) do
+            for _, wep in ipairs(traitorBuyable) do
                 ply:ChatPrint("- " .. wep)
             end
         elseif not boughtAllDetective and boughtAllTraitor then
@@ -62,7 +75,7 @@ function EVENT:Begin()
             PrintToGive(detectiveBuyable[math.random(#detectiveBuyable)], ply)
             ply:ChatPrint("==Detective items never bought==")
 
-            for j, wep in ipairs(detectiveBuyable) do
+            for _, wep in ipairs(detectiveBuyable) do
                 ply:ChatPrint("- " .. wep)
             end
         else
@@ -71,13 +84,13 @@ function EVENT:Begin()
             PrintToGive(traitorBuyable[math.random(#traitorBuyable)], ply)
             ply:ChatPrint("==Detective items never bought==")
 
-            for j, wep in ipairs(detectiveBuyable) do
+            for _, wep in ipairs(detectiveBuyable) do
                 ply:ChatPrint("- " .. wep)
             end
 
             ply:ChatPrint("==Traitor items never bought==")
 
-            for j, wep in ipairs(traitorBuyable) do
+            for _, wep in ipairs(traitorBuyable) do
                 ply:ChatPrint("- " .. wep)
             end
         end
@@ -87,7 +100,7 @@ function EVENT:Begin()
     local choices = GetConVar("randomat_choose_choices"):GetInt()
     local vote = GetConVar("randomat_choose_vote"):GetBool()
 
-    if table.IsEmpty(boughtEmAllPlayers) == false then
+    if not table.IsEmpty(boughtEmAllPlayers) then
         -- Displays a randomat alert and message to chat for everyone displaying which players have bought all weapons
         local boughtEmAllPlayersString = table.ToString(boughtEmAllPlayers, "Players who bought 'em all:", true)
 
@@ -97,7 +110,7 @@ function EVENT:Begin()
         end)
 
         timer.Simple(10, function()
-            Randomat:SmallNotify("They now choose a randomat at the start of every round, for the rest of the map!")
+            Randomat:SmallNotify("They now choose the randomat at the start of every round, for the rest of the map!")
         end)
 
         -- At the start of every round, for the rest of the current map, a random player that bought every weapon gets to choose the randomat for that round
@@ -122,6 +135,29 @@ end
 function EVENT:Condition()
     -- This event is reliant on 'Choose an Event!' existing, and can only trigger once a map
     return Randomat:CanEventRun("choose") and not eventTriggered
+end
+
+function EVENT:GetConVars()
+    local sliders = {}
+
+    for _, v in ipairs({"given_items_count"}) do
+        local name = "randomat_" .. self.id .. "_" .. v
+
+        if ConVarExists(name) then
+            local convar = GetConVar(name)
+            convar:Revert()
+
+            table.insert(sliders, {
+                cmd = v,
+                dsc = convar:GetHelpText(),
+                min = convar:GetMin(),
+                max = convar:GetMax(),
+                dcm = 0
+            })
+        end
+    end
+
+    return sliders
 end
 
 Randomat:register(EVENT)
