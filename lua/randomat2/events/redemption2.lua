@@ -56,4 +56,8 @@ function EVENT:Begin()
     end)
 end
 
+function EVENT:Condition()
+    return #self:GetAlivePlayers() >= 3
+end
+
 Randomat:register(EVENT)
