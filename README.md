@@ -29,15 +29,8 @@ _ttt_randomat_event_history_ - Default: 10 - How many events should be kept in h
 1. O Rubber Tree... - Periodically gives everyone baby donconnans
 
 # Randomats
+
 __Randomats that don't have credit were completely made by me__
-
-## 100% Detective Winrate
-
-Whoever has the highest detective winrate is turned into a detective! (According to the TTT stats mod)\
-\
-_ttt_randomat_detectivewinrate_ - Default: 1 - Whether this randomat is enabled\
-\
-Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=2540490462>
 
 ## AFK = Dead
 
@@ -78,26 +71,6 @@ Everyone gets a random zombies perk bottle\
 _ttt_randomat_drinkup_ - Default: 1 - Whether this randomat is enabled\
 \
 Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=2243578658>
-
-## Everyone has their favourites
-
-Gives everyone their most bought detective and traitor item, according to the TTT stats mod.\
-If the two items take the same slot, only the most bought of the two is given.\
-\
-_ttt_randomat_favourites_ - Default: 1 - Whether this randomat is enabled\
-\
-Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=2540490462>
-
-## Gotta buy 'em all
-
-Gives everyone a detective and traitor weapon they haven't bought before, according to the TTT stats mod. If the two weapons take the same slot, only the traitor weapon is given. \
-If a player has bought all detective AND traitor items at least once, they get to choose a randomat at the start of every round for the rest of the map!\
-If multiple players have bought all items, they take turns in choosing randomats.\
-A list of all detective and traitor weapons you are yet to buy is displayed in the chat.\
-\
-_ttt_randomat_buyemall_ - Default: 1 - Whether this randomat is enabled\
-
-Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=2540490462>
 
 ## Hack the planet
 
@@ -285,14 +258,6 @@ _ttt_randomat_jetpack_ - Default: 1 - Whether this randomat is enabled\
 \
 Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=1735229517>
 
-## Redemption Time
-
-Puts someone with their worst traitor partner, according to the TTT stats mod. Doesn't trigger if there aren't at least two living traitors already in the round.\
-\
-_ttt_randomat_redemption_ - Default: 1 - Whether this randomat is enabled\
-\
-Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=2540490462>
-
 ## Secret Friday Update
 
 Everyone gets a minecraft bow and minecraft block weapon. All other weapons are striped from players and the ground.\
@@ -302,14 +267,6 @@ _ttt_randomat_secretfriday_ - Default: 1 - Whether this randomat is enabled\
 Requires:\
 <https://steamcommunity.com/sharedfiles/filedetails/?id=2311866661> \
 <https://steamcommunity.com/sharedfiles/filedetails/?id=2311859098>
-
-## Sharky and Palp
-
-Puts someone with their best traitor partner, according to the TTT stats mod. Doesn't trigger if there aren't at least two living traitors already in the round.\
-\
-_ttt_randomat_sharky_ - Default: 1 - Whether this randomat is enabled\
-\
-Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=2540490462>
 
 ## Snail Time
 
@@ -348,16 +305,6 @@ _ttt_randomat_stungun_ - Default: 1 - Whether this randomat is enabled\
 Originally made by [nanz](https://steamcommunity.com/sharedfiles/filedetails/?id=2194776699)\
 \
 Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=785294711>
-
-## What it's like to be [player name]
-
-Gives everyone someone's playermodel and favourite traitor and detective weapon, according to the TTT stats mod.\
-If the two weapons take the same slot, only the most bought of the two is given.\
-\
-_ttt_randomat_whatitslike_ - Default: 1 - Whether this randomat is enabled\
-_randomat_whatitslike_disguise_ - Default: 0 - Hide each player’s name\
-\
-Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=2540490462>
 
 ## Woof Woof
 
