@@ -80,19 +80,6 @@ _ttt_randomat_hack_ - Default: 1 - Whether this randomat is enabled\
 \
 Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=2181940209>
 
-## Home Run
-
-Everyone is continually given home run bats!\
-\
-_ttt_randomat_homerun_ - Default: 1 - Whether this randomat is enabled\
-_randomat_homerun_strip_ - Default: 1 - The event strips your other weapons\
-_randomat_homerun_weaponid_ - Default: weapon_ttt_homebat - Id of the weapon given\
-\
-Changed name from "Batter Up!"\
-Originally made by [nanz](https://steamcommunity.com/sharedfiles/filedetails/?id=2194776699)\
-\
-Requires: <https://steamcommunity.com/workshop/filedetails/?id=648957314>
-
 ## Hot Potato
 
 Gives someone a ‘Hot Potato’, a weapon that after 17 seconds makes the holder explode. It must be passed to another player to avoid exploding.\
@@ -170,14 +157,6 @@ Gives everyone a deal with the devil\
 _ttt_randomat_devildeal_ - Default: 1 - Whether this randomat is enabled\
 \
 Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=2140473915>
-
-## Mystery box
-
-Everyone gets a random COD Zombies wonder weapon!\
-\
-_ttt_randomat_mysterybox_ - Default: 1 - Whether this randomat is enabled\
-\
-Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=2252594978>
 
 ## Now, you're thinking with portals
 
@@ -313,12 +292,3 @@ Everyone gets a guard dog\
 _ttt_randomat_woof_ - Default: 1 - Whether this randomat is enabled\
 \
 Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=2120419714>
-
-## You just triggered my trap card
-
-Everyone gets an uno reverse card that reflects all damage and lasts for a set amount of time\
-\
-_ttt_randomat_uno_ - Default: 1 - Whether this randomat is enabled\
-_randomat_uno_time_ - Default: 3 - How long the uno reverse card lasts\
-\
-Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=2329721936>
