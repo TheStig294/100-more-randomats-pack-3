@@ -41,7 +41,7 @@ hook.Add("PlayerInitialSpawn", "RandomatStatsFillPlayerIDs", function(ply, trans
     end
 end)
 
-local boughtItemEvents = {"favourites2", "buyemall2", "whatitslike2"}
+local boughtItemEvents = {"favourites", "buyemall", "whatitslike"}
 
 -- Keeps track of the number of times any player has bought any one buy menu item
 hook.Add("TTTOrderedEquipment", "RandomatStatsOrderedEquipment", function(ply, equipment, is_item)
