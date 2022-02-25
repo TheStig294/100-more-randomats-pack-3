@@ -1,54 +1,66 @@
 local EVENT = {}
-EVENT.Title = "Everyone has their favourites"
-EVENT.Description = "Gives your most bought traitor item, and your most bought detective item, unless they take the same slot"
-EVENT.id = "favourites"
 
-function EVENT:Begin()
-    -- The stats data is recorded from another mod, 'TTT Total Statistics'
-    local data = file.Read("ttt/ttt_total_statistics/stats.txt", "DATA")
-    local stats = util.JSONToTable(data)
+CreateConVar("randomat_favourites_given_items_count", "2", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "How many most bought items to give out", 1, 10)
 
-    for i, ply in pairs(self:GetAlivePlayers()) do
-        timer.Simple(0.1, function()
-            local id = ply:SteamID()
-            local detectiveStats = stats[id]["DetectiveEquipment"]
-            local traitorStats = stats[id]["TraitorEquipment"]
-            -- Set every player's buy count of the radar and body armour to 0 to prevent these from always being a player's most bought item
-            -- Also effectively sets the player's most bought item to the body armour as a fail-safe if the player has never bought anything before
-            detectiveStats["Radar"] = 0
-            detectiveStats["Body Armor"] = 0
-            traitorStats["Radar"] = 0
-            traitorStats["Body Armor"] = 0
-            -- Gets the print name of their most bought traitor and detective item
-            local detectiveItemName = table.GetWinningKey(detectiveStats)
-            local traitorItemName = table.GetWinningKey(traitorStats)
+local function GetDescription()
+    local count = GetConVar("randomat_favourites_given_items_count"):GetInt()
 
-            -- The most bought item between the detective and traitor equipment is given first
-            if detectiveStats[detectiveItemName] >= traitorStats[traitorItemName] then
-                PrintToGive(detectiveItemName, ply)
-
-                -- If they're about to be given the body armour a second time, give them the radar instead
-                if detectiveItemName == "Body Armor" and traitorItemName == "Body Armor" then
-                    PrintToGive("Radar", ply)
-                else
-                    PrintToGive(traitorItemName, ply)
-                end
-            else
-                PrintToGive(traitorItemName, ply)
-
-                if traitorItemName == "Body Armor" and detectiveItemName == "Body Armor" then
-                    PrintToGive("Radar", ply)
-                else
-                    PrintToGive(detectiveItemName, ply)
-                end
-            end
-        end)
+    if count == 1 then
+        return "Everyone gets their most bought item!"
+    else
+        return "Everyone gets their " .. GetConVar("randomat_favourites_given_items_count"):GetInt() .. " most bought items!"
     end
 end
 
-function EVENT:Condition()
-    -- Trigger when 'TTT Total Statistics' is installed
-    return file.Exists("gamemodes/terrortown/entities/entities/ttt_total_statistics/init.lua", "THIRDPARTY")
+EVENT.Title = "Everyone has their favourites"
+EVENT.Description = GetDescription()
+EVENT.id = "favourites"
+
+function EVENT:Begin()
+    self.Description = GetDescription()
+    -- The stats data is recorded from another lua file, lua/autorun/server/stig_randomat_player_stats.lua
+    local stats = randomatPlayerStats
+
+    for _, ply in pairs(self:GetAlivePlayers()) do
+        local ID = ply:SteamID()
+        local equipmentStats = table.Copy(stats[ID]["EquipmentItems"])
+        -- Set every player's buy count of the radar and body armour to 1 to prevent these from always being a player's most bought item
+        -- Also effectively sets the player's most bought item to the body armour and radar as a fail-safe if the player has never bought anything before
+        equipmentStats["item_radar"] = 1
+        equipmentStats["item_armor"] = 1
+        local wepKind = 10
+        local itemCount = math.min(GetConVar("randomat_favourites_given_items_count"):GetInt(), table.Count(equipmentStats))
+
+        for i = 1, itemCount do
+            local mostBoughtItem = table.GetWinningKey(equipmentStats)
+            GiveEquipmentByIdOrClass(ply, mostBoughtItem, wepKind)
+            equipmentStats[mostBoughtItem] = 0
+            wepKind = wepKind + 1
+        end
+    end
+end
+
+function EVENT:GetConVars()
+    local sliders = {}
+
+    for _, v in ipairs({"given_items_count"}) do
+        local name = "randomat_" .. self.id .. "_" .. v
+
+        if ConVarExists(name) then
+            local convar = GetConVar(name)
+            convar:Revert()
+
+            table.insert(sliders, {
+                cmd = v,
+                dsc = convar:GetHelpText(),
+                min = convar:GetMin(),
+                max = convar:GetMax(),
+                dcm = 0
+            })
+        end
+    end
+
+    return sliders
 end
 
 Randomat:register(EVENT)

@@ -4,33 +4,49 @@ EVENT.Description = "Whoever has the highest detective winrate is now the detect
 EVENT.id = "detectivewinrate"
 
 function EVENT:Begin()
-    -- The stats data is recorded from another mod, 'TTT Total Statistics'
-    local data = file.Read("ttt/ttt_total_statistics/stats.txt", "DATA")
-    local stats = util.JSONToTable(data)
-    local detectiveStats = {}
+    -- The stats data is recorded from another lua file, lua/autorun/server/stig_randomat_player_stats.lua
+    local stats = randomatPlayerStats
+    local alivePlayers = self:GetAlivePlayers(true)
+    local detectiveWinrates = {}
+    local zylusEasterEgg = false
+    local chosenDetective
 
-    -- Grabbing everyone's detective winrate, 'Detective' is capitalised in the old version of TTT Total Statistics
-    for i, ply in pairs(self:GetAlivePlayers()) do
-        -- And check detective rounds are not 0 so we're not dividing by 0
-        if stats[ply:SteamID()] and stats[ply:SteamID()]["DetectiveWins"] and stats[ply:SteamID()]["DetectiveRounds"] ~= 0 then
-            detectiveStats[stats[ply:SteamID()]["DetectiveWins"] / stats[ply:SteamID()]["DetectiveRounds"]] = ply:Nick()
-        elseif stats[ply:SteamID()] and stats[ply:SteamID()]["detectiveWins"] and stats[ply:SteamID()]["detectiveRounds"] ~= 0 then
-            detectiveStats[stats[ply:SteamID()]["detectiveWins"] / stats[ply:SteamID()]["detectiveRounds"]] = ply:Nick()
+    -- Grabbing everyone's detective winrate
+    for _, ply in ipairs(alivePlayers) do
+        if ply:GetModel() == "models/player/jenssons/kermit.mdl" or ply:Nick() == "Zylus" then
+            zylusEasterEgg = true
+            chosenDetective = ply
+            break
+        end
+
+        local ID = ply:SteamID()
+        local detectiveWins = stats[ID]["DetectiveWins"]
+        local detectiveRounds = stats[ID]["DetectiveRounds"]
+        -- Can't have a detective winrate if you've played no rounds as detective! Also, that's dividing by zero, which is a no-no
+        if detectiveRounds == 0 then continue end
+        detectiveWinrates[ply] = detectiveWins / detectiveRounds
+    end
+
+    if not zylusEasterEgg then
+        -- Grabbing the Steam nickname of the player with the highest detective winrate
+        if table.IsEmpty(detectiveWinrates) then
+            -- If the chosen player hasn't been a traitor with anyone yet, pick a random player
+            chosenDetective = table.Random(alivePlayers)
+        else
+            -- Else, finding the chosen player's best partner
+            chosenDetective = table.GetWinningKey(detectiveWinrates)
         end
     end
 
-    -- Grabbing the Steam nickname of the player with the highest detective winrate
-    local bestDetectiveTable = table.GetKeys(detectiveStats)
-    table.sort(bestDetectiveTable)
-    local bestDetectiveWinRate = bestDetectiveTable[#bestDetectiveTable]
-    local bestDetectiveNickname = detectiveStats[bestDetectiveWinRate]
+    local removedDetectiveRole
 
     -- Turn a current detective into an innocent, if there is one
-    for i, ply in pairs(self:GetAlivePlayers()) do
+    for _, ply in ipairs(alivePlayers) do
         if Randomat:IsGoodDetectiveLike(ply) then
+            removedDetectiveRole = ply:GetRole()
             self:StripRoleWeapons(ply)
             Randomat:SetRole(ply, ROLE_INNOCENT)
-            SendFullStateUpdate()
+            ply:SetDefaultCredits()
             break
         end
     end
@@ -38,69 +54,56 @@ function EVENT:Begin()
     local traitorChanged = false
 
     -- Make the player with the highest winrate a detective
-    for i, ply in pairs(self:GetAlivePlayers()) do
-        if ply:Nick() == bestDetectiveNickname then
+    for _, ply in ipairs(alivePlayers) do
+        if ply == chosenDetective then
             if Randomat:IsTraitorTeam(ply) then
                 traitorChanged = true
             end
 
             self:StripRoleWeapons(ply)
-            Randomat:SetRole(ply, ROLE_DETECTIVE)
-            ply:SetCredits(GetConVar("ttt_det_credits_starting"):GetInt())
-            SendFullStateUpdate()
+            Randomat:SetRole(ply, removedDetectiveRole or ROLE_DETECTIVE)
+            ply:SetDefaultCredits()
         end
     end
 
     -- If a traitor was made the detective, change a random non-traitor, non-detective into traitor
-    for i, ply in pairs(self:GetAlivePlayers(true)) do
+    for _, ply in ipairs(alivePlayers) do
         if traitorChanged and not Randomat:IsTraitorTeam(ply) and not Randomat:IsDetectiveLike(ply) then
             self:StripRoleWeapons(ply)
             Randomat:SetRole(ply, ROLE_TRAITOR)
-            ply:SetCredits(GetConVar("ttt_credits_starting"):GetInt())
-            SendFullStateUpdate()
+            ply:SetDefaultCredits()
+
+            if Randomat:GetRoundCompletePercent() > 5 then
+                timer.Simple(0.1, function()
+                    ply:ChatPrint("You were changed to a traitor, \nbecause the detective was originally a traitor")
+                end)
+            end
+
             break
         end
     end
 
+    SendFullStateUpdate()
+    local winrate
+
+    if zylusEasterEgg then
+        winrate = 100
+
+        self:AddHook("PostPlayerDeath", function(ply)
+            if ply == chosenDetective then
+                timer.Create("DetectiveWinrateEasterEggMessage", 1, 3, function()
+                    ply:PrintMessage(HUD_PRINTCENTER, "This was a non-cannon round...")
+                end)
+            end
+        end)
+    else
+        winrate = math.Round((detectiveWinrates[chosenDetective] or 1) * 100)
+    end
+
     --Notifying everyone of the detective's winrate
     timer.Simple(5, function()
-        self:SmallNotify(bestDetectiveNickname .. " is the detective with a " .. math.Round(bestDetectiveWinRate * 100) .. "% win rate!")
+        self:SmallNotify(chosenDetective:Nick() .. " is the detective with a " .. winrate .. "% win rate!")
     end)
-end
-
-function EVENT:Condition()
-    -- First check the stats mod is installed
-    if not file.Exists("gamemodes/terrortown/entities/entities/ttt_total_statistics/init.lua", "THIRDPARTY") then return false end
-    -- Next check the stats file actually exists
-    if not file.Exists("ttt/ttt_total_statistics/stats.txt", "DATA") then return false end
-    -- Next check the stats this randomat uses exist
-    local data = file.Read("ttt/ttt_total_statistics/stats.txt", "DATA")
-    local stats = util.JSONToTable(data)
-    local validStatsPlayers = self:GetAlivePlayers()
-
-    -- Getting a table of all players with valid stats
-    for i, ply in pairs(self:GetAlivePlayers()) do
-        local invalidStats = false
-
-        if not (stats[ply:SteamID()]) then
-            invalidStats = true
-        end
-
-        if not ((stats[ply:SteamID()]["DetectiveWins"] and stats[ply:SteamID()]["DetectiveRounds"]) or (stats[ply:SteamID()]["detectiveWins"] and stats[ply:SteamID()]["detectiveRounds"])) then
-            invalidStats = true
-        end
-
-        if stats[ply:SteamID()]["DetectiveRounds"] == 0 or stats[ply:SteamID()]["detectiveRounds"] == 0 then
-            invalidStats = true
-        end
-
-        if invalidStats then
-            table.RemoveByValue(validStatsPlayers, ply)
-        end
-    end
-    -- So long as SOMEONE has a valid detective winrate, this event can run
-
-    return not table.IsEmpty(validStatsPlayers)
 end
 
 Randomat:register(EVENT)

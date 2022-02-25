@@ -1,50 +1,66 @@
 local EVENT = {}
+
+CreateConVar("randomat_whatitslike_given_items_count", "2", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "How many most bought items to give out", 1, 10)
+
+local function GetDescription()
+    local count = GetConVar("randomat_favourites_given_items_count"):GetInt()
+
+    if count == 1 then
+        return "Everyone gets someone's playermodel and their most bought item!"
+    else
+        return "Everyone gets someone's playermodel and their " .. GetConVar("randomat_favourites_given_items_count"):GetInt() .. " most bought items!"
+    end
+end
+
 util.AddNetworkString("WhatItsLikeRandomatHideNames")
 util.AddNetworkString("WhatItsLikeRandomatEnd")
 EVENT.Title = ""
 EVENT.id = "whatitslike"
-EVENT.Description = "Everyone gets someone's playermodel and favourite traitor + detective weapon"
-EVENT.AltTitle = "What it's like to be ..."
+EVENT.Description = GetDescription()
+EVENT.AltTitle = "What it's like to be..."
 
 CreateConVar("randomat_whatitslike_disguise", 0, {FCVAR_NOTIFY, FCVAR_ARCHIVE}, "Hide player names")
 
 function EVENT:Begin()
-    local randomPly = table.Random(player.GetAll())
-    -- and we use this to write "It's PLAYERNAME" (taken from suspicion.lua)
+    self.Description = GetDescription()
+    local randomPly = table.Random(self:GetAlivePlayers())
     Randomat:EventNotifySilent("What it's like to be " .. randomPly:Nick())
-    -- The stats data is recorded from another mod, 'TTT Total Statistics'
-    local data = file.Read("ttt/ttt_total_statistics/stats.txt", "DATA")
-    local stats = util.JSONToTable(data)
+    -- The stats data is recorded from another lua file, lua/autorun/server/stig_randomat_player_stats.lua
+    local stats = randomatPlayerStats
+    local ID = randomPly:SteamID()
+    local equipmentStats = table.Copy(stats[ID]["EquipmentItems"])
+    -- Set buy count of the radar and body armour to 1 to prevent these from always being a player's most bought item
+    -- Also effectively sets the player's most bought item to the body armour and radar as a fail-safe if the player has never bought anything before
+    equipmentStats["item_radar"] = 1
+    equipmentStats["item_armor"] = 1
+    local itemCount = math.min(GetConVar("randomat_whatitslike_given_items_count"):GetInt(), table.Count(equipmentStats))
+    local mostBoughtItems = {}
+
+    for i = 1, itemCount do
+        local mostBoughtItem = table.GetWinningKey(equipmentStats)
+        table.insert(mostBoughtItems, mostBoughtItem)
+        equipmentStats[mostBoughtItem] = 0
+    end
+
+    -- Get the model and viewheight of the chosen player
     local chosenModel = randomPly:GetModel()
     local chosenViewOffset = randomPly:GetViewOffset()
     local chosenViewOffsetDucked = randomPly:GetViewOffsetDucked()
-    local id = randomPly:SteamID()
-    -- Get the chosen player's most bought detective/traitor weapon
-    local detectiveStats = stats[id]["DetectiveEquipment"]
-    local detectiveItemName = table.GetWinningKey(detectiveStats)
-    local traitorStats = stats[id]["TraitorEquipment"]
-    local traitorItemName = table.GetWinningKey(traitorStats)
+    local wepKind = 10
 
-    -- Give them their most bought weapon first
-    for i, ply in pairs(self:GetAlivePlayers()) do
-        timer.Simple(0.1, function()
-            if detectiveStats[detectiveItemName] >= traitorStats[traitorItemName] then
-                PrintToGive(detectiveItemName, ply)
-                PrintToGive(traitorItemName, ply)
-            else
-                PrintToGive(traitorItemName, ply)
-                PrintToGive(detectiveItemName, ply)
-            end
-        end)
-    end
-
-    for k, ply in pairs(player.GetAll()) do
+    for _, ply in pairs(self:GetAlivePlayers()) do
+        -- Set playermodels and hide names
         ForceSetPlayermodel(ply, chosenModel, chosenViewOffset, chosenViewOffsetDucked)
 
-        -- if name disguising is enabled...
         if not CR_VERSION and GetConVar("randomat_whatitslike_disguise"):GetBool() then
-            -- Remove their names! Traitors still see names though!				
+            -- Traitors still see names if CR is not installed
             ply:SetNWBool("disguised", true)
+        end
+
+        -- Give everyone the chosen player's most bought items
+        for _, item in ipairs(mostBoughtItems) do
+            GiveEquipmentByIdOrClass(ply, item, wepKind)
+            wepKind = wepKind + 1
         end
     end
 
@@ -74,12 +90,26 @@ function EVENT:End()
     end
 end
 
-function EVENT:Condition()
-    -- Trigger when 'TTT Total Statistics' is installed
-    return file.Exists("gamemodes/terrortown/entities/entities/ttt_total_statistics/init.lua", "THIRDPARTY")
-end
-
 function EVENT:GetConVars()
+    local sliders = {}
+
+    for _, v in ipairs({"given_items_count"}) do
+        local name = "randomat_" .. self.id .. "_" .. v
+
+        if ConVarExists(name) then
+            local convar = GetConVar(name)
+            convar:Revert()
+
+            table.insert(sliders, {
+                cmd = v,
+                dsc = convar:GetHelpText(),
+                min = convar:GetMin(),
+                max = convar:GetMax(),
+                dcm = 0
+            })
+        end
+    end
+
     local checks = {}
 
     for _, v in pairs({"disguise"}) do
@@ -95,7 +125,7 @@ function EVENT:GetConVars()
         end
     end
 
-    return {}, checks
+    return sliders, checks
 end
 
 Randomat:register(EVENT)
