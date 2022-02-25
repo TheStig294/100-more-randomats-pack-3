@@ -74,7 +74,11 @@ function EVENT:Begin()
         end
     end
 
+    local choices = GetConVar("randomat_choose_choices"):GetInt()
+
     if not table.IsEmpty(boughtEmAllPlayers) then
+        GetConVar("randomat_choose_choices"):SetInt(5)
+
         -- Displays a randomat alert and message to chat for everyone displaying which players have bought all weapons
         timer.Simple(5, function()
             Randomat:SmallNotify("One or more players bought 'em all!")
@@ -94,6 +98,10 @@ function EVENT:Begin()
 
         hook.Add("TTTBeginRound", "BoughtEmAllRandomat", function()
             Randomat:SilentTriggerEvent("choose", table.Random(boughtEmAllPlayers), false, false)
+        end)
+
+        hook.Add("ShutDown", "BoughtEmAllResetConvar", function()
+            GetConVar("randomat_choose_choices"):SetInt(choices)
         end)
     end
 end
