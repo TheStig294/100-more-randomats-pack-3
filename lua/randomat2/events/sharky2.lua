@@ -78,10 +78,4 @@ function EVENT:Begin()
     end)
 end
 
--- This event tries to index self:GetAlivePlayers() up to 4 unique players
--- So, at least 4 players need to be alive for this event not to error
-function EVENT:Condition()
-    return #self:GetAlivePlayers() >= 4
-end
-
 Randomat:register(EVENT)
