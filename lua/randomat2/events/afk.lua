@@ -3,6 +3,8 @@ EVENT.Title = "AFK = Dead"
 EVENT.Description = "Being AFK kills you"
 EVENT.id = "afk"
 
+EVENT.Categories = {"smallimpact"}
+
 function EVENT:Begin()
     -- Set the flag that lets a player be killed by being AFK on all players
     for i, ply in pairs(self:GetPlayers()) do

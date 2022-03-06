@@ -6,6 +6,8 @@ EVENT.Title = "Snail Wars"
 EVENT.Description = "Everyone has a snail gun + freeze gun"
 EVENT.id = "snailwars"
 
+EVENT.Categories = {"item", "smallimpact"}
+
 function EVENT:Begin()
     for i, ply in pairs(self:GetAlivePlayers()) do
         timer.Simple(0.1, function()

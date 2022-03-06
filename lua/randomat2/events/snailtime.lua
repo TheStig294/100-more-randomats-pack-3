@@ -5,6 +5,8 @@ EVENT.Title = "Snail Time!"
 EVENT.Description = "Everyone is transformed a snail and set to " .. GetConVar("randomat_snailtime_health"):GetInt() .. " health"
 EVENT.id = "snailtime"
 
+EVENT.Categories = {"fun", "largeimpact"}
+
 local snailModels = {"models/TSBB/Animals/Snail.mdl", "models/TSBB/Animals/Snail2.mdl", "models/TSBB/Animals/Snail3.mdl"}
 
 local snailTimeTriggered = false

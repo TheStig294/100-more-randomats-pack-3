@@ -3,6 +3,8 @@ EVENT.Title = "RELEASE THE SNAILS!"
 EVENT.Description = "Spawns snails that follow players around, killing you if they reach you"
 EVENT.id = "snails"
 
+EVENT.Categories = {"moderateimpact"}
+
 CreateConVar("randomat_snails_cap", 12, {FCVAR_NOTIFY, FCVAR_ARCHIVE}, "Maximum number of snails spawned", 0, 15)
 
 CreateConVar("randomat_snails_delay", 0.5, {FCVAR_NOTIFY, FCVAR_ARCHIVE}, "Delay before snails are spawned", 0.1, 2.0)

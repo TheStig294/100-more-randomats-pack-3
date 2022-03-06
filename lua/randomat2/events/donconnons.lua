@@ -22,6 +22,8 @@ EVENT.Title = "O Rubber Tree..."
 EVENT.Description = "Donconnons for all!"
 EVENT.id = "donconnons"
 
+EVENT.Categories = {"item", "moderateimpact"}
+
 if GetConVar("randomat_donconnons_strip"):GetBool() then
     EVENT.Type = EVENT_TYPE_WEAPON_OVERRIDE
 end

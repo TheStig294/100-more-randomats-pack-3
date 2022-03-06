@@ -5,6 +5,8 @@ EVENT.Title = "Jingle Jam"
 EVENT.Description = "Everyone gets a Yogscast Christmas playermodel!"
 EVENT.id = "jinglejam"
 
+EVENT.Categories = {"fun", "smallimpact"}
+
 function EVENT:Begin()
     local remainingModels = {}
     --Adding the playermodels table to a different table so if more than 8 people are playing, the choosable models are able to be reset

@@ -3,6 +3,8 @@ EVENT.Title = "It's just a flesh wound."
 EVENT.Description = "Everyone has a flesh wound"
 EVENT.id = "fleshwound"
 
+EVENT.Categories = {"item", "biased", "largeimpact"}
+
 function EVENT:Begin()
     for i, ply in pairs(self:GetAlivePlayers()) do
         if IsKillCommandSensitiveRole(ply) then

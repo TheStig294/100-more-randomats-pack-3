@@ -4,6 +4,8 @@ EVENT.Description = "Infinite cat guns for all!"
 EVENT.id = "meow"
 EVENT.Type = EVENT_TYPE_WEAPON_OVERRIDE
 
+EVENT.Categories = {"item", "smallimpact"}
+
 function EVENT:Begin()
     for _, ent in pairs(ents.GetAll()) do
         if ent.Kind == WEAPON_HEAVY and ent.AutoSpawnable then

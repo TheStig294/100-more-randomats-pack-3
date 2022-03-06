@@ -3,6 +3,8 @@ EVENT.Title = "UNLIMITED POWEEERRRRRR!"
 EVENT.Description = "Infinite stunguns for all!"
 EVENT.id = "stungun"
 
+EVENT.Categories = {"item", "largeimpact"}
+
 function EVENT:Begin()
     for i, ply in pairs(self:GetAlivePlayers(true)) do
         ply:Give("stungun")

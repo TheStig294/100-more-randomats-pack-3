@@ -4,6 +4,8 @@ EVENT.Description = "Everyone gets a minecraft bow and block (Press 'R' to chang
 EVENT.id = "secretfriday"
 EVENT.Type = EVENT_TYPE_WEAPON_OVERRIDE
 
+EVENT.Categories = {"item", "biased", "largeimpact"}
+
 function EVENT:Begin()
     for _, ent in pairs(ents.GetAll()) do
         if (ent.Base == "weapon_tttbase" or ent.Kind == WEAPON_PISTOL or ent.Kind == WEAPON_HEAVY) and ent.AutoSpawnable then

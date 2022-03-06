@@ -3,6 +3,8 @@ EVENT.Title = "Bruh..."
 EVENT.Description = "Everyone has a bruh bunker"
 EVENT.id = "bruh"
 
+EVENT.Categories = {"item", "biased", "moderateimpact"}
+
 function EVENT:Begin()
     for i, ply in pairs(self:GetAlivePlayers()) do
         timer.Simple(0.1, function()

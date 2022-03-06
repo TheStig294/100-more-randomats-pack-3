@@ -2,6 +2,9 @@ local EVENT = {}
 EVENT.Title = "It's time to go third-person!"
 EVENT.Description = "Everyone is forced to stay in third-person"
 EVENT.id = "thirdperson"
+
+EVENT.Categories = {"largeimpact"}
+
 util.AddNetworkString("ThirdPersonRandomat")
 util.AddNetworkString("ThirdPersonRandomatEnd")
 util.AddNetworkString("ThirdPersonRandomatCheck")

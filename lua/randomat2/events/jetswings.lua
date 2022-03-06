@@ -3,6 +3,8 @@ EVENT.Title = "Jets vs. Wings"
 EVENT.Description = "Gives someone a jetpack, everyone else a homing pigeon"
 EVENT.id = "jetswings"
 
+EVENT.Categories = {"item", "moderateimpact"}
+
 function EVENT:Begin()
     jetpackPlayer = table.Random(self:GetAlivePlayers())
 

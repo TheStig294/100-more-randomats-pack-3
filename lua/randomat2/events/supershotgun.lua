@@ -2,6 +2,9 @@ local EVENT = {}
 EVENT.Title = "Infinite Super Shotguns For All!"
 EVENT.id = "supershotgun"
 EVENT.Type = EVENT_TYPE_WEAPON_OVERRIDE
+
+EVENT.Categories = {"item", "largeimpact"}
+
 local defaultSSG = "tfa_doom_ssg"
 
 if weapons.Get(defaultSSG) == nil then

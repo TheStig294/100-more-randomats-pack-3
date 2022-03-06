@@ -2,6 +2,9 @@ local EVENT = {}
 EVENT.Title = "Drink up!"
 EVENT.Description = "Everyone gets a random COD Zombies perk bottle"
 EVENT.id = "drinkup"
+
+EVENT.Categories = {"item", "smallimpact"}
+
 local perks = {}
 
 hook.Add("TTTPrepareRound", "RandomatDrinkupGetPerkBottleIDs", function()

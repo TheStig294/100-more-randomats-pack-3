@@ -4,6 +4,8 @@ EVENT.Description = "Someone has the hot potato, melee someone with it before yo
 EVENT.id = "potato"
 EVENT.Type = EVENT_TYPE_WEAPON_OVERRIDE
 
+EVENT.Categories = {"gamemode", "smallimpact"}
+
 hook.Add("PreRegisterSWEP", "HotPotatoGetRandomatFunctions", function(SWEP, class)
     -- If it exists,
     if class == "weapon_ttt_hotpotato" then

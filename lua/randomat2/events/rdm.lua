@@ -4,6 +4,8 @@ EVENT.Description = "Infinite free kill guns only!"
 EVENT.id = "rdm"
 EVENT.Type = EVENT_TYPE_WEAPON_OVERRIDE
 
+EVENT.Categories = {"item", "largeimpact"}
+
 function EVENT:Begin()
     for k, ply in pairs(self:GetAlivePlayers(true)) do
         if ply:GetRole() == ROLE_SWAPPER then

@@ -3,6 +3,8 @@ EVENT.Title = "One Puuuuunch!"
 EVENT.Description = "Everyone gets the One Punch fists!"
 EVENT.id = "onepunch"
 
+EVENT.Categories = {"item", "largeimpact"}
+
 function EVENT:Begin()
     for i, ply in pairs(self:GetAlivePlayers()) do
         timer.Simple(0.1, function()

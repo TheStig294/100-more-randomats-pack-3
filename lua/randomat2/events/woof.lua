@@ -3,6 +3,8 @@ EVENT.Title = "Woof Woof!"
 EVENT.Description = "Everyone gets a guard dog summoner, press 'R' while selected"
 EVENT.id = "woof"
 
+EVENT.Categories = {"item", "smallimpact"}
+
 function EVENT:Begin()
     for i, ply in pairs(self:GetAlivePlayers()) do
         timer.Simple(0.1, function()

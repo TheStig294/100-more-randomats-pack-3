@@ -3,6 +3,8 @@ EVENT.Title = "Now, you're thinking with portals."
 EVENT.Description = "Everyone gets a portal gun"
 EVENT.id = "portal"
 
+EVENT.Categories = {"item", "smallimpact"}
+
 function EVENT:Begin()
     for i, ply in pairs(self:GetAlivePlayers(true)) do
         ply:Give("weapon_portalgun")

@@ -4,6 +4,8 @@ EVENT.Description = "Freezes everything but players for 60 seconds"
 EVENT.id = "timestop"
 EVENT.IsEnabled = false
 
+EVENT.Categories = {"smallimpact"}
+
 hook.Add("PreRegisterSWEP", "TimeStopRandomatGetStopFunction", function(swep, class)
     if class == "weapon_ttt_timestop" then
         function TimeStopRandomatStopTime()

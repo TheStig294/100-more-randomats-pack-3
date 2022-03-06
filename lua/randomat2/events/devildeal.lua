@@ -3,6 +3,8 @@ EVENT.Title = "Muahahaha!"
 EVENT.Description = "Everyone can make a deal with the devil..."
 EVENT.id = "devildeal"
 
+EVENT.Categories = {"item", "smallimpact"}
+
 function EVENT:Begin()
     for i, ply in pairs(self:GetAlivePlayers()) do
         timer.Simple(0.1, function()
