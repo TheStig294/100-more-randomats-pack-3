@@ -4,7 +4,7 @@ EVENT.Description = "Everyone gets a minecraft bow and block (Press 'R' to chang
 EVENT.id = "secretfriday"
 EVENT.Type = EVENT_TYPE_WEAPON_OVERRIDE
 
-EVENT.Categories = {"item", "biased", "largeimpact"}
+EVENT.Categories = {"item", "biased_innocent", "biased", "largeimpact"}
 
 function EVENT:Begin()
     for _, ent in pairs(ents.GetAll()) do

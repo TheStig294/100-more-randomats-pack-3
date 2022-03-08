@@ -3,7 +3,7 @@ EVENT.Title = "Death isn't the end..."
 EVENT.Description = "Everyone has a demonic possession"
 EVENT.id = "possession"
 
-EVENT.Categories = {"item", "biased", "largeimpact"}
+EVENT.Categories = {"item", "biased_innocent", "biased", "largeimpact"}
 
 function EVENT:Begin()
     for i, ply in pairs(self:GetAlivePlayers()) do

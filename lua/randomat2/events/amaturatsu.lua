@@ -3,7 +3,7 @@ EVENT.Title = "Careful where you look..."
 EVENT.Description = "Everyone has an amaterasu!"
 EVENT.id = "amaterasu"
 
-EVENT.Categories = {"item", "largeimpact"}
+EVENT.Categories = {"item", "largeimpact", "biased_traitor", "biased"}
 
 function EVENT:Begin()
     for i, ply in pairs(self:GetAlivePlayers()) do

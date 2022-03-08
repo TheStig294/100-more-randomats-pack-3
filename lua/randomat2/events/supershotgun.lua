@@ -3,7 +3,7 @@ EVENT.Title = "Infinite Super Shotguns For All!"
 EVENT.id = "supershotgun"
 EVENT.Type = EVENT_TYPE_WEAPON_OVERRIDE
 
-EVENT.Categories = {"item", "largeimpact"}
+EVENT.Categories = {"item", "largeimpact", "biased_traitor", "biased"}
 
 local defaultSSG = "tfa_doom_ssg"
 
