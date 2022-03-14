@@ -25,8 +25,8 @@ _ttt_randomat_event_history_ - Default: 10 - How many events should be kept in h
 # Newly added randomats
 
 1. One Puuuuunch! - Gives everyone the one punch fists!
-1. Hot Potato! - Gives someone a hot potato they have to pass on or explode!
-1. O Rubber Tree... - Periodically gives everyone baby donconnans
+2. Hot Potato! - Gives someone a hot potato they have to pass on or explode!
+3. O Rubber Tree... - Periodically gives everyone baby donconnans
 
 # Randomats
 
