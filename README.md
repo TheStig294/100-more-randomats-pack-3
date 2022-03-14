@@ -40,7 +40,7 @@ _ttt_randomat_afk_ - Default: 1 - Whether this randomat is enabled\
 \
 Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=572519224>
 
-## Bruh
+## Bruh...
 
 Gives everyone a bruh bunker\
 \
@@ -48,7 +48,7 @@ _ttt_randomat_bruh_ - Default: 1 - Whether this randomat is enabled\
 \
 Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=1796374263>
 
-## Careful where you look
+## Careful where you look...
 
 Everyone gets an amaterasu\
 \
@@ -56,7 +56,7 @@ _ttt_randomat_amaterasu_ - Default: 1 - Whether this randomat is enabled\
 \
 Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=1978094981>
 
-## Death isn't the end
+## Death isn't the end...
 
 Everyone has a demonic possession\
 \
@@ -64,7 +64,7 @@ _ttt_randomat_possession_ - Default: 1 - Whether this randomat is enabled\
 \
 Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=1615324913>
 
-## Drink up
+## Drink up!
 
 Everyone gets a random zombies perk bottle\
 \
@@ -72,7 +72,7 @@ _ttt_randomat_drinkup_ - Default: 1 - Whether this randomat is enabled\
 \
 Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=2243578658>
 
-## Hack the planet
+## Hack the planet!
 
 Gives everyone a command prompt\
 \
@@ -80,7 +80,7 @@ _ttt_randomat_hack_ - Default: 1 - Whether this randomat is enabled\
 \
 Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=2181940209>
 
-## Hot Potato
+## Hot Potato!
 
 Gives someone a ‘Hot Potato’, a weapon that after 17 seconds makes the holder explode. It must be passed to another player to avoid exploding.\
 \
@@ -89,16 +89,16 @@ _ttt_randomat_potato_ - Default: 1 - Whether this randomat is enabled\
 Idea from u/Nuclearaxe979 on reddit.\
 Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=2377790970>
 
-## Infinite Super Shotguns For All
+## Infinite Super Shotguns For All!
 
 Everyone can only use an infinite ammo super shotgun as their main weapon\
 \
-_ttt_randomat_supershotgun_ - Default: 1 - Whether this randomat is enabled
+_ttt_randomat_supershotgun_ - Default: 1 - Whether this randomat is enabled\
 _randomat_supershotgun_weaponid_ - Default: tfa_doom_ssg - Id of the weapon given\
 \
 Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=2236037793>
 
-## It's just a flesh wound
+## It's just a flesh wound.
 
 Everyone has a flesh wound\
 \
@@ -106,12 +106,12 @@ _ttt_randomat_fleshwound_ - Default: 1 - Whether this randomat is enabled\
 \
 Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=2179764633>
 
-## It's time to go third-person
+## It's time to go third-person!
 
 Switches everyone to an over-the-shoulder thirdperson view\
 \
 _ttt_randomat_thirdperson_ - Default: 1 - Whether this randomat is enabled\
-
+\
 Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=2593095865>
 
 ## Jets vs. Wings
@@ -132,7 +132,7 @@ _ttt_randomat_jinglejam_ - Default: 1 - Whether this randomat is enabled\
 \
 Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=1220749653>
 
-## Join the dark side
+## Join the dark side!
 
 Gives every player a red lightsaber\
 \
@@ -150,7 +150,7 @@ _ttt_randomat_meow_ - Default: 1 - Whether this randomat is enabled\
 \
 Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=827320827>
 
-## Muahahaha
+## Muahahaha!
 
 Gives everyone a deal with the devil\
 \
@@ -158,7 +158,7 @@ _ttt_randomat_devildeal_ - Default: 1 - Whether this randomat is enabled\
 \
 Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=2140473915>
 
-## Now, you're thinking with portals
+## Now, you're thinking with portals.
 
 Everyone gets a portal gun!\
 \
@@ -169,7 +169,7 @@ Originally made by [nanz](https://steamcommunity.com/sharedfiles/filedetails/?id
 \
 Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=2315732527>
 
-## O Rubber Tree
+## O Rubber Tree...
 
 Continually gives donconnans to everyone\
 \
@@ -189,7 +189,7 @@ Originally made by [Fate](https://steamcommunity.com/sharedfiles/filedetails/?id
 \
 Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=2237522867>
 
-## One Puuuuunch
+## One Puuuuunch!
 
 Gives everyone One Punch fists!\
 \
@@ -197,7 +197,7 @@ _ttt_randomat_onepunch_ - Default: 1 - Whether this randomat is enabled\
 \
 Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=2609859728>
 
-## Pew! Bang! Pow
+## Pew! Bang! Pow!
 
 Strips everyone of their floor weapons, if they've picked up any, and gives either a pew gun or a finger gun.\
 \
@@ -207,7 +207,7 @@ Requires:\
 <https://steamcommunity.com/sharedfiles/filedetails/?id=2236046949> \
 <https://steamcommunity.com/sharedfiles/filedetails/?id=2329744756>
 
-## RELEASE THE SNAILS
+## RELEASE THE SNAILS!
 
 Spawns snails that follow players around, killing you if they reach you. Plays “threatening” music for a while.\
 \
@@ -247,7 +247,7 @@ Requires:\
 <https://steamcommunity.com/sharedfiles/filedetails/?id=2311866661> \
 <https://steamcommunity.com/sharedfiles/filedetails/?id=2311859098>
 
-## Snail Time
+## Snail Time!
 
 Transforms everyone into a snail\
 \
@@ -275,7 +275,7 @@ _ttt_randomat_timestop_ - Default: 0 - Whether this randomat is enabled\
 \
 Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=1337349942>
 
-## UNLIMITED POWEEERRRRRR
+## UNLIMITED POWEEERRRRRR!
 
 Everyone gets a stungun with unlimited ammo!\
 \
@@ -285,7 +285,7 @@ Originally made by [nanz](https://steamcommunity.com/sharedfiles/filedetails/?id
 \
 Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=785294711>
 
-## Woof Woof
+## Woof Woof!
 
 Everyone gets a guard dog\
 \
