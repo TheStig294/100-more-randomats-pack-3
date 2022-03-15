@@ -11,15 +11,16 @@ function EVENT:Begin()
         if ply:GetRole() == ROLE_SWAPPER then
             swapper = ply
             Randomat:SetRole(swapper, ROLE_INNOCENT)
-            SendFullStateUpdate()
         end
 
         if ply:GetRole() == ROLE_JESTER then
             jester = ply
             Randomat:SetRole(jester, ROLE_INNOCENT)
-            SendFullStateUpdate()
         end
     end
+
+    SendFullStateUpdate()
+    hook.Run("UpdatePlayerLoadouts")
 
     for _, ent in pairs(ents.GetAll()) do
         if (ent.Base == "weapon_tttbase" or ent.Kind == WEAPON_PISTOL or ent.Kind == WEAPON_HEAVY) and ent.AutoSpawnable then
