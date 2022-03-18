@@ -1,5 +1,6 @@
 local EVENT = {}
 EVENT.Title = "Infinite Super Shotguns For All!"
+EVENT.ExtDescription = "Gives everyone a super shotgun, which fires every time you click"
 EVENT.id = "supershotgun"
 EVENT.Type = EVENT_TYPE_WEAPON_OVERRIDE
 
