@@ -19,7 +19,6 @@ function EVENT:Begin()
     end
 
     SendFullStateUpdate()
-    hook.Run("UpdatePlayerLoadouts")
 end
 
 -- Checking if someone is a role that gets screwed over by the flesh wound using a kill command and if it isn't at the start of the round, prevent the event from running

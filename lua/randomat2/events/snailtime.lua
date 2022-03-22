@@ -34,7 +34,6 @@ function EVENT:Begin()
     end
 
     SendFullStateUpdate()
-    hook.Run("UpdatePlayerLoadouts")
 
     -- Caps player HP
     timer.Create("RdmtSnailsHp", 1, 0, function()
