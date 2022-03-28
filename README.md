@@ -169,26 +169,6 @@ Originally made by [nanz](https://steamcommunity.com/sharedfiles/filedetails/?id
 \
 Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=2315732527>
 
-## O Rubber Tree...
-
-Continually gives donconnans to everyone\
-\
-_ttt_randomat_donconnons_ - Default: 1 - Whether this randomat is enabled\
-_randomat_donconnons_timer_ - Default: 5 - Time between being given donconnons\
-_randomat_donconnons_strip_ - Default: 0 - The event strips your other weapons\
-_randomat_donconnons_weaponid_ - Default: weapon_ttt_donconnon_randomat - Id of the weapon given\
-_randomat_donconnons_damage_ - Default: 1000 - Donconnon Damage\
-_randomat_donconnons_speed_ - Default: 350 - Donconnon Speed\
-_randomat_donconnons_range_ - Default: 2000 - Donconnon Range\
-_randomat_donconnons_scale_ - Default: 0.1 - Donconnon Size\
-_randomat_donconnons_turn_ - Default: 0 - Donconnon Homing turn speed, set to 0 to disable homing\
-_randomat_donconnons_lockondecaytime_ - Default: 15 - Seconds until homing stop\
-\
-Changed name from "O Rubber Tree", added description, made doncon projectiles much smaller, faster and one-shot, added convars to change donconnon stats, no longer strips all weapons by default, fixed donconnons eventually stopping being given out\
-Originally made by [Fate](https://steamcommunity.com/sharedfiles/filedetails/?id=2122924789)\
-\
-Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=2237522867>
-
 ## One Puuuuunch!
 
 Gives everyone One Punch fists!\
@@ -274,16 +254,6 @@ NOTE: This randomat is disabled by default as it can cause issues with players b
 _ttt_randomat_timestop_ - Default: 0 - Whether this randomat is enabled\
 \
 Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=1337349942>
-
-## UNLIMITED POWEEERRRRRR!
-
-Everyone gets a stungun with unlimited ammo!\
-\
-_ttt_randomat_stungun_ - Default: 1 - Whether this randomat is enabled\
-\
-Originally made by [nanz](https://steamcommunity.com/sharedfiles/filedetails/?id=2194776699)\
-\
-Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=785294711>
 
 ## Woof Woof!
 
