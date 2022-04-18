@@ -80,7 +80,7 @@ _ttt_randomat_catchemall_ - Default: 1 - Whether this randomat is enabled\
 \
 Install one or more of these playermodels if you want this randomat:
 - [Pikachu](https://steamcommunity.com/sharedfiles/filedetails/?id=719109875)
-- [Mewtwo](https://steamcommunity.com/sharedfiles/filedetails/?id=713164559)
+- [Mewtwo](https://steamcommunity.com/sharedfiles/filedetails/?id=2002092734)
 - [Decidueye](https://steamcommunity.com/sharedfiles/filedetails/?id=1277705366)
 - [Garchomp](https://steamcommunity.com/sharedfiles/filedetails/?id=691985720)
 - [Sceptile](https://steamcommunity.com/sharedfiles/filedetails/?id=695997752)
@@ -89,6 +89,8 @@ Install one or more of these playermodels if you want this randomat:
 - [Gengar](https://steamcommunity.com/sharedfiles/filedetails/?id=691151323)
 - [Weavile + Sneasel](https://steamcommunity.com/sharedfiles/filedetails/?id=1136367247)
 - [Spinda](https://steamcommunity.com/sharedfiles/filedetails/?id=1923507876)
+- [Incineroar](https://steamcommunity.com/sharedfiles/filedetails/?id=1606557718)
+- [Primal Dialga](https://steamcommunity.com/sharedfiles/filedetails/?id=2162580480)
 - [Red](https://steamcommunity.com/sharedfiles/filedetails/?id=235640846)
 - [Cynthia](https://steamcommunity.com/sharedfiles/filedetails/?id=863055489)
 - [Ethan/Gold](https://steamcommunity.com/sharedfiles/filedetails/?id=2158206491)
@@ -96,6 +98,7 @@ Install one or more of these playermodels if you want this randomat:
 - [Team Rocket James](https://steamcommunity.com/sharedfiles/filedetails/?id=1618435419)
 - [Zinnia](https://steamcommunity.com/sharedfiles/filedetails/?id=773769560)
 - [May](https://steamcommunity.com/sharedfiles/filedetails/?id=331119460)
+- [Brendan](https://steamcommunity.com/sharedfiles/filedetails/?id=890269139)
 - [Guzma](https://steamcommunity.com/sharedfiles/filedetails/?id=2029094987)
 
 ## Hack the planet!

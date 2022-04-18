@@ -5,7 +5,7 @@ EVENT.id = "catchemall"
 
 EVENT.Categories = {"fun", "smallimpact"}
 
-local pokemonModels = {"models/pokemon/legends_arceus/akari.mdl", "models/player/custom/Blaziken/Blaziken_pm.mdl", "models/player/mrmariobros222/cynthia.mdl", "models/player/deci/deci_pm/deci.mdl", "models/jp/pokemon/ethan/ethan_player.mdl", "models/player/custom/Garchomp/Garchomp_pm.mdl", "models/gengarplayer/gengarplayer.mdl", "models/guzma/group13/tale_13.mdl", "models/player/may/may.mdl", "models/player/mewtwo_xy_mewtwo.mdl", "models/player/pikachu_lebray.mdl", "models/pokemon/Zinnia.mdl", "models/player/red.mdl", "models/player/mewtwo_james.mdl", "models/player/custom/Sceptile/Sceptile_pm.mdl", "models/pokemon/sneasel/sneasel_reference.mdl", "models/pokemon/spinda/spinda_player.mdl", "models/player/custom/Swampert/Swampert_pm.mdl", "models/player/custom/Swampert/SHINY Swampert_pm.mdl", "models/pokemon/weavile/weavile_reference.mdl"}
+local pokemonModels = {"models/pokemon/legends_arceus/akari.mdl", "models/player/custom/Blaziken/Blaziken_pm.mdl", "models/player/mrmariobros222/cynthia.mdl", "models/player/deci/deci_pm/deci.mdl", "models/jp/pokemon/ethan/ethan_player.mdl", "models/player/custom/Garchomp/Garchomp_pm.mdl", "models/gengarplayer/gengarplayer.mdl", "models/guzma/group13/tale_13.mdl", "models/player/may/may.mdl", "models/player/pikachu_lebray.mdl", "models/pokemon/Zinnia.mdl", "models/player/red.mdl", "models/player/mewtwo_james.mdl", "models/player/custom/Sceptile/Sceptile_pm.mdl", "models/pokemon/sneasel/sneasel_reference.mdl", "models/pokemon/spinda/spinda_player.mdl", "models/player/custom/Swampert/Swampert_pm.mdl", "models/player/custom/Swampert/SHINY Swampert_pm.mdl", "models/pokemon/weavile/weavile_reference.mdl", "models/player/captainPawn/ssbuincineroar.mdl", "models/player/genetic/mewtwo.mdl", "models/player/pokemon/dialga_pm/Dialga_pm.mdl", "models/player/mrmariobros222/brendan.mdl"}
 
 local installedModels = {}
 
@@ -33,15 +33,6 @@ local function SetPokemonModel(ply, randomModel)
         data.model = "models/player/red.mdl"
         data.playerColor = Color(214, 38, 38):ToVector()
         ForceSetPlayermodel(ply, data)
-    elseif randomModel == "models/pokemon/legends_arceus/akari.mdl" then
-        local scale = 1.3
-        ply:SetStepSize(ply:GetStepSize() * scale)
-        ply:SetModelScale(scale, 0)
-        local a, b = ply:GetHull()
-        ply:SetHull(a * scale, b * scale)
-        a, b = ply:GetHullDuck()
-        ply:SetHullDuck(a * scale, b * scale)
-        ForceSetPlayermodel(ply, randomModel)
     else
         ForceSetPlayermodel(ply, randomModel)
     end
