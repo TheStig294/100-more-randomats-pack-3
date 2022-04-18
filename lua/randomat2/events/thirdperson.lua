@@ -15,7 +15,7 @@ local thirdpersonExists = false
 hook.Add("TTTPrepareRound", "ThirdPersonCheck", function()
     net.Start("ThirdPersonRandomatCheck")
     net.Send(Entity(1))
-    hook.Remove("ThirdPersonCheck")
+    hook.Remove("TTTPrepareRound", "ThirdPersonCheck")
 end)
 
 net.Receive("ThirdPersonRandomatCheck", function()
