@@ -16,7 +16,7 @@ function EVENT:Begin()
 
     for i, ply in pairs(player.GetAll()) do
         -- Resets the choosable models for everyone's playermodel if none are left (happens when there are more than 8 players, as there are 8 playermodels to choose from)
-        if remainingModels == {} then
+        if table.IsEmpty(remainingModels) then
             table.Add(remainingModels, yogsModels)
         end
 
