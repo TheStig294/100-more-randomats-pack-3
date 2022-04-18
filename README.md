@@ -24,9 +24,9 @@ _ttt_randomat_event_history_ - Default: 10 - How many events should be kept in h
 
 # Newly added randomats
 
-1. One Puuuuunch! - Gives everyone the one punch fists!
-2. Hot Potato! - Gives someone a hot potato they have to pass on or explode!
-3. O Rubber Tree... - Periodically gives everyone baby donconnans
+1. Gotta catch 'em all! - Everyone gets a Pokemon playermodel!
+2. One Puuuuunch! - Gives everyone the one punch fists!
+3. Hot Potato! - Gives someone a hot potato they have to pass on or explode!
 
 # Randomats
 
@@ -71,6 +71,32 @@ Everyone gets a random zombies perk bottle\
 _ttt_randomat_drinkup_ - Default: 1 - Whether this randomat is enabled\
 \
 Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=2243578658>
+## Gotta catch 'em all!
+
+Everyone gets a random Pokemon playermodel!\
+Choose any combination of the models below, you need at least one installed for this randomat to start triggering!\
+\
+_ttt_randomat_catchemall_ - Default: 1 - Whether this randomat is enabled\
+\
+Install one or more of these playermodels if you want this randomat:
+- [Pikachu](https://steamcommunity.com/sharedfiles/filedetails/?id=719109875)
+- [Mewtwo](https://steamcommunity.com/sharedfiles/filedetails/?id=713164559)
+- [Decidueye](https://steamcommunity.com/sharedfiles/filedetails/?id=1277705366)
+- [Garchomp](https://steamcommunity.com/sharedfiles/filedetails/?id=691985720)
+- [Sceptile](https://steamcommunity.com/sharedfiles/filedetails/?id=695997752)
+- [Swampert](https://steamcommunity.com/sharedfiles/filedetails/?id=699776749)
+- [Blaziken](https://steamcommunity.com/sharedfiles/filedetails/?id=701781916)
+- [Gengar](https://steamcommunity.com/sharedfiles/filedetails/?id=691151323)
+- [Weavile + Sneasel](https://steamcommunity.com/sharedfiles/filedetails/?id=1136367247)
+- [Spinda](https://steamcommunity.com/sharedfiles/filedetails/?id=1923507876)
+- [Red](https://steamcommunity.com/sharedfiles/filedetails/?id=235640846)
+- [Cynthia](https://steamcommunity.com/sharedfiles/filedetails/?id=863055489)
+- [Ethan/Gold](https://steamcommunity.com/sharedfiles/filedetails/?id=2158206491)
+- [Akari (Legends Arceus)](https://steamcommunity.com/sharedfiles/filedetails/?id=2760109142)
+- [Team Rocket James](https://steamcommunity.com/sharedfiles/filedetails/?id=1618435419)
+- [Zinnia](https://steamcommunity.com/sharedfiles/filedetails/?id=773769560)
+- [May](https://steamcommunity.com/sharedfiles/filedetails/?id=331119460)
+- [Guzma](https://steamcommunity.com/sharedfiles/filedetails/?id=2029094987)
 
 ## Hack the planet!
 
