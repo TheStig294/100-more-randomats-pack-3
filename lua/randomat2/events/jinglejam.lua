@@ -7,6 +7,8 @@ EVENT.id = "jinglejam"
 
 EVENT.Categories = {"fun", "smallimpact"}
 
+local selectedModels = {}
+
 function EVENT:Begin()
     local remainingModels = {}
     --Adding the playermodels table to a different table so if more than 8 people are playing, the choosable models are able to be reset
@@ -21,8 +23,16 @@ function EVENT:Begin()
         --Chooses a random model, prevents it from being chosen by anyone else, and sets the player to that model
         local randomModel = table.Random(remainingModels)
         table.RemoveByValue(remainingModels, randomModel)
+        selectedModels[ply] = randomModel
         ForceSetPlayermodel(ply, randomModel)
     end
+
+    self:AddHook("PlayerSpawn", function(ply)
+        timer.Simple(1, function()
+            local randomModel = selectedModels[ply]
+            ForceSetPlayermodel(ply, randomModel)
+        end)
+    end)
 end
 
 function EVENT:End()
