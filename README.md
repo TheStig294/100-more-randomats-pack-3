@@ -187,17 +187,6 @@ _ttt_randomat_devildeal_ - Default: 1 - Whether this randomat is enabled\
 \
 Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=2140473915>
 
-## Now, you're thinking with portals.
-
-Everyone gets a portal gun!\
-\
-_ttt_randomat_portal_ - Default: 1 - Whether this randomat is enabled\
-\
-Changed name from "Aperture Science!", now uses a different portal gun weapon\
-Originally made by [nanz](https://steamcommunity.com/sharedfiles/filedetails/?id=2194776699)\
-\
-Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=2315732527>
-
 ## One Puuuuunch!
 
 Gives everyone One Punch fists!\
