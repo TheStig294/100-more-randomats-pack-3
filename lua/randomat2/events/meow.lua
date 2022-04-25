@@ -23,13 +23,10 @@ function EVENT:Begin()
                 end
 
                 -- Reset FOV to unscope weapons if they were possibly scoped in
-                if active_kind == WEAPON_HEAVY then
-                    ply:SetFOV(0, 0.2)
-                end
-
-                local wep1 = ply:Give("weapon_catgun")
-                ply:SelectWeapon(wep1)
-                wep1.AllowDrop = false
+                ply:SetFOV(0, 0.2)
+                local catgun = ply:Give("weapon_catgun")
+                ply:SelectWeapon("weapon_catgun")
+                catgun.AllowDrop = false
             end)
         end)
     end
@@ -37,10 +34,8 @@ function EVENT:Begin()
     timer.Simple(1, function()
         self:AddHook("Think", function()
             for _, v in pairs(self:GetAlivePlayers()) do
-                if IsValid(v:GetActiveWeapon()) then
-                    if v:GetActiveWeapon():GetClass() == "weapon_catgun" then
-                        v:GetActiveWeapon():SetClip1(v:GetActiveWeapon().Primary.ClipSize)
-                    end
+                if IsValid(v:GetActiveWeapon()) and v:GetActiveWeapon():GetClass() == "weapon_catgun" then
+                    v:GetActiveWeapon():SetClip1(v:GetActiveWeapon().Primary.ClipSize)
                 end
             end
         end)
