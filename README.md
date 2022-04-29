@@ -24,9 +24,9 @@ _ttt_randomat_event_history_ - Default: 10 - How many events should be kept in h
 
 # Newly added randomats
 
-1. Gotta catch 'em all! - Everyone gets a Pokemon playermodel!
-2. One Puuuuunch! - Gives everyone the one punch fists!
-3. Hot Potato! - Gives someone a hot potato they have to pass on or explode!
+1. War of Words - Everyone gets a death note!
+2. Gotta catch 'em all! - Everyone gets a Pokemon playermodel!
+3. One Puuuuunch! - Gives everyone the one punch fists!
 
 # Randomats
 
@@ -272,6 +272,14 @@ NOTE: This randomat is disabled by default as it can cause issues with players b
 _ttt_randomat_timestop_ - Default: 0 - Whether this randomat is enabled\
 \
 Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=1337349942>
+
+## War of Words
+
+Everyone gets a death note!\
+\
+_ttt_randomat_deathnote_ - Default: 1 - Whether this randomat is enabled\
+\
+Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=2552417009>
 
 ## Woof Woof!
 
