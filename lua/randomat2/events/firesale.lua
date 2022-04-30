@@ -84,8 +84,7 @@ function EVENT:Begin()
     -- Else, the player is given nothing when they try to pick up something
     self:AddHook("PlayerUse", function(ply, ent)
         if ent.ClassName == "zombies_box_weapon" then
-            -- Deprecated function, but the mystery box uses deprecated code!
-            local classname = ent:GetNetworkedString("weapon_class", 0)
+            local classname = ent:GetNWString("weapon_class", 0)
             local boxWep = weapons.Get(classname)
 
             for _, wep in ipairs(ply:GetWeapons()) do
