@@ -41,12 +41,12 @@ function EVENT:Begin()
     file.CreateDir("codzombies")
     file.Write("codzombies/mysterybox.txt", boxFile)
     -- Get every player's position so the boxes aren't spawned too close to a player
-    local playerPositions = {}
+    local playerAndBoxPositions = {}
     local boxCount = 0
     local playerCount = #self:GetAlivePlayers()
 
     for _, ply in ipairs(self:GetAlivePlayers()) do
-        table.insert(playerPositions, ply:GetPos())
+        table.insert(playerAndBoxPositions, ply:GetPos())
     end
 
     for _, ent in ipairs(ents.GetAll()) do
@@ -58,9 +58,9 @@ function EVENT:Begin()
         if (string.StartWith(classname, "weapon_") or string.StartWith(classname, "item_") or infoEnt) and not IsValid(ent:GetParent()) and boxCount <= playerCount then
             local tooClose = false
 
-            for _, plyPos in ipairs(playerPositions) do
+            for _, entPos in ipairs(playerAndBoxPositions) do
                 -- 100 * 100 = 10,000, so any boxes closer than 100 source units to the player are too close to be placed
-                if math.DistanceSqr(pos.x, pos.y, plyPos.x, plyPos.y) < 10000 then
+                if pos == entPos or math.DistanceSqr(pos.x, pos.y, entPos.x, entPos.y) < 10000 then
                     tooClose = true
                     break
                 end
@@ -81,6 +81,7 @@ function EVENT:Begin()
                 box:Spawn()
                 box:Arrive()
                 table.insert(boxes, box)
+                table.insert(playerAndBoxPositions, pos)
             end
         end
     end
