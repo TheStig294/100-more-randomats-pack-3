@@ -7,12 +7,16 @@ EVENT.Categories = {"item", "entityspawn", "moderateimpact"}
 
 util.AddNetworkString("FireSaleRandomatBegin")
 util.AddNetworkString("FireSaleRandomatEnd")
+
+local wonderWeapons = {"tfa_wunderwaffe", "tfa_wavegun", "tfa_staff_wind", "tfa_shrinkray", "tfa_vr11", "tfa_wintershowl", "tfa_thundergun", "tfa_staff_lightning", "tfa_sliquifier", "tfa_scavenger", "tfa_raygun_mark2", "tfa_raygun", "tfa_jetgun", "tfa_blundergat", "tfa_acidgat"}
+
 local ogBoxFile
 
 function EVENT:Begin()
     net.Start("FireSaleRandomatBegin")
     net.Broadcast()
     -- Modifying the weapons that appear in the mystery box
+    -- Adding all floor weapons
     local boxWeapons = {}
     ogBoxFile = file.Read("codzombies/mysterybox.txt")
 
@@ -24,7 +28,14 @@ function EVENT:Begin()
         end
     end
 
-    local boxFile = "\n\n\n\n" .. table.concat(boxWeapons, "\n")
+    -- Adding all wonder weapons that are installed
+    for _, classname in ipairs(wonderWeapons) do
+        if weapons.Get(classname) ~= nil then
+            table.insert(boxWeapons, classname)
+        end
+    end
+
+    local boxFile = "\n\n\n" .. table.concat(boxWeapons, "\n")
     file.CreateDir("codzombies")
     file.Write("codzombies/mysterybox.txt", boxFile)
     -- Get every player's position so the boxes aren't spawned too close to a player
