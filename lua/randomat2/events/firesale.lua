@@ -7,11 +7,27 @@ EVENT.Categories = {"item", "entityspawn", "moderateimpact"}
 
 util.AddNetworkString("FireSaleRandomatBegin")
 util.AddNetworkString("FireSaleRandomatEnd")
+local ogBoxFile
 
 function EVENT:Begin()
     net.Start("FireSaleRandomatBegin")
     net.Broadcast()
-    -- Get every player's position so the traps aren't spawned too close to a player
+    -- Modifying the weapons that appear in the mystery box
+    local boxWeapons = {}
+    ogBoxFile = file.Read("codzombies/mysterybox.txt")
+
+    for _, wep in ipairs(weapons.GetList()) do
+        local classname = WEPS.GetClass(wep)
+
+        if classname and wep.AutoSpawnable then
+            table.insert(boxWeapons, classname)
+        end
+    end
+
+    local boxFile = "\n\n\n\n" .. table.concat(boxWeapons, "\n")
+    file.CreateDir("codzombies")
+    file.Write("codzombies/mysterybox.txt", boxFile)
+    -- Get every player's position so the boxes aren't spawned too close to a player
     local playerPositions = {}
     local boxCount = 0
     local playerCount = #self:GetAlivePlayers()
@@ -30,7 +46,7 @@ function EVENT:Begin()
             local tooClose = false
 
             for _, plyPos in ipairs(playerPositions) do
-                -- 100 * 100 = 10,000, so any traps closer than 100 source units to the player are too close to be placed
+                -- 100 * 100 = 10,000, so any boxes closer than 100 source units to the player are too close to be placed
                 if math.DistanceSqr(pos.x, pos.y, plyPos.x, plyPos.y) < 10000 then
                     tooClose = true
                     break
@@ -57,6 +73,11 @@ end
 function EVENT:End()
     net.Start("FireSaleRandomatEnd")
     net.Broadcast()
+
+    if ogBoxFile then
+        file.CreateDir("codzombies")
+        file.Write("codzombies/mysterybox.txt", ogBoxFile)
+    end
 end
 
 function EVENT:Condition()
