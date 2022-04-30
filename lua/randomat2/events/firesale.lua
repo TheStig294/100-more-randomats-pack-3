@@ -11,8 +11,10 @@ util.AddNetworkString("FireSaleRandomatEnd")
 local wonderWeapons = {"tfa_wunderwaffe", "tfa_wavegun", "tfa_staff_wind", "tfa_shrinkray", "tfa_vr11", "tfa_wintershowl", "tfa_thundergun", "tfa_staff_lightning", "tfa_sliquifier", "tfa_scavenger", "tfa_raygun_mark2", "tfa_raygun", "tfa_jetgun", "tfa_blundergat", "tfa_acidgat"}
 
 local ogBoxFile
+local boxes = {}
 
 function EVENT:Begin()
+    -- Playing fire sale music and displaying the icon
     net.Start("FireSaleRandomatBegin")
     net.Broadcast()
     -- Modifying the weapons that appear in the mystery box
@@ -67,6 +69,8 @@ function EVENT:Begin()
             if not tooClose then
                 boxCount = boxCount + 1
                 local box = ents.Create("zombies_mysterybox")
+                -- Stops the box from removing itself until the fire sale timer is up
+                box:SetNWString("PreventRemove", "true")
                 box:SetPos(pos + Vector(0, 0, 5))
 
                 -- Don't remove player spawn points
@@ -76,6 +80,7 @@ function EVENT:Begin()
 
                 box:Spawn()
                 box:Arrive()
+                table.insert(boxes, box)
             end
         end
     end
@@ -94,18 +99,48 @@ function EVENT:Begin()
             end
         end
     end)
+
+    -- After 34.4 seconds, the fire sale is over and players can finish their current spin before all boxes are removed
+    timer.Create("FireSaleRandomatTimer", 34.4, 1, function()
+        for _, box in ipairs(boxes) do
+            box:SetNWString("PreventRemove", "false")
+        end
+
+        self:AddHook("Think", function()
+            for _, box in ipairs(boxes) do
+                if IsValid(box) and box:GetNWString("CanUse", "false") == "true" then
+                    box:Remove()
+                end
+            end
+        end)
+    end)
 end
 
 function EVENT:End()
+    -- Stopping the music and removing the icon if they're still there
     net.Start("FireSaleRandomatEnd")
     net.Broadcast()
+    timer.Remove("FireSaleRandomatTimer")
 
+    -- Remove all boxes and weapons in boxes
+    for _, box in ipairs(boxes) do
+        if IsValid(box) then
+            box:Remove()
+        end
+    end
+
+    for _, ent in ipairs(ents.FindByClass("zombies_box_weapon")) do
+        ent:Remove()
+    end
+
+    -- Resetting the box weapons to what they were
     if ogBoxFile then
         file.CreateDir("codzombies")
         file.Write("codzombies/mysterybox.txt", ogBoxFile)
     end
 end
 
+-- This event doesn't necessarily need the wonder weapons to work, just the mystery box itself
 function EVENT:Condition()
     return scripted_ents.Get("zombies_mysterybox")
 end

@@ -71,6 +71,17 @@ Everyone gets a random zombies perk bottle\
 _ttt_randomat_drinkup_ - Default: 1 - Whether this randomat is enabled\
 \
 Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=2243578658>
+## Fire Sale
+
+Spawns "mystery boxes" around the map, which have a chance to contain powerful wonder weapons! (If installed)\
+Else the boxes only contain weapons that can spawn on the floor\
+Press 'E' to open a box if you find one, as many boxes as players spawn somewhere on the map to find\
+\
+_ttt_randomat_firesale_ - Default: 1 - Whether this randomat is enabled\
+\
+Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=2554783208>
+Optional "Wonder Weapons": <https://steamcommunity.com/sharedfiles/filedetails/?id=2252594978>
+
 ## Gotta catch 'em all!
 
 Everyone gets a random Pokemon playermodel!\
