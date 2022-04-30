@@ -1,6 +1,6 @@
 local EVENT = {}
 EVENT.Title = "Fire Sale"
-EVENT.Description = "Get to a box! Quick!"
+EVENT.Description = "Get to a box, quick!"
 EVENT.id = "firesale"
 
 EVENT.Categories = {"item", "entityspawn", "moderateimpact"}
@@ -79,6 +79,22 @@ function EVENT:Begin()
             end
         end
     end
+
+    -- Strips weapons taking up the same slot as the box weapon when the player goes to pick it up
+    -- Else, the player is given nothing when they try to pick up something
+    self:AddHook("PlayerUse", function(ply, ent)
+        if ent.ClassName == "zombies_box_weapon" then
+            -- Deprecated function, but the mystery box uses deprecated code!
+            local classname = ent:GetNetworkedString("weapon_class", 0)
+            local boxWep = weapons.Get(classname)
+
+            for _, wep in ipairs(ply:GetWeapons()) do
+                if wep.ClassName and wep.Kind and boxWep.Kind and wep.Kind == boxWep.Kind then
+                    ply:StripWeapon(wep.ClassName)
+                end
+            end
+        end
+    end)
 end
 
 function EVENT:End()
