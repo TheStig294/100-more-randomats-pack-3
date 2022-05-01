@@ -139,6 +139,8 @@ function EVENT:End()
         file.CreateDir("codzombies")
         file.Write("codzombies/mysterybox.txt", ogBoxFile)
     end
+
+    table.Empty(boxes)
 end
 
 -- This event doesn't necessarily need the wonder weapons to work, just the mystery box itself
