@@ -3,7 +3,7 @@ EVENT.Title = "Fire Sale"
 EVENT.Description = "Get to a box, quick!"
 EVENT.id = "firesale"
 
-EVENT.Categories = {"item", "entityspawn", "moderateimpact"}
+EVENT.Categories = {"biased_traitor", "biased", "item", "entityspawn", "moderateimpact"}
 
 util.AddNetworkString("FireSaleRandomatBegin")
 util.AddNetworkString("FireSaleRandomatEnd")
