@@ -14,6 +14,70 @@ local ogBoxFile
 local boxes = {}
 
 function EVENT:Begin()
+    -- If the current map is a cod zombies map, use it's actual mystery box spawn locations!
+    local zmSpawns = {}
+
+    zmSpawns.nz_kino_der_toten = {
+        {Vector(-1054, 1485, 104), Angle(0, 0, 0)},
+        {Vector(-1297, 532, -61), Angle(0, 180, 0)},
+        {Vector(-1065, -433, 16), Angle(0, 180, 0)},
+        {Vector(739, 360, -80), Angle(0, 0, 0)},
+        {Vector(612, 2333, -75), Angle(0, 90, 0)},
+        {Vector(2251, 1833, -75), Angle(0, 180, 0)},
+        {Vector(2696, 1233, -75), Angle(0, 90, 0)},
+        {Vector(1827, -404, 266), Angle(0, 0, 0)},
+        {Vector(606, -398, 196), Angle(0, 90, 0)}
+    }
+
+    zmSpawns.nz_moon = {
+        {Vector(-3839, 179, -238), Angle(0, 180, 0)},
+        {Vector(-1270, 1374, -258), Angle(0, 0, 0)},
+        {Vector(-80, 460, -615), Angle(0, -90, 0)}
+    }
+
+    zmSpawns.nz_tranzit2 = {
+        {Vector(290, 144, 0), Angle(0, -90, 0)},
+        {Vector(-19, -1175, 128), Angle(0, 180, 0)},
+        {Vector(-5578, -4151, -303), Angle(0, 90, 0)},
+        {Vector(-4056, 5112, 192), Angle(0, -153, 0)},
+        {Vector(4135, 5899, -111), Angle(0, 90, 0)},
+        {Vector(7573, -2943, 0), Angle(0, -90, 0)}
+    }
+
+    zmSpawns.nz_nacht_der_untoten = {
+        {Vector(-432, -450, -815), Angle(0, -52, 0)}
+    }
+
+    zmSpawns.zombieverruckt_map = {
+        {Vector(219, 480, 326), Angle(0, 0, 0)}
+    }
+
+    zmSpawns.nz_der_riese_waw = {
+        {Vector(-1046, -1955, 8), Angle(0, -90, 0)},
+        {Vector(-1250, -2041, 148), Angle(0, 0, 0)},
+        {Vector(32, -3012, 232), Angle(0, 180, 0)},
+        {Vector(621, -2049, 10), Angle(0, -90, 0)},
+        {Vector(1260, 590, 124), Angle(0, -90, 0)},
+        {Vector(678, -224, 8), Angle(0, 180, 0)}
+    }
+
+    zmSpawns.nz_motd = {
+        {Vector(-711, -980, -231), Angle(0, 180, 0)},
+        {Vector(2247, -1202, 208), Angle(0, 90, 0)},
+        {Vector(-1572, -4823, -1359), Angle(0, -90, 0)},
+        {Vector(-1372, -1522, 0), Angle(0, 0, 0)},
+        {Vector(1830, -517, 0), Angle(0, 90, 0)}
+    }
+
+    local zombiesMaps = table.GetKeys(zmSpawns)
+    local zombiesMap = nil
+
+    for _, map in ipairs(zombiesMaps) do
+        if game.GetMap() == map then
+            zombiesMap = game.GetMap()
+        end
+    end
+
     -- Playing fire sale music and displaying the icon
     net.Start("FireSaleRandomatBegin")
     net.Broadcast()
@@ -43,45 +107,58 @@ function EVENT:Begin()
     -- Get every player's position so the boxes aren't spawned too close to a player
     local playerAndBoxPositions = {}
     local boxCount = 0
-    local playerCount = #self:GetAlivePlayers()
+    local boxCap = #self:GetAlivePlayers()
 
     for _, ply in ipairs(self:GetAlivePlayers()) do
         table.insert(playerAndBoxPositions, ply:GetPos())
     end
 
-    for _, ent in ipairs(ents.GetAll()) do
-        local classname = ent:GetClass()
-        local pos = ent:GetPos()
-        local infoEnt = string.StartWith(classname, "info_")
+    if zombiesMap then
+        for _, posData in ipairs(zmSpawns[zombiesMap]) do
+            local box = ents.Create("zombies_mysterybox")
+            box:SetPos(posData[1])
+            box:SetAngles(posData[2])
+            -- Stops the box from removing itself until the fire sale timer is up
+            box:SetNWString("PreventRemove", "true")
+            box:Spawn()
+            box:Arrive()
+            table.insert(boxes, box)
+        end
+    else
+        for _, ent in ipairs(ents.GetAll()) do
+            local classname = ent:GetClass()
+            local pos = ent:GetPos()
+            local infoEnt = string.StartWith(classname, "info_")
 
-        -- Using the positions of weapon, ammo and player spawns
-        if (string.StartWith(classname, "weapon_") or string.StartWith(classname, "item_") or infoEnt) and not IsValid(ent:GetParent()) and boxCount <= playerCount then
-            local tooClose = false
+            -- Using the positions of weapon, ammo and player spawns
+            if (string.StartWith(classname, "weapon_") or string.StartWith(classname, "item_") or infoEnt) and not IsValid(ent:GetParent()) and boxCount <= boxCap then
+                local tooClose = false
 
-            for _, entPos in ipairs(playerAndBoxPositions) do
-                -- 100 * 100 = 10,000, so any boxes closer than 100 source units to the player are too close to be placed
-                if pos == entPos or math.DistanceSqr(pos.x, pos.y, entPos.x, entPos.y) < 10000 then
-                    tooClose = true
-                    break
+                for _, entPos in ipairs(playerAndBoxPositions) do
+                    -- 100 * 100 = 10,000, so any boxes closer than 100 source units to the player are too close to be placed
+                    if pos == entPos or math.DistanceSqr(pos.x, pos.y, entPos.x, entPos.y) < 10000 then
+                        tooClose = true
+                        break
+                    end
                 end
-            end
 
-            if not tooClose then
-                boxCount = boxCount + 1
-                local box = ents.Create("zombies_mysterybox")
-                -- Stops the box from removing itself until the fire sale timer is up
-                box:SetNWString("PreventRemove", "true")
-                box:SetPos(pos + Vector(0, 0, 5))
+                if not tooClose then
+                    boxCount = boxCount + 1
+                    local box = ents.Create("zombies_mysterybox")
+                    box:SetPos(pos + Vector(0, 0, 5))
 
-                -- Don't remove player spawn points
-                if not infoEnt then
-                    ent:Remove()
+                    -- Don't remove player spawn points
+                    if not infoEnt then
+                        ent:Remove()
+                    end
+
+                    -- Stops the box from removing itself until the fire sale timer is up
+                    box:SetNWString("PreventRemove", "true")
+                    box:Spawn()
+                    box:Arrive()
+                    table.insert(boxes, box)
+                    table.insert(playerAndBoxPositions, pos)
                 end
-
-                box:Spawn()
-                box:Arrive()
-                table.insert(boxes, box)
-                table.insert(playerAndBoxPositions, pos)
             end
         end
     end
