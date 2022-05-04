@@ -274,6 +274,14 @@ _ttt_randomat_snailwars_ - Default: 1 - Whether this randomat is enabled\
 Requires:\
 <https://steamcommunity.com/sharedfiles/filedetails/?id=2151761122> \
 <https://steamcommunity.com/sharedfiles/filedetails/?id=1817717513>
+## Spider Mod
+
+When you look at someone, you see a health bar above them!\
+\
+_ttt_randomat_healthbar_ - Default: 1 - Whether this randomat is enabled\
+\
+Requires:\
+<https://steamcommunity.com/sharedfiles/filedetails/?id=2372740052>
 
 ## Time Stop
 
