@@ -24,9 +24,10 @@ _ttt_randomat_event_history_ - Default: 10 - How many events should be kept in h
 
 # Newly added randomats
 
-1. War of Words - Everyone gets a death note!
-2. Gotta catch 'em all! - Everyone gets a Pokemon playermodel!
-3. One Puuuuunch! - Gives everyone the one punch fists!
+1. Spider Mod - Puts health bars over everyone's head
+2. Fire Sale - Spawns boxes that can give you powerful weapons!
+3. War of Words - Everyone gets a "Death Note"
+4. Gotta catch 'em all! - Everyone gets a Pokemon playermodel!
 
 # Randomats
 
@@ -39,6 +40,14 @@ Being AFK kills you\
 _ttt_randomat_afk_ - Default: 1 - Whether this randomat is enabled\
 \
 Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=572519224>
+
+## Air Raid
+
+Everyone gets a gravity changer
+\
+_ttt_randomat_afk_ - Default: 1 - Whether this randomat is enabled\
+\
+Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=1618719637>
 
 ## Bruh...
 
@@ -291,6 +300,14 @@ NOTE: This randomat is disabled by default as it can cause issues with players b
 _ttt_randomat_timestop_ - Default: 0 - Whether this randomat is enabled\
 \
 Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=1337349942>
+
+## The Slow-mo Guys
+
+Everyone gets a time manipulator
+\
+_ttt_randomat_timemanipulator_ - Default: 1 - Whether this randomat is enabled\
+\
+Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=1318271171>
 
 ## War of Words
 
