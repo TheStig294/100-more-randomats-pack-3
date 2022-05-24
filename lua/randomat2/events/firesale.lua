@@ -52,6 +52,10 @@ function EVENT:Begin()
         {Vector(219, 480, 326), Angle(0, 0, 0)}
     }
 
+    zmSpawns.zombieverruckt_map = {
+        {Vector(219, 480, 326), Angle(0, 0, 0)}
+    }
+
     zmSpawns.nz_der_riese_waw = {
         {Vector(-1046, -1955, 8), Angle(0, -90, 0)},
         {Vector(-1250, -2041, 148), Angle(0, 0, 0)},
