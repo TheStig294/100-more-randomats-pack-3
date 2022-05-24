@@ -48,7 +48,7 @@ function EVENT:Begin()
         {Vector(-432, -450, -815), Angle(0, -52, 0)}
     }
 
-    zmSpawns.ttt_verruckt = {
+    zmSpawns.nz_verruckt = {
         {Vector(219, 480, 326), Angle(0, 0, 0)}
     }
 
