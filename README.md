@@ -239,14 +239,6 @@ Originally made by [Dem](https://steamcommunity.com/sharedfiles/filedetails/?id=
 \
 Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=2151761122>
 
-## Random Deathmatch
-
-Gives everyone an infinite ammo free kill gun, strips all other weapons on the ground and on players. Transforms the jester or swapper into an innocent if there is one.\
-\
-_ttt_randomat_rdm_ - Default: 1 - Whether this randomat is enabled\
-\
-Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=337994500>
-
 ## Reach for the sky
 
 Everyone gets a jetpack\
