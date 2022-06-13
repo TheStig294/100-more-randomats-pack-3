@@ -191,11 +191,13 @@ Originally made by [ruiner189](https://steamcommunity.com/sharedfiles/filedetail
 \
 Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=635911320>
 
-## Meow
+## Meow (a.k.a Bat with a cat!)
 
-Everyone gets an infinite ammo cat gun\
+Everyone gets an infinite ammo cat gun, all weapons found on the ground are removed.\
+If the [Homerun Bat](https://steamcommunity.com/sharedfiles/filedetails/?id=648957314) weapon is installed, this event changes to 'Bat with a cat!' and also changes everyone's model to a bat.\
+(Play on words with the '[Cat with a bat!](https://github.com/TheStig294/100-more-randomats-pack-2/blob/master/README.md#home-run-aka-cat-with-a-bat)' event from randomat pack 2)\
 \
-_ttt_randomat_meow_ - Default: 1 - Whether this randomat is enabled\
+_ttt_randomat_catgun_ - Default: 1 - Whether this randomat is enabled\
 \
 Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=827320827>
 
