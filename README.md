@@ -27,7 +27,7 @@ _ttt_randomat_event_history_ - Default: 10 - How many events should be kept in h
 2. Fire Sale - Spawns boxes that can give you powerful weapons!
 3. War of Words - Everyone gets a "Death Note"
 1. Gotta catch 'em all! - Everyone gets a Pokemon playermodel!
-1. New Horizons - Everyone gets an Animal Crossing playermodel!
+1. Turnip Day - Everyone gets an Animal Crossing playermodel!
 
 # Randomats
 
@@ -209,25 +209,6 @@ _ttt_randomat_devildeal_ - Default: 1 - Whether this randomat is enabled\
 \
 Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=2140473915>
 
-## New Horizons
-
-Everyone gets a random Animal Crossing playermodel!\
-Choose any combination of the models below, you need at least one installed for this randomat to start triggering!\
-\
-_ttt_randomat_animalcrossing_ - Default: 1 - Whether this randomat is enabled\
-\
-Install one or more of these playermodels if you want this randomat:
-- [Tom Nook](https://steamcommunity.com/sharedfiles/filedetails/?id=2247735533)
-- [Isabelle & Digby](https://steamcommunity.com/sharedfiles/filedetails/?id=2005233079)
-- [Timmy & Tommy](https://steamcommunity.com/sharedfiles/filedetails/?id=2281485427)
-- [Blathers & Celeste](https://steamcommunity.com/sharedfiles/filedetails/?id=2493674134)
-- [Gulliver](https://steamcommunity.com/sharedfiles/filedetails/?id=2428929091)
-- [Redd](https://steamcommunity.com/sharedfiles/filedetails/?id=2252919369)
-- [K.K. Slider](https://steamcommunity.com/sharedfiles/filedetails/?id=2211476571)
-- [Flick & C.J.](https://steamcommunity.com/sharedfiles/filedetails/?id=2511743678)
-- [Kidcat](https://steamcommunity.com/sharedfiles/filedetails/?id=2655468843)
-- [Sherb](https://steamcommunity.com/sharedfiles/filedetails/?id=2101409901)
-
 ## One Puuuuunch!
 
 Gives everyone One Punch fists!\
@@ -321,6 +302,25 @@ Everyone gets a time manipulator
 _ttt_randomat_timemanipulator_ - Default: 1 - Whether this randomat is enabled\
 \
 Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=1318271171>
+
+## Turnip Day!
+
+Everyone gets a random Animal Crossing playermodel!\
+Choose any combination of the models below, you need at least one installed for this randomat to start triggering!\
+\
+_ttt_randomat_animalcrossing_ - Default: 1 - Whether this randomat is enabled\
+\
+Install one or more of these playermodels if you want this randomat:
+- [Tom Nook](https://steamcommunity.com/sharedfiles/filedetails/?id=2247735533)
+- [Isabelle & Digby](https://steamcommunity.com/sharedfiles/filedetails/?id=2005233079)
+- [Timmy & Tommy](https://steamcommunity.com/sharedfiles/filedetails/?id=2281485427)
+- [Blathers & Celeste](https://steamcommunity.com/sharedfiles/filedetails/?id=2493674134)
+- [Gulliver](https://steamcommunity.com/sharedfiles/filedetails/?id=2428929091)
+- [Redd](https://steamcommunity.com/sharedfiles/filedetails/?id=2252919369)
+- [K.K. Slider](https://steamcommunity.com/sharedfiles/filedetails/?id=2211476571)
+- [Flick & C.J.](https://steamcommunity.com/sharedfiles/filedetails/?id=2511743678)
+- [Kidcat](https://steamcommunity.com/sharedfiles/filedetails/?id=2655468843)
+- [Sherb](https://steamcommunity.com/sharedfiles/filedetails/?id=2101409901)
 
 ## War of Words
 

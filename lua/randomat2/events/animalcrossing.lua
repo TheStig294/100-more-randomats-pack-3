@@ -1,5 +1,5 @@
 local EVENT = {}
-EVENT.Title = "New Horizons"
+EVENT.Title = "Turnip Day!"
 EVENT.Description = "Everyone gets an Animal Crossing playermodel!"
 EVENT.id = "animalcrossing"
 
