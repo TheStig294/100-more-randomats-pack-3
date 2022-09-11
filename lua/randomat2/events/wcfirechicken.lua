@@ -6,8 +6,8 @@ EVENT.id = "wcfirechicken"
 EVENT.Categories = {"item", "largeimpact", "biased_traitor", "biased"}
 
 function EVENT:Begin()
-    Randomat:TriggerEvent("amaterasu")
-    Randomat:TriggerEvent("chickens")
+    Randomat:SilentTriggerEvent("amaterasu")
+    Randomat:SilentTriggerEvent("chickens")
 end
 
 function EVENT:Condition()
