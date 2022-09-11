@@ -30,17 +30,6 @@ _ttt_randomat_event_history_ - Default: 10 - How many events should be kept in h
 1. Spider Mod - Puts health bars over everyone's head
 2. Fire Sale - Spawns boxes that can give you powerful weapons!
 3. War of Words - Everyone gets a "Death Note"
-<<<<<<< HEAD
-2. Fire Sale - Spawns boxes that can give you powerful weapons!
-3. War of Words - Everyone gets a "Death Note"
-1. Gotta catch 'em all! - Everyone gets a Pokemon playermodel!
-1. Turnip Day - Everyone gets an Animal Crossing playermodel!
-=======
-1. Wombo Combo: Rocket Chickens - Everyone is a chicken + has an amaterasu!
-1. Spider Mod - Puts health bars over everyone's head
-2. Fire Sale - Spawns boxes that can give you powerful weapons!
-3. War of Words - Everyone gets a "Death Note"
->>>>>>> wip-events
 
 # Randomats
 
