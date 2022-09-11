@@ -24,10 +24,23 @@ _ttt_randomat_event_history_ - Default: 10 - How many events should be kept in h
 
 # Newly added randomats
 
+1. Wombo Combo: Rocket Chickens - Everyone is a chicken + has an amaterasu!
+1. Turnip Day - Everyone gets an Animal Crossing playermodel!
+1. Gotta catch 'em all! - Everyone gets a Pokemon playermodel!
+1. Spider Mod - Puts health bars over everyone's head
+2. Fire Sale - Spawns boxes that can give you powerful weapons!
+3. War of Words - Everyone gets a "Death Note"
+<<<<<<< HEAD
 2. Fire Sale - Spawns boxes that can give you powerful weapons!
 3. War of Words - Everyone gets a "Death Note"
 1. Gotta catch 'em all! - Everyone gets a Pokemon playermodel!
 1. Turnip Day - Everyone gets an Animal Crossing playermodel!
+=======
+1. Wombo Combo: Rocket Chickens - Everyone is a chicken + has an amaterasu!
+1. Spider Mod - Puts health bars over everyone's head
+2. Fire Sale - Spawns boxes that can give you powerful weapons!
+3. War of Words - Everyone gets a "Death Note"
+>>>>>>> wip-events
 
 # Randomats
 
@@ -329,6 +342,15 @@ Everyone gets a death note!\
 _ttt_randomat_deathnote_ - Default: 1 - Whether this randomat is enabled\
 \
 Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=2552417009>
+
+## Wombo Combo: Rocket Chickens
+
+Everyone is a chicken + has an amaterasu!\
+\
+_ttt_randomat_wcfirechicken_ - Default: 1 - Whether this randomat is enabled\
+\
+Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=1978094981>
+Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=2428342861>
 
 ## Woof Woof!
 
