@@ -261,6 +261,12 @@ Requires:\
 <https://steamcommunity.com/sharedfiles/filedetails/?id=2311866661> \
 <https://steamcommunity.com/sharedfiles/filedetails/?id=2311859098>
 
+## Shh... It's a Secret!
+
+Runs another random Randomat event without notifying the players. Also silences all future Randomat events while this event is active.\
+\
+_ttt_randomat_secret_ - Default: 1 - Whether this event is enabled.
+
 ## Snail Time!
 
 Transforms everyone into a snail\
