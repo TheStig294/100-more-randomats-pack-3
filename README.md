@@ -24,12 +24,12 @@ _ttt_randomat_event_history_ - Default: 10 - How many events should be kept in h
 
 # Newly added randomats
 
+1. RISE FROM YOUR... Dobbees? - When you die, you come back as a T-Posing "dobbee"
 1. Wombo Combo: Rocket Chickens - Everyone is a chicken + has an amaterasu!
 1. Turnip Day - Everyone gets an Animal Crossing playermodel!
 1. Gotta catch 'em all! - Everyone gets a Pokemon playermodel!
 1. Spider Mod - Puts health bars over everyone's head
 2. Fire Sale - Spawns boxes that can give you powerful weapons!
-3. War of Words - Everyone gets a "Death Note"
 
 # Randomats
 
@@ -250,6 +250,17 @@ Everyone gets a jetpack\
 _ttt_randomat_jetpack_ - Default: 1 - Whether this randomat is enabled\
 \
 Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=1735229517>
+
+## RISE FROM YOUR... Dobbees?
+
+When you die, you come back as a T-Posing "dobbee", from the "Dobby Grenade" weapon.\
+\
+_ttt_randomat_dobbees_ - Default: 1 - Whether this randomat is enabled\
+\
+Changed model set from the bee model to the dobbee model, check for dobby model being installed before triggering.\
+Originally made by [Malivil](https://steamcommunity.com/sharedfiles/filedetails/?id=2055805086)\
+\
+Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=2429414338>
 
 ## Secret Friday Update
 
