@@ -24,12 +24,11 @@ _ttt_randomat_event_history_ - Default: 10 - How many events should be kept in h
 
 # Newly added randomats
 
+1. Combo - Triggers a random interesting combo of randomats
 1. RISE FROM YOUR... Dobbees? - When you die, you come back as a T-Posing "dobbee"
-1. Wombo Combo: Rocket Chickens - Everyone is a chicken + has an amaterasu!
 1. Turnip Day - Everyone gets an Animal Crossing playermodel!
 1. Gotta catch 'em all! - Everyone gets a Pokemon playermodel!
 1. Spider Mod - Puts health bars over everyone's head
-2. Fire Sale - Spawns boxes that can give you powerful weapons!
 
 # Randomats
 
@@ -66,6 +65,61 @@ Everyone gets an amaterasu\
 _ttt_randomat_amaterasu_ - Default: 1 - Whether this randomat is enabled\
 \
 Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=1978094981>
+
+## Combo
+
+Triggers a random pair of randomats from a pre-made list.\
+The possible pairs are listed below and and be individually turned on/off.\
+If one of the randomats in the pair is turned off, then any pair using that randomat won't trigger.\
+\
+General idea and some combos suggested by u/venort_ on Reddit.
+### "Combo: Why aren't you dead?"
+Infinite super shotguns + delayed damage!\
+_ttt_randomat_cdelayshotguns_ - Default: 1 - Whether this randomat is enabled\
+Requires:\
+<https://steamcommunity.com/sharedfiles/filedetails/?id=2055805086>\
+<https://steamcommunity.com/sharedfiles/filedetails/?id=2236037793>
+
+### "Combo: Rocket Chickens"
+Everyone is a chicken + has an amaterasu!\
+_ttt_randomat_cfirechicken_ - Default: 1 - Whether this randomat is enabled\
+Requires:\
+<https://steamcommunity.com/sharedfiles/filedetails/?id=1978094981>\
+<https://steamcommunity.com/sharedfiles/filedetails/?id=2428342861>
+
+### "Combo: Sonic Potato!"
+Pass on the hot potato or explode + while you have it you're super fast!\
+_ttt_randomat_cpotato_ - Default: 1 - Whether this randomat is enabled\
+Requires:\
+<https://steamcommunity.com/sharedfiles/filedetails/?id=2428342861>\
+<https://steamcommunity.com/sharedfiles/filedetails/?id=2377790970>
+
+### "Combo: Snails vs. snails"
+Everyone is a snail + has a snail following them!\
+_ttt_randomat_csnails_ - Default: 1 - Whether this randomat is enabled\
+Requires:\
+<https://steamcommunity.com/sharedfiles/filedetails/?id=2151761122>
+
+### "Combo: Uh-oh"
+Innocents freeze every 30 secs + RELEASE THE SNAILS!\
+_ttt_randomat_csnailsfreeze_ - Default: 1 - Whether this randomat is enabled\
+Requires:\
+<https://steamcommunity.com/sharedfiles/filedetails/?id=2055805086>\
+<https://steamcommunity.com/sharedfiles/filedetails/?id=2151761122>
+
+### "Combo: Wibbly wobbly timey wimey"
+Everyone gets a time manipulator + gravity changer!\
+_ttt_randomat_ctimegravity_ - Default: 1 - Whether this randomat is enabled\
+Requires:\
+<https://steamcommunity.com/sharedfiles/filedetails/?id=1618719637>\
+<https://steamcommunity.com/sharedfiles/filedetails/?id=1318271171>
+
+### "Combo: Yogscast"
+Yogs intro + everyone's a yogscast model!\
+_ttt_randomat_cyogs_ - Default: 1 - Whether this randomat is enabled\
+Requires:\
+<https://steamcommunity.com/sharedfiles/filedetails/?id=2055805086>\
+<https://steamcommunity.com/sharedfiles/filedetails/?id=2428342861>
 
 ## Death isn't the end...
 
@@ -348,15 +402,6 @@ Everyone gets a death note!\
 _ttt_randomat_deathnote_ - Default: 1 - Whether this randomat is enabled\
 \
 Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=2552417009>
-
-## Wombo Combo: Rocket Chickens
-
-Everyone is a chicken + has an amaterasu!\
-\
-_ttt_randomat_wcfirechicken_ - Default: 1 - Whether this randomat is enabled\
-\
-Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=1978094981>
-Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=2428342861>
 
 ## Woof Woof!
 
