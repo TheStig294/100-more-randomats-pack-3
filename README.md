@@ -24,11 +24,11 @@ _ttt_randomat_event_history_ - Default: 10 - How many events should be kept in h
 
 # Newly added randomats
 
+1. Random joke weapons for all!
 1. Combo - Triggers a random interesting combo of randomats
 1. RISE FROM YOUR... Dobbees? - When you die, you come back as a T-Posing "dobbee"
 1. Turnip Day - Everyone gets an Animal Crossing playermodel!
 1. Gotta catch 'em all! - Everyone gets a Pokemon playermodel!
-1. Spider Mod - Puts health bars over everyone's head
 
 # Randomats
 
@@ -272,6 +272,15 @@ Gives everyone One Punch fists!\
 _ttt_randomat_onepunch_ - Default: 1 - Whether this randomat is enabled\
 \
 Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=2609859728>
+
+## Random joke weapons for all!
+
+Gives everyone a random buyable joke weapon.\
+\
+_ttt_randomat_jokeweapons_ - Default: 1 - Whether this randomat is enabled\
+\
+Requires:\
+<https://steamcommunity.com/sharedfiles/filedetails/?id=2568344774>
 
 ## Pew! Bang! Pow!
 
