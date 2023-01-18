@@ -24,12 +24,12 @@ _ttt_randomat_event_history_ - Default: 10 - How many events should be kept in h
 
 # Newly added randomats
 
+1. Sips sends his regards - Everyone gets one of these models: https://steamcommunity.com/sharedfiles/filedetails/?id=2659543412
 1. Am I a jester or a traitor? - There is a jester, and a traitor with a maclunkey gun!
 1. Random joke weapons for all!
 1. Combo - Triggers a random interesting combo of randomats
 1. RISE FROM YOUR... Dobbees? - When you die, you come back as a T-Posing "dobbee"
 1. Turnip Day - Everyone gets an Animal Crossing playermodel!
-1. Gotta catch 'em all! - Everyone gets a Pokemon playermodel!
 
 # Randomats
 
@@ -349,6 +349,15 @@ Requires:\
 Runs another random Randomat event without notifying the players. Also silences all future Randomat events while this event is active.\
 \
 _ttt_randomat_secret_ - Default: 1 - Whether this event is enabled.
+
+## Sips sends his regards
+
+Everyone gets one of these models: https://steamcommunity.com/sharedfiles/filedetails/?id=2659543412\
+\
+_ttt_randomat_sips_ - Default: 1 - Whether this randomat is enabled\
+\
+Requires:\
+<https://steamcommunity.com/sharedfiles/filedetails/?id=2659543412>
 
 ## Snail Time!
 
