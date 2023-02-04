@@ -7,9 +7,9 @@ EVENT.Categories = {"item", "biased_innocent", "biased", "largeimpact"}
 
 function EVENT:Begin()
     for i, ply in pairs(self:GetAlivePlayers()) do
-        if IsKillCommandSensitiveRole(ply) then
+        if Randomat:IsKillCommandSensitiveRole(ply) then
             self:StripRoleWeapons(ply)
-            SetToBasicRole(ply)
+            Randomat:SetToBasicRole(ply)
         end
 
         timer.Simple(0.1, function()
@@ -26,7 +26,7 @@ function EVENT:Condition()
     local killCommandSensitiveRoleExists = false
 
     for _, ply in ipairs(self:GetAlivePlayers()) do
-        if IsKillCommandSensitiveRole(ply) then
+        if Randomat:IsKillCommandSensitiveRole(ply) then
             killCommandSensitiveRoleExists = true
             break
         end

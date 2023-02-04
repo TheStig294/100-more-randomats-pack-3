@@ -27,14 +27,14 @@ local function SetPokemonModel(ply, randomModel)
             [1] = 1
         }
 
-        ForceSetPlayermodel(ply, data)
+        Randomat:ForceSetPlayermodel(ply, data)
     elseif randomModel == "models/player/red.mdl" then
         local data = {}
         data.model = "models/player/red.mdl"
         data.playerColor = Color(214, 38, 38):ToVector()
-        ForceSetPlayermodel(ply, data)
+        Randomat:ForceSetPlayermodel(ply, data)
     else
-        ForceSetPlayermodel(ply, randomModel)
+        Randomat:ForceSetPlayermodel(ply, randomModel)
     end
 end
 
@@ -65,7 +65,7 @@ function EVENT:Begin()
 end
 
 function EVENT:End()
-    ForceResetAllPlayermodels()
+    Randomat:ForceResetAllPlayermodels()
     self:ResetAllPlayerScales()
     table.Empty(selectedModels)
 end

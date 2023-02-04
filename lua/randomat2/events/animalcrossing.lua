@@ -23,21 +23,21 @@ local function ApplyModel(ply, randomModel)
 
     if randomModel == "models/catcraze777/animal_crossing/Timmy_acnh/timmy_pm.mdl" then
         data.viewOffset = Vector(0, 0, 40)
-        ForceSetPlayermodel(ply, data)
+        Randomat:ForceSetPlayermodel(ply, data)
     elseif randomModel == "models/catcraze777/animal_crossing/blathers_acnh/celeste_pm.mdl" then
         data.viewOffset = Vector(0, 0, 48)
-        ForceSetPlayermodel(ply, data)
+        Randomat:ForceSetPlayermodel(ply, data)
     elseif randomModel == "models/gwladys/digby/digby_player.mdl" then
         data.viewOffset = Vector(0, 0, 43)
-        ForceSetPlayermodel(ply, data)
+        Randomat:ForceSetPlayermodel(ply, data)
     elseif randomModel == "models/gwladys/isabelle/isabelle__player.mdl" then
         data.viewOffset = Vector(0, 0, 45)
-        ForceSetPlayermodel(ply, data)
+        Randomat:ForceSetPlayermodel(ply, data)
     elseif randomModel == "models/croissant/animalcrossing/tomnook/tomnook_pm.mdl" then
         data.viewOffset = Vector(0, 0, 48)
-        ForceSetPlayermodel(ply, data)
+        Randomat:ForceSetPlayermodel(ply, data)
     else
-        ForceSetPlayermodel(ply, randomModel)
+        Randomat:ForceSetPlayermodel(ply, randomModel)
     end
 end
 
@@ -68,7 +68,7 @@ function EVENT:Begin()
 end
 
 function EVENT:End()
-    ForceResetAllPlayermodels()
+    Randomat:ForceResetAllPlayermodels()
     self:ResetAllPlayerScales()
     table.Empty(selectedModels)
 end

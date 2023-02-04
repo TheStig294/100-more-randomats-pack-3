@@ -15,9 +15,7 @@ function EVENT:Begin()
 end
 
 function EVENT:Condition()
-    local mapHasAI = MapHasAI()
-
-    return mapHasAI and weapons.Get("weapon_ttt_guard_dog") ~= nil
+    return Randomat:MapHasAI() and weapons.Get("weapon_ttt_guard_dog") ~= nil
 end
 
 Randomat:register(EVENT)

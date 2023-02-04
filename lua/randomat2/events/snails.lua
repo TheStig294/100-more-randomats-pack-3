@@ -64,9 +64,7 @@ function EVENT:End()
 end
 
 function EVENT:Condition()
-    local mapHasAI = MapHasAI()
-
-    return mapHasAI and weapons.Get("weapon_ttt_killersnail") ~= nil
+    return Randomat:MapHasAI() and weapons.Get("weapon_ttt_killersnail") ~= nil
 end
 
 function EVENT:GetConVars()

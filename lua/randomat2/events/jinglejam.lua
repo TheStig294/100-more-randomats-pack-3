@@ -24,19 +24,19 @@ function EVENT:Begin()
         local randomModel = table.Random(remainingModels)
         table.RemoveByValue(remainingModels, randomModel)
         selectedModels[ply] = randomModel
-        ForceSetPlayermodel(ply, randomModel)
+        Randomat:ForceSetPlayermodel(ply, randomModel)
     end
 
     self:AddHook("PlayerSpawn", function(ply)
         timer.Simple(1, function()
             local randomModel = selectedModels[ply]
-            ForceSetPlayermodel(ply, randomModel)
+            Randomat:ForceSetPlayermodel(ply, randomModel)
         end)
     end)
 end
 
 function EVENT:End()
-    ForceResetAllPlayermodels()
+    Randomat:ForceResetAllPlayermodels()
 end
 
 function EVENT:Condition()

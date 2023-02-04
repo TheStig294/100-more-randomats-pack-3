@@ -25,11 +25,11 @@ function EVENT:Begin()
         local snailModel = snailModels[math.random(1, #snailModels)]
         playerModels[ply] = snailModel
         maxHealth[ply] = ply:GetMaxHealth()
-        ForceSetPlayermodel(ply, snailModel)
+        Randomat:ForceSetPlayermodel(ply, snailModel)
 
-        if IsBodyDependentRole(ply) then
+        if Randomat:IsBodyDependentRole(ply) then
             self:StripRoleWeapons(ply)
-            SetToBasicRole(ply)
+            Randomat:SetToBasicRole(ply)
         end
     end
 
@@ -64,7 +64,7 @@ function EVENT:Begin()
     self:AddHook("PlayerSpawn", function(ply)
         timer.Simple(1, function()
             if playerModels[ply] then
-                ForceSetPlayermodel(ply, playerModels[ply])
+                Randomat:ForceSetPlayermodel(ply, playerModels[ply])
             end
         end)
     end)
@@ -85,7 +85,7 @@ end
 function EVENT:End()
     if snailTimeTriggered then
         snailTimeTriggered = false
-        ForceResetAllPlayermodels()
+        Randomat:ForceResetAllPlayermodels()
         hook.Remove("Think", "SnailTimeThink")
         timer.Remove("RdmtSnailsHp")
         -- Reset the player speed on the client
@@ -112,7 +112,7 @@ function EVENT:Condition()
     local bodyDependentRoleExists = false
 
     for _, ply in ipairs(self:GetAlivePlayers()) do
-        if IsBodyDependentRole(ply) then
+        if Randomat:IsBodyDependentRole(ply) then
             bodyDependentRoleExists = true
             break
         end
