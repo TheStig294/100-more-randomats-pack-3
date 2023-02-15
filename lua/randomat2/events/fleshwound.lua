@@ -3,13 +3,19 @@ EVENT.Title = "It's just a flesh wound."
 EVENT.Description = "Everyone has a flesh wound"
 EVENT.id = "fleshwound"
 
-EVENT.Categories = {"item", "biased_innocent", "biased", "largeimpact"}
+EVENT.Categories = {"item", "biased_innocent", "rolechange", "biased", "largeimpact"}
 
 function EVENT:Begin()
-    for i, ply in pairs(self:GetAlivePlayers()) do
+    local new_traitors = {}
+
+    for _, ply in ipairs(self:GetAlivePlayers()) do
         if Randomat:IsKillCommandSensitiveRole(ply) then
             self:StripRoleWeapons(ply)
-            Randomat:SetToBasicRole(ply)
+            local isTraitor = Randomat:SetToBasicRole(ply, "Traitor")
+
+            if isTraitor then
+                table.insert(new_traitors, ply)
+            end
         end
 
         timer.Simple(0.1, function()
@@ -18,6 +24,8 @@ function EVENT:Begin()
         end)
     end
 
+    -- Send message to the traitor team if new traitors joined
+    self:NotifyTeamChange(new_traitors, ROLE_TEAM_TRAITOR)
     SendFullStateUpdate()
 end
 

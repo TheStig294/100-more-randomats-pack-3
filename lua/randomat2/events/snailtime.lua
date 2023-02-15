@@ -20,8 +20,9 @@ function EVENT:Begin()
     local sp = 0.5 -- player speed factor
     local playerModels = {}
     maxHealth = {}
+    local new_traitors = {}
 
-    for k, ply in pairs(player.GetAll()) do
+    for k, ply in pairs(self:GetAlivePlayers()) do
         local snailModel = snailModels[math.random(1, #snailModels)]
         playerModels[ply] = snailModel
         maxHealth[ply] = ply:GetMaxHealth()
@@ -29,10 +30,16 @@ function EVENT:Begin()
 
         if Randomat:IsBodyDependentRole(ply) then
             self:StripRoleWeapons(ply)
-            Randomat:SetToBasicRole(ply)
+            local isTraitor = Randomat:SetToBasicRole(ply, "Traitor", true)
+
+            if isTraitor then
+                table.insert(new_traitors, ply)
+            end
         end
     end
 
+    -- Send message to the traitor team if new traitors joined
+    self:NotifyTeamChange(new_traitors, ROLE_TEAM_TRAITOR)
     SendFullStateUpdate()
 
     -- Caps player HP
@@ -63,9 +70,11 @@ function EVENT:Begin()
     -- Sets a player's model to a snail if they respawn
     self:AddHook("PlayerSpawn", function(ply)
         timer.Simple(1, function()
-            if playerModels[ply] then
-                Randomat:ForceSetPlayermodel(ply, playerModels[ply])
+            if not playerModels[ply] then
+                playerModels[ply] = snailModels[math.random(1, #snailModels)]
             end
+
+            Randomat:ForceSetPlayermodel(ply, playerModels[ply])
         end)
     end)
 
