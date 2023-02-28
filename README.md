@@ -89,7 +89,7 @@ Requires:\
 <https://steamcommunity.com/sharedfiles/filedetails/?id=2055805086>\
 <https://steamcommunity.com/sharedfiles/filedetails/?id=2236037793>
 
-### "Combo: Rocket Chickens"
+### "Combo: KFC"
 Everyone is a chicken + has an amaterasu!\
 _ttt_randomat_cfirechicken_ - Default: 1 - Whether this randomat is enabled\
 Requires:\

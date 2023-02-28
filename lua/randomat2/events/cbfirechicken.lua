@@ -1,5 +1,5 @@
 local EVENT = {}
-EVENT.Title = "Combo: Rocket Chickens"
+EVENT.Title = "Combo: KFC"
 EVENT.Description = "Everyone is a chicken + has an amaterasu!"
 EVENT.id = "cbfirechicken"
 
