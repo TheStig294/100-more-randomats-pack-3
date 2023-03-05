@@ -35,6 +35,7 @@ function EVENT:Begin()
             end)
 
             Randomat:SetRole(ply, ROLE_JESTER)
+            self:StripRoleWeapons(ply)
         end
     end
 
@@ -42,10 +43,13 @@ function EVENT:Begin()
         for _, ply in ipairs(self:GetAlivePlayers(true)) do
             if Randomat:IsInnocentTeam(ply, true) then
                 Randomat:SetRole(ply, ROLE_JESTER)
+                self:StripRoleWeapons(ply)
                 break
             end
         end
     end
+
+    SendFullStateUpdate()
 end
 
 function EVENT:Condition()
