@@ -24,7 +24,7 @@ _ttt_randomat_event_history_ - Default: 10 - How many events should be kept in h
 
 # Newly added randomats
 
-1. Sips sends his regards - Everyone gets one of these models: https://steamcommunity.com/sharedfiles/filedetails/?id=2659543412
+1. Sips sends his regards - Everyone gets one of these models: <https://steamcommunity.com/sharedfiles/filedetails/?id=2659543412>
 1. Am I a jester or a traitor? - There is a jester, and a traitor with a maclunkey gun!
 1. Random joke weapons for all!
 1. Combo - Triggers a random interesting combo of randomats
@@ -59,7 +59,7 @@ _ttt_randomat_maclunkey_ - Default: 1 - Whether this randomat is enabled\
 \
 Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=1960689564>
 
-## Bruh...
+## Bruh
 
 Gives everyone a bruh bunker\
 \
@@ -67,7 +67,7 @@ _ttt_randomat_bruh_ - Default: 1 - Whether this randomat is enabled\
 \
 Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=1796374263>
 
-## Careful where you look...
+## Careful where you look
 
 Everyone gets an amaterasu\
 \
@@ -81,8 +81,10 @@ Triggers a random pair of randomats from a pre-made list.\
 The possible pairs are listed below and and be individually turned on/off.\
 If one of the randomats in the pair is turned off, then any pair using that randomat won't trigger.\
 \
-General idea and some combos suggested by u/venort_ on Reddit.
+General idea and some combos suggested by u/venort_on Reddit.
+
 ### "Combo: Why aren't you dead?"
+
 Infinite super shotguns + delayed damage!\
 _ttt_randomat_cdelayshotguns_ - Default: 1 - Whether this randomat is enabled\
 Requires:\
@@ -90,6 +92,7 @@ Requires:\
 <https://steamcommunity.com/sharedfiles/filedetails/?id=2236037793>
 
 ### "Combo: KFC"
+
 Everyone is a chicken + has an amaterasu!\
 _ttt_randomat_cfirechicken_ - Default: 1 - Whether this randomat is enabled\
 Requires:\
@@ -97,6 +100,7 @@ Requires:\
 <https://steamcommunity.com/sharedfiles/filedetails/?id=2428342861>
 
 ### "Combo: Sonic Potato!"
+
 Pass on the hot potato or explode + while you have it you're super fast!\
 _ttt_randomat_cpotato_ - Default: 1 - Whether this randomat is enabled\
 Requires:\
@@ -104,12 +108,14 @@ Requires:\
 <https://steamcommunity.com/sharedfiles/filedetails/?id=2377790970>
 
 ### "Combo: Snails vs. snails"
+
 Everyone is a snail + has a snail following them!\
 _ttt_randomat_csnails_ - Default: 1 - Whether this randomat is enabled\
 Requires:\
 <https://steamcommunity.com/sharedfiles/filedetails/?id=2151761122>
 
 ### "Combo: Uh-oh"
+
 Innocents freeze every 30 secs + RELEASE THE SNAILS!\
 _ttt_randomat_csnailsfreeze_ - Default: 1 - Whether this randomat is enabled\
 Requires:\
@@ -117,6 +123,7 @@ Requires:\
 <https://steamcommunity.com/sharedfiles/filedetails/?id=2151761122>
 
 ### "Combo: Wibbly wobbly timey wimey"
+
 Everyone gets a time manipulator + gravity changer!\
 _ttt_randomat_ctimegravity_ - Default: 1 - Whether this randomat is enabled\
 Requires:\
@@ -124,13 +131,14 @@ Requires:\
 <https://steamcommunity.com/sharedfiles/filedetails/?id=1318271171>
 
 ### "Combo: Yogscast"
+
 Yogs intro + everyone's a yogscast model!\
 _ttt_randomat_cyogs_ - Default: 1 - Whether this randomat is enabled\
 Requires:\
 <https://steamcommunity.com/sharedfiles/filedetails/?id=2055805086>\
 <https://steamcommunity.com/sharedfiles/filedetails/?id=2428342861>
 
-## Death isn't the end...
+## Death isn't the end
 
 Everyone has a demonic possession\
 \
@@ -138,13 +146,6 @@ _ttt_randomat_possession_ - Default: 1 - Whether this randomat is enabled\
 \
 Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=1615324913>
 
-## Drink up!
-
-Everyone gets a random zombies perk bottle\
-\
-_ttt_randomat_drinkup_ - Default: 1 - Whether this randomat is enabled\
-\
-Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=2243578658>
 ## Fire Sale
 
 Spawns "mystery boxes" around the map, which have a chance to contain powerful wonder weapons! (If installed)\
@@ -156,7 +157,7 @@ _ttt_randomat_firesale_ - Default: 1 - Whether this randomat is enabled\
 Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=2554783208>
 Optional "Wonder Weapons": <https://steamcommunity.com/sharedfiles/filedetails/?id=2252594978>
 
-## Gotta catch 'em all!
+## Gotta catch 'em all
 
 Everyone gets a random Pokemon playermodel!\
 Choose any combination of the models below, you need at least one installed for this randomat to start triggering!\
@@ -164,6 +165,7 @@ Choose any combination of the models below, you need at least one installed for 
 _ttt_randomat_catchemall_ - Default: 1 - Whether this randomat is enabled\
 \
 Install one or more of these playermodels if you want this randomat:
+
 - [Pikachu](https://steamcommunity.com/sharedfiles/filedetails/?id=719109875)
 - [Mewtwo](https://steamcommunity.com/sharedfiles/filedetails/?id=2002092734)
 - [Decidueye](https://steamcommunity.com/sharedfiles/filedetails/?id=1277705366)
@@ -186,7 +188,7 @@ Install one or more of these playermodels if you want this randomat:
 - [Brendan](https://steamcommunity.com/sharedfiles/filedetails/?id=890269139)
 - [Guzma](https://steamcommunity.com/sharedfiles/filedetails/?id=2029094987)
 
-## Hack the planet!
+## Hack the planet
 
 Gives everyone a command prompt\
 \
@@ -194,7 +196,7 @@ _ttt_randomat_hack_ - Default: 1 - Whether this randomat is enabled\
 \
 Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=2181940209>
 
-## Hot Potato!
+## Hot Potato
 
 Gives someone a ‘Hot Potato’, a weapon that after 17 seconds makes the holder explode. It must be passed to another player to avoid exploding.\
 \
@@ -203,7 +205,7 @@ _ttt_randomat_potato_ - Default: 1 - Whether this randomat is enabled\
 Idea from u/Nuclearaxe979 on reddit.\
 Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=2377790970>
 
-## Infinite Super Shotguns For All!
+## Infinite Super Shotguns For All
 
 Everyone can only use an infinite ammo super shotgun as their main weapon\
 \
@@ -212,7 +214,7 @@ _randomat_supershotgun_weaponid_ - Default: tfa_doom_ssg - Id of the weapon give
 \
 Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=2236037793>
 
-## It's just a flesh wound.
+## It's just a flesh wound
 
 Everyone has a flesh wound\
 \
@@ -220,7 +222,7 @@ _ttt_randomat_fleshwound_ - Default: 1 - Whether this randomat is enabled\
 \
 Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=2179764633>
 
-## It's time to go third-person!
+## It's time to go third-person
 
 Switches everyone to an over-the-shoulder thirdperson view\
 \
@@ -246,7 +248,7 @@ _ttt_randomat_jinglejam_ - Default: 1 - Whether this randomat is enabled\
 \
 Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=1220749653>
 
-## Join the dark side!
+## Join the dark side
 
 Gives every player a red lightsaber\
 \
@@ -266,7 +268,7 @@ _ttt_randomat_catgun_ - Default: 1 - Whether this randomat is enabled\
 \
 Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=827320827>
 
-## Muahahaha!
+## Muahahaha
 
 Gives everyone a deal with the devil\
 \
@@ -274,7 +276,7 @@ _ttt_randomat_devildeal_ - Default: 1 - Whether this randomat is enabled\
 \
 Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=2140473915>
 
-## One Puuuuunch!
+## One Puuuuunch
 
 Gives everyone One Punch fists!\
 \
@@ -282,7 +284,7 @@ _ttt_randomat_onepunch_ - Default: 1 - Whether this randomat is enabled\
 \
 Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=2609859728>
 
-## Random joke weapons for all!
+## Random joke weapons for all
 
 Gives everyone a random buyable joke weapon.\
 \
@@ -291,7 +293,7 @@ _ttt_randomat_jokeweapons_ - Default: 1 - Whether this randomat is enabled\
 Requires:\
 <https://steamcommunity.com/sharedfiles/filedetails/?id=2568344774>
 
-## Pew! Bang! Pow!
+## Pew! Bang! Pow
 
 Strips everyone of their floor weapons, if they've picked up any, and gives either a pew gun or a finger gun.\
 \
@@ -301,7 +303,7 @@ Requires:\
 <https://steamcommunity.com/sharedfiles/filedetails/?id=2236046949> \
 <https://steamcommunity.com/sharedfiles/filedetails/?id=2329744756>
 
-## RELEASE THE SNAILS!
+## RELEASE THE SNAILS
 
 Spawns snails that follow players around, killing you if they reach you. Plays “threatening” music for a while.\
 \
@@ -344,7 +346,7 @@ Requires:\
 <https://steamcommunity.com/sharedfiles/filedetails/?id=2311866661> \
 <https://steamcommunity.com/sharedfiles/filedetails/?id=2311859098>
 
-## Shh... It's a Secret!
+## Shh... It's a Secret
 
 Runs another random Randomat event without notifying the players. Also silences all future Randomat events while this event is active.\
 \
@@ -352,14 +354,14 @@ _ttt_randomat_secret_ - Default: 1 - Whether this event is enabled.
 
 ## Sips sends his regards
 
-Everyone gets one of these models: https://steamcommunity.com/sharedfiles/filedetails/?id=2659543412\
+Everyone gets one of these models: <https://steamcommunity.com/sharedfiles/filedetails/?id=2659543412>\
 \
 _ttt_randomat_sips_ - Default: 1 - Whether this randomat is enabled\
 \
 Requires:\
 <https://steamcommunity.com/sharedfiles/filedetails/?id=2659543412>
 
-## Snail Time!
+## Snail Time
 
 Transforms everyone into a snail\
 \
@@ -377,6 +379,7 @@ _ttt_randomat_snailwars_ - Default: 1 - Whether this randomat is enabled\
 Requires:\
 <https://steamcommunity.com/sharedfiles/filedetails/?id=2151761122> \
 <https://steamcommunity.com/sharedfiles/filedetails/?id=1817717513>
+
 ## Spider Mod
 
 When you look at someone, you see a health bar above them!\
@@ -403,7 +406,7 @@ _ttt_randomat_timemanipulator_ - Default: 1 - Whether this randomat is enabled\
 \
 Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=1318271171>
 
-## Turnip Day!
+## Turnip Day
 
 Everyone gets a random Animal Crossing playermodel!\
 Choose any combination of the models below, you need at least one installed for this randomat to start triggering!\
@@ -411,6 +414,7 @@ Choose any combination of the models below, you need at least one installed for 
 _ttt_randomat_animalcrossing_ - Default: 1 - Whether this randomat is enabled\
 \
 Install one or more of these playermodels if you want this randomat:
+
 - [Tom Nook](https://steamcommunity.com/sharedfiles/filedetails/?id=2247735533)
 - [Isabelle & Digby](https://steamcommunity.com/sharedfiles/filedetails/?id=2005233079)
 - [Timmy & Tommy](https://steamcommunity.com/sharedfiles/filedetails/?id=2281485427)
@@ -430,7 +434,7 @@ _ttt_randomat_deathnote_ - Default: 1 - Whether this randomat is enabled\
 \
 Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=2552417009>
 
-## Woof Woof!
+## Woof Woof
 
 Everyone gets a guard dog\
 \
