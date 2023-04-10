@@ -5,6 +5,8 @@ EVENT.id = "firesale"
 
 EVENT.Categories = {"biased_traitor", "biased", "item", "entityspawn", "moderateimpact"}
 
+local musicCvar = CreateConVar("randomat_firesale_music", 1, {FCVAR_NOTIFY, FCVAR_ARCHIVE}, "Whether music plays while event is active", 0, 1)
+
 util.AddNetworkString("FireSaleRandomatBegin")
 util.AddNetworkString("FireSaleRandomatEnd")
 
@@ -76,6 +78,7 @@ function EVENT:Begin()
 
     -- Playing fire sale music and displaying the icon
     net.Start("FireSaleRandomatBegin")
+    net.WriteBool(musicCvar:GetBool())
     net.Broadcast()
     -- Modifying the weapons that appear in the mystery box
     -- Adding all floor weapons
@@ -115,7 +118,7 @@ function EVENT:Begin()
             box:SetPos(posData[1])
             box:SetAngles(posData[2])
             -- Stops the box from removing itself until the fire sale timer is up
-            box:SetNWString("PreventRemove", "true")
+            box:SetNWBool("PreventRemove", true)
             box:Spawn()
             box:Arrive()
             table.insert(boxes, box)
@@ -149,7 +152,7 @@ function EVENT:Begin()
                     end
 
                     -- Stops the box from removing itself until the fire sale timer is up
-                    box:SetNWString("PreventRemove", "true")
+                    box:SetNWBool("PreventRemove", true)
                     box:Spawn()
                     box:Arrive()
                     table.insert(boxes, box)
@@ -177,12 +180,12 @@ function EVENT:Begin()
     -- After 34.4 seconds, the fire sale is over and players can finish their current spin before all boxes are removed
     timer.Create("FireSaleRandomatTimer", 34.4, 1, function()
         for _, box in ipairs(boxes) do
-            box:SetNWString("PreventRemove", "false")
+            box:SetNWBool("PreventRemove", false)
         end
 
         self:AddHook("Think", function()
             for _, box in ipairs(boxes) do
-                if IsValid(box) and box:GetNWString("CanUse", "false") == "true" then
+                if IsValid(box) and box:GetNWBool("CanUse") then
                     box:Remove()
                 end
             end
@@ -219,6 +222,25 @@ end
 -- This event doesn't necessarily need the wonder weapons to work, just the mystery box itself
 function EVENT:Condition()
     return scripted_ents.Get("zombies_mysterybox")
+end
+
+function EVENT:GetConVars()
+    local checks = {}
+
+    for _, v in pairs({"music"}) do
+        local name = "randomat_" .. self.id .. "_" .. v
+
+        if ConVarExists(name) then
+            local convar = GetConVar(name)
+
+            table.insert(checks, {
+                cmd = v,
+                dsc = convar:GetHelpText()
+            })
+        end
+    end
+
+    return {}, checks
 end
 
 Randomat:register(EVENT)

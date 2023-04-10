@@ -1,4 +1,5 @@
 local iconFrame
+local music
 
 local function CreateIcon()
     --Create the frame
@@ -31,7 +32,12 @@ local function RemoveIcon()
 end
 
 net.Receive("FireSaleRandomatBegin", function()
-    surface.PlaySound("firesale/music.mp3")
+    music = net.ReadBool()
+
+    if music then
+        surface.PlaySound("firesale/music.mp3")
+    end
+
     CreateIcon()
 
     timer.Create("FireSaleIconStartFlash", 23.4, 1, function()
@@ -68,5 +74,8 @@ net.Receive("FireSaleRandomatEnd", function()
     timer.Remove("FireSaleIcon2stFlash")
     timer.Remove("FireSaleRemoveIconTimer")
     RemoveIcon()
-    RunConsoleCommand("stopsound")
+
+    if music then
+        RunConsoleCommand("stopsound")
+    end
 end)

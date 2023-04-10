@@ -153,6 +153,7 @@ Else the boxes only contain weapons that can spawn on the floor\
 Press 'E' to open a box if you find one, as many boxes as players spawn somewhere on the map to find\
 \
 _ttt_randomat_firesale_ - Default: 1 - Whether this randomat is enabled\
+_randomat_firesale_music_ - Default: 1 - Whether music plays while event is active\
 \
 Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=2554783208>
 Optional "Wonder Weapons": <https://steamcommunity.com/sharedfiles/filedetails/?id=2252594978>

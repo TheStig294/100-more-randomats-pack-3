@@ -27,7 +27,7 @@ function EVENT:Begin()
                 ply:EmitSound(Sound("killer_snail/killer_snail_loop.wav"))
             end)
 
-            timer.Simple(34, function()
+            timer.Simple(19.5, function()
                 ply:StopSound(Sound("killer_snail/killer_snail_loop.wav"))
             end)
         end
