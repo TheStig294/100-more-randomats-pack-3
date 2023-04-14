@@ -1,6 +1,13 @@
+local memeGunInstalled = file.Find("entities/ent_meme_gun/shared.lua", "lsv")
 local EVENT = {}
 EVENT.Title = "RELEASE THE SNAILS!"
-EVENT.Description = "Spawns snails that follow players around, killing you if they reach you"
+EVENT.ExtDescription = "Spawns snails that follow players around, killing you if they reach you"
+
+if memeGunInstalled then
+    EVENT.Title = "RELEASE THE MEMES!"
+    EVENT.ExtDescription = "Spawns meme images that follow players around, killing you if they reach you"
+end
+
 EVENT.id = "snails"
 
 EVENT.Categories = {"moderateimpact"}
@@ -24,11 +31,11 @@ function EVENT:Begin()
             end)
 
             timer.Simple(5, function()
-                ply:EmitSound(Sound("killer_snail/killer_snail_loop.wav"))
+                ply:EmitSound(Sound("snails/killer_snail_loop.wav"))
             end)
 
             timer.Simple(19.5, function()
-                ply:StopSound(Sound("killer_snail/killer_snail_loop.wav"))
+                ply:StopSound(Sound("snails/killer_snail_loop.wav"))
             end)
         end
     end
@@ -45,7 +52,13 @@ function EVENT:Begin()
 
             -- Spawn a Snail if we have a cap and we haven't bypassed it
             if count < cap or cap == 0 then
-                local ent = ents.Create("killer_snail")
+                local classname = "killer_snail"
+
+                if memeGunInstalled then
+                    classname = "ent_meme_gun"
+                end
+
+                local ent = ents.Create(classname)
                 ent:SetEnemy(ply)
                 ent:SetPos(ply:GetAimVector())
                 ent:Spawn()
@@ -64,7 +77,7 @@ function EVENT:End()
 end
 
 function EVENT:Condition()
-    return Randomat:MapHasAI() and weapons.Get("weapon_ttt_killersnail") ~= nil
+    return Randomat:MapHasAI() and (memeGunInstalled or weapons.Get("weapon_ttt_killersnail") ~= nil)
 end
 
 function EVENT:GetConVars()
