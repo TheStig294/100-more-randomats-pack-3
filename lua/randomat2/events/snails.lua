@@ -1,4 +1,4 @@
-local memeGunInstalled = file.Find("entities/ent_meme_gun/shared.lua", "lsv")
+local memeGunInstalled = file.Exists("entities/ent_meme_gun/shared.lua", "lsv")
 local EVENT = {}
 EVENT.Title = "RELEASE THE SNAILS!"
 EVENT.ExtDescription = "Spawns snails that follow players around, killing you if they reach you"
