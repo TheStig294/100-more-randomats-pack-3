@@ -3,7 +3,7 @@ EVENT.Title = "Turnip Day!"
 EVENT.Description = "Everyone gets an Animal Crossing playermodel!"
 EVENT.id = "animalcrossing"
 
-EVENT.Categories = {"fun", "smallimpact"}
+EVENT.Categories = {"modelchange", "fun", "smallimpact"}
 
 local animalCrossingModels = {"models/catcraze777/animal_crossing/Timmy_acnh/timmy_pm.mdl", "models/catcraze777/animal_crossing/redd_acnh/Redd_PM.mdl", "models/catcraze777/animal_crossing/kk_slider_acnh/kk_slider_PM.mdl", "models/player/player/sherb_pm/sherb_pm.mdl", "models/catcraze777/animal_crossing/kkclue_acnh/Kidcat_Casual_PM.mdl", "models/catcraze777/animal_crossing/Gulliver_acnh/Gulliver_PM.mdl", "models/catcraze777/animal_crossing/cj_acnh/cj_pm.mdl", "models/catcraze777/animal_crossing/cj_acnh/Flick_pm.mdl", "models/catcraze777/animal_crossing/blathers_acnh/blathers_pm.mdl", "models/catcraze777/animal_crossing/blathers_acnh/celeste_pm.mdl", "models/gwladys/digby/digby_player.mdl", "models/gwladys/isabelle/isabelle__player.mdl", "models/croissant/animalcrossing/tomnook/tomnook_pm.mdl"}
 

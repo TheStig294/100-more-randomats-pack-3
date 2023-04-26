@@ -11,6 +11,7 @@ local batModel = "models/weapons/gamefreak/w_nessbat.mdl"
 if batModel then
     EVENT.Title = "Bat with a cat!"
     EVENT.Description = "Everyone's a bat, with only a cat!"
+    table.insert(EVENT.Categories, 1, "modelchange")
 end
 
 local bats = {}

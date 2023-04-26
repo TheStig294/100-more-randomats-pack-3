@@ -5,7 +5,7 @@ EVENT.Title = "Jingle Jam"
 EVENT.Description = "Everyone gets a Yogscast Christmas playermodel!"
 EVENT.id = "jinglejam"
 
-EVENT.Categories = {"fun", "smallimpact"}
+EVENT.Categories = {"modelchange", "fun", "smallimpact"}
 
 local selectedModels = {}
 

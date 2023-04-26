@@ -2,7 +2,7 @@ local EVENT = {}
 EVENT.Title = "Sips sends his regards"
 EVENT.id = "sips"
 
-EVENT.Categories = {"fun", "smallimpact"}
+EVENT.Categories = {"modelchange", "fun", "smallimpact"}
 
 local canadaModels = {"models/sentry/canuccop/sentrycanarcmpmale6pm.mdl", "models/sentry/canuccop/sentrycanarcmpmale7pm.mdl", "models/sentry/canuccop/sentrycanarcmpmale8pm.mdl", "models/sentry/canuccop/sentrycanarcmpmale9pm.mdl"}
 

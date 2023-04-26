@@ -3,7 +3,7 @@ EVENT.Title = "Combo: Yogscast"
 EVENT.Description = "Yogs intro + everyone's a yogscast model!"
 EVENT.id = "cbyogs"
 
-EVENT.Categories = {"eventtrigger", "largeimpact"}
+EVENT.Categories = {"eventtrigger", "modelchange", "largeimpact"}
 
 local event1 = "jinglejam"
 local event2 = "welcomeback"
