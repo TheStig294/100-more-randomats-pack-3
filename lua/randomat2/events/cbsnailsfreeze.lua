@@ -14,7 +14,7 @@ function EVENT:Begin()
 end
 
 function EVENT:Condition()
-    return Randomat:CanEventRun(event1) and Randomat:CanEventRun(event2)
+    return Randomat:CanEventRun(event1) and Randomat:CanEventRun(event2) and weapons.Get("weapon_ttt_killersnail") ~= nil
 end
 
 Randomat:register(EVENT)
