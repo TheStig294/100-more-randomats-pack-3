@@ -9,7 +9,7 @@ local megamindModel = "models/player/megamind/megamind.mdl"
 
 function EVENT:Begin()
     for _, ply in ipairs(self:GetAlivePlayers()) do
-        Randomat:ForceSetModel(ply, megamindModel)
+        Randomat:ForceSetPlayermodel(ply, megamindModel)
     end
 
     self:AddHook("PlayerSpawn", function(ply)
