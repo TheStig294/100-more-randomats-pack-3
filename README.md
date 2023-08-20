@@ -24,12 +24,12 @@ _ttt_randomat_event_history_ - Default: 10 - How many events should be kept in h
 
 # Newly added randomats
 
+1. Megamind - Everyone changes to a Megamind playermodel
 1. Sips sends his regards - Everyone gets one of these models: <https://steamcommunity.com/sharedfiles/filedetails/?id=2659543412>
 1. Am I a jester or a traitor? - There is a jester, and a traitor with a maclunkey gun!
 1. Random joke weapons for all!
 1. Combo - Triggers a random interesting combo of randomats
 1. RISE FROM YOUR... Dobbees? - When you die, you come back as a T-Posing "dobbee"
-1. Turnip Day - Everyone gets an Animal Crossing playermodel!
 
 # Randomats
 
@@ -258,6 +258,14 @@ _ttt_randomat_darkside_ - Default: 1 - Whether this randomat is enabled\
 Originally made by [ruiner189](https://steamcommunity.com/sharedfiles/filedetails/?id=1988901134)\
 \
 Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=635911320>
+
+## Megamind
+
+Changes everyone to a Megamind playermodel\
+\
+_ttt_randomat_megamind_ - Default: 1 - Whether this randomat is enabled\
+\
+Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=3020804282>
 
 ## Muahahaha
 
