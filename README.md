@@ -24,12 +24,12 @@ _ttt_randomat_event_history_ - Default: 10 - How many events should be kept in h
 
 # Newly added randomats
 
+1. Minimap: Activated - Displays a minimap one everyone's screen
 1. Megamind - Everyone changes to a Megamind playermodel
 1. Sips sends his regards - Everyone gets one of these models: <https://steamcommunity.com/sharedfiles/filedetails/?id=2659543412>
 1. Am I a jester or a traitor? - There is a jester, and a traitor with a maclunkey gun!
 1. Random joke weapons for all!
 1. Combo - Triggers a random interesting combo of randomats
-1. RISE FROM YOUR... Dobbees? - When you die, you come back as a T-Posing "dobbee"
 
 # Randomats
 
@@ -266,6 +266,14 @@ Changes everyone to a Megamind playermodel\
 _ttt_randomat_megamind_ - Default: 1 - Whether this randomat is enabled\
 \
 Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=3020804282>
+
+## Minimap: Activated
+
+Adds a minimap to everyone's screen\
+\
+_ttt_randomat_minimap_ - Default: 1 - Whether this randomat is enabled\
+\
+Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=3024317004>
 
 ## Muahahaha
 
