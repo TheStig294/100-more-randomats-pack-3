@@ -23,7 +23,7 @@ function EVENT:Begin()
     local new_traitors = {}
 
     for k, ply in pairs(self:GetAlivePlayers()) do
-        local snailModel = snailModels[math.random(1, #snailModels)]
+        local snailModel = snailModels[math.random(#snailModels)]
         playerModels[ply] = snailModel
         maxHealth[ply] = ply:GetMaxHealth()
         Randomat:ForceSetPlayermodel(ply, snailModel)
@@ -71,7 +71,7 @@ function EVENT:Begin()
     self:AddHook("PlayerSpawn", function(ply)
         timer.Simple(1, function()
             if not playerModels[ply] then
-                playerModels[ply] = snailModels[math.random(1, #snailModels)]
+                playerModels[ply] = snailModels[math.random(#snailModels)]
             end
 
             Randomat:ForceSetPlayermodel(ply, playerModels[ply])

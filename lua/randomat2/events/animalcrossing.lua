@@ -43,7 +43,7 @@ end
 
 function EVENT:Begin()
     local remainingModels = {}
-    --Adding the playermodels table to a different table so if more than 8 people are playing, the choosable models are able to be reset
+    -- Adding the playermodels table to a different table so if more than 8 people are playing, the choosable models are able to be reset
     table.Add(remainingModels, installedModels)
 
     for i, ply in pairs(player.GetAll()) do
@@ -52,8 +52,8 @@ function EVENT:Begin()
             table.Add(remainingModels, installedModels)
         end
 
-        --Chooses a random model, prevents it from being chosen by anyone else, and sets the player to that model
-        local randomModel = table.Random(remainingModels)
+        -- Chooses a random model, prevents it from being chosen by anyone else, and sets the player to that model
+        local randomModel = remainingModels[math.random(#remainingModels)]
         table.RemoveByValue(remainingModels, randomModel)
         selectedModels[ply] = randomModel
         ApplyModel(ply, randomModel)

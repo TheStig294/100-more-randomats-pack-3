@@ -50,7 +50,7 @@ function EVENT:Begin()
         end
 
         --Chooses a random model, prevents it from being chosen by anyone else, and sets the player to that model
-        local randomModel = table.Random(remainingModels)
+        local randomModel = remainingModels[math.random(#remainingModels)]
         table.RemoveByValue(remainingModels, randomModel)
         selectedModels[ply] = randomModel
         SetPokemonModel(ply, randomModel)

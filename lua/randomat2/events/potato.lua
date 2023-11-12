@@ -25,7 +25,7 @@ end)
 
 function EVENT:Begin()
     -- Choose a random player
-    local ply = table.Random(self:GetAlivePlayers())
+    local ply = self:GetAlivePlayers(true)[1]
 
     -- Ensure the hot potato hooks are cleaned up
     hook.Add("TTTPrepareRound", ply:Name() .. "_RoundRestartCleanup", function()
@@ -36,8 +36,8 @@ function EVENT:Begin()
     RandomatActivatePotato(ply, ply)
 end
 
+-- Only activate if the hot potato weapon was found
 function EVENT:Condition()
-    -- Only activate if the hot potato weapon was found
     return GetGlobalBool("PotatoRandomatExists", false)
 end
 

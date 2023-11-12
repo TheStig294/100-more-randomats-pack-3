@@ -6,18 +6,17 @@ EVENT.id = "jetswings"
 EVENT.Categories = {"item", "moderateimpact"}
 
 function EVENT:Begin()
-    jetpackPlayer = table.Random(self:GetAlivePlayers())
+    local givenJetpack = false
 
-    for i, ply in pairs(self:GetAlivePlayers()) do
-        timer.Simple(0.1, function()
-            if ply == jetpackPlayer then
-                ply:Give("weapon_ttt_jetpackspawner")
-                Randomat:CallShopHooks(false, "weapon_ttt_jetpackspawner", ply)
-            else
-                ply:Give("weapon_ttt_homingpigeon")
-                Randomat:CallShopHooks(false, "weapon_ttt_homingpigeon", ply)
-            end
-        end)
+    for _, ply in pairs(self:GetAlivePlayers(true)) do
+        if not givenJetpack then
+            ply:Give("weapon_ttt_jetpackspawner")
+            Randomat:CallShopHooks(false, "weapon_ttt_jetpackspawner", ply)
+            givenJetpack = true
+        else
+            ply:Give("weapon_ttt_homingpigeon")
+            Randomat:CallShopHooks(false, "weapon_ttt_homingpigeon", ply)
+        end
     end
 end
 
