@@ -1,45 +1,53 @@
 local EVENT = {}
 EVENT.Title = "Secret Friday Update"
-EVENT.Description = "Everyone gets a minecraft bow and block (Press 'R' to change block)"
 EVENT.id = "secretfriday"
 EVENT.Type = EVENT_TYPE_WEAPON_OVERRIDE
 
 EVENT.Categories = {"item", "biased_innocent", "biased", "largeimpact"}
 
-function EVENT:Begin()
-    for _, ent in pairs(ents.GetAll()) do
-        if (ent.Base == "weapon_tttbase" or ent.Kind == WEAPON_PISTOL or ent.Kind == WEAPON_HEAVY) and ent.AutoSpawnable then
-            ent:Remove()
-        end
+local blockInstalled = false
+local bowInstalled = false
+
+local function GetDescription()
+    local desc = "Everyone gets a "
+
+    if weapons.Get("minecraft_swep") and weapons.Get("republic_mcbow") then
+        desc = desc .. "minecraft bow and block (Press 'R' to change block)"
+    elseif weapons.Get("minecraft_swep") then
+        desc = desc .. "minecraft block (Press 'R' to change block)"
+    elseif weapons.Get("republic_mcbow") then
+        desc = desc .. "minecraft bow"
+    else
+        return
     end
 
-    for i, ply in pairs(self:GetAlivePlayers()) do
-        timer.Simple(0.1, function()
-            self:HandleWeaponAddAndSelect(ply, function(active_class, active_kind)
-                for _, wep in pairs(ply:GetWeapons()) do
-                    if wep.Kind == WEAPON_HEAVY or wep.Kind == WEAPON_PISTOL then
-                        ply:StripWeapon(wep:GetClass())
-                    end
-                end
+    return desc
+end
 
-                -- Reset FOV to unscope weapons if they were possibly scoped in
-                if active_kind == WEAPON_HEAVY or active_kind == WEAPON_PISTOL then
-                    ply:SetFOV(0, 0.2)
-                end
+hook.Add("InitPostEntity", "RandomatSecretFridayDescription", function()
+    blockInstalled = weapons.Get("minecraft_swep") ~= nil
+    bowInstalled = weapons.Get("republic_mcbow") ~= nil
+    EVENT.Description = GetDescription()
+end)
 
-                local wep1 = ply:Give("republic_mcbow")
-                Randomat:CallShopHooks(false, "republic_mcbow", ply)
-                local wep2 = ply:Give("minecraft_swep")
-                Randomat:CallShopHooks(false, "minecraft_swep", ply)
-                wep1.AllowDrop = false
-                wep2.AllowDrop = false
-            end)
-        end)
+function EVENT:Begin()
+    self.Description = GetDescription()
+
+    for _, ply in pairs(self:GetAlivePlayers()) do
+        if blockInstalled then
+            ply:Give("minecraft_swep")
+            Randomat:CallShopHooks(false, "minecraft_swep", ply)
+        end
+
+        if bowInstalled then
+            ply:Give("republic_mcbow")
+            Randomat:CallShopHooks(false, "republic_mcbow", ply)
+        end
     end
 end
 
 function EVENT:Condition()
-    return weapons.Get("republic_mcbow") ~= nil and weapons.Get("minecraft_swep") ~= nil
+    return blockInstalled or bowInstalled
 end
 
 Randomat:register(EVENT)
