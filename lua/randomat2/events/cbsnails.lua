@@ -6,15 +6,28 @@ EVENT.id = "cbsnails"
 EVENT.Categories = {"eventtrigger", "largeimpact"}
 
 local event1 = "snails"
+local backupEvent1 = "planes"
 local event2 = "snailtime"
+local snailGunInstalled
+local snailPlaneInstalled
 
 function EVENT:Begin()
-    Randomat:SilentTriggerEvent(event1)
-    Randomat:SilentTriggerEvent(event2)
+    if snailGunInstalled then
+        Randomat:SilentTriggerEvent(event1)
+        Randomat:SilentTriggerEvent(event2)
+    elseif snailPlaneInstalled then
+        Randomat:SilentTriggerEvent(backupEvent1)
+        Randomat:SilentTriggerEvent(event2)
+    end
 end
 
 function EVENT:Condition()
-    return Randomat:CanEventRun(event1) and Randomat:CanEventRun(event2) and weapons.Get("weapon_ttt_killersnail") ~= nil
+    snailGunInstalled = weapons.Get("weapon_ttt_killersnail") ~= nil
+    snailPlaneInstalled = ConVarExists("ttt_snailplane_music")
+    if snailGunInstalled then return Randomat:CanEventRun(event1) and Randomat:CanEventRun(event2) end
+    if snailPlaneInstalled then return Randomat:CanEventRun(backupEvent1) and Randomat:CanEventRun(event2) end
+
+    return false
 end
 
 Randomat:register(EVENT)
