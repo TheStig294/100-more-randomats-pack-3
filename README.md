@@ -69,11 +69,11 @@ Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=1796374263>
 
 ## Careful where you look
 
-Everyone gets an amaterasu\
+Everyone gets an Amaterasu\
 \
 _ttt_randomat_amaterasu_ - Default: 1 - Whether this randomat is enabled\
 \
-Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=1978094981>
+Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=3165277026>
 
 ## Combo
 
