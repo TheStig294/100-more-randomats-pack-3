@@ -66,7 +66,7 @@ function EVENT:Condition()
         if isTraitor and isInnocent then break end
     end
 
-    return isTraitor and isInnocent and weapons.Get("maclunkey") ~= nil and ConVarExists("ttt_jester_enabled")
+    return isTraitor and isInnocent and weapons.Get("maclunkey") ~= nil and Randomat:CanRoleSpawn(ROLE_JESTER)
 end
 
 Randomat:register(EVENT)
