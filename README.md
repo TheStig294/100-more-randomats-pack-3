@@ -177,7 +177,6 @@ Install one or more of these playermodels if you want this randomat:
 - [Gengar](https://steamcommunity.com/sharedfiles/filedetails/?id=691151323)
 - [Weavile + Sneasel](https://steamcommunity.com/sharedfiles/filedetails/?id=1136367247)
 - [Spinda](https://steamcommunity.com/sharedfiles/filedetails/?id=1923507876)
-- [Incineroar](https://steamcommunity.com/sharedfiles/filedetails/?id=1606557718)
 - [Primal Dialga](https://steamcommunity.com/sharedfiles/filedetails/?id=2162580480)
 - [Red](https://steamcommunity.com/sharedfiles/filedetails/?id=235640846)
 - [Cynthia](https://steamcommunity.com/sharedfiles/filedetails/?id=863055489)
