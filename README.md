@@ -24,12 +24,12 @@ _ttt_randomat_event_history_ - Default: 10 - How many events should be kept in h
 
 # Newly added randomats
 
+1. Let's play the 1812 Overture - Gives everyone an artillery cannon or PHD flopper
 1. Minimap: Activated - Displays a minimap one everyone's screen
 1. Megamind - Everyone changes to a Megamind playermodel
 1. Sips sends his regards - Everyone gets one of these models: <https://steamcommunity.com/sharedfiles/filedetails/?id=2659543412>
 1. Am I a jester or a traitor? - There is a jester, and a traitor with a maclunkey gun!
 1. Random joke weapons for all!
-1. Combo - Triggers a random interesting combo of randomats
 
 # Randomats
 
@@ -257,6 +257,18 @@ _ttt_randomat_darkside_ - Default: 1 - Whether this randomat is enabled\
 Originally made by [ruiner189](https://steamcommunity.com/sharedfiles/filedetails/?id=1988901134)\
 \
 Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=635911320>
+
+## Let's play the 1812 Overture
+
+Gives everyone an artillery cannon (Upgraded if the Pack-a-Punch is installed) or PHD flopper\
+\
+Suggested by u/alpha1812 on Reddit.\
+\
+_ttt_randomat_cannons_ - Default: 1 - Whether this randomat is enabled\
+\
+Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=2087368173>\
+<https://steamcommunity.com/sharedfiles/filedetails/?id=2243578658>\
+<https://steamcommunity.com/sharedfiles/filedetails/?id=3043605644>
 
 ## Megamind
 
