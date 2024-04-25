@@ -158,36 +158,6 @@ _randomat_firesale_music_ - Default: 1 - Whether music plays while event is acti
 Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=2554783208>
 Optional "Wonder Weapons": <https://steamcommunity.com/sharedfiles/filedetails/?id=2252594978>
 
-## Gotta catch 'em all
-
-Everyone gets a random Pokemon playermodel!\
-Choose any combination of the models below, you need at least one installed for this randomat to start triggering!\
-\
-_ttt_randomat_catchemall_ - Default: 1 - Whether this randomat is enabled\
-\
-Install one or more of these playermodels if you want this randomat:
-
-- [Pikachu](https://steamcommunity.com/sharedfiles/filedetails/?id=719109875)
-- [Mewtwo](https://steamcommunity.com/sharedfiles/filedetails/?id=2002092734)
-- [Decidueye](https://steamcommunity.com/sharedfiles/filedetails/?id=1277705366)
-- [Garchomp](https://steamcommunity.com/sharedfiles/filedetails/?id=691985720)
-- [Sceptile](https://steamcommunity.com/sharedfiles/filedetails/?id=695997752)
-- [Swampert](https://steamcommunity.com/sharedfiles/filedetails/?id=699776749)
-- [Blaziken](https://steamcommunity.com/sharedfiles/filedetails/?id=701781916)
-- [Gengar](https://steamcommunity.com/sharedfiles/filedetails/?id=691151323)
-- [Weavile + Sneasel](https://steamcommunity.com/sharedfiles/filedetails/?id=1136367247)
-- [Spinda](https://steamcommunity.com/sharedfiles/filedetails/?id=1923507876)
-- [Primal Dialga](https://steamcommunity.com/sharedfiles/filedetails/?id=2162580480)
-- [Red](https://steamcommunity.com/sharedfiles/filedetails/?id=235640846)
-- [Cynthia](https://steamcommunity.com/sharedfiles/filedetails/?id=863055489)
-- [Ethan/Gold](https://steamcommunity.com/sharedfiles/filedetails/?id=2158206491)
-- [Akari (Legends Arceus)](https://steamcommunity.com/sharedfiles/filedetails/?id=2760109142)
-- [Team Rocket James](https://steamcommunity.com/sharedfiles/filedetails/?id=1618435419)
-- [Zinnia](https://steamcommunity.com/sharedfiles/filedetails/?id=773769560)
-- [May](https://steamcommunity.com/sharedfiles/filedetails/?id=331119460)
-- [Brendan](https://steamcommunity.com/sharedfiles/filedetails/?id=890269139)
-- [Guzma](https://steamcommunity.com/sharedfiles/filedetails/?id=2029094987)
-
 ## Hack the planet
 
 Gives everyone a command prompt\
