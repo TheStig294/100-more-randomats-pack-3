@@ -412,3 +412,6 @@ Everyone gets a guard dog\
 _ttt_randomat_woof_ - Default: 1 - Whether this randomat is enabled\
 \
 Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=2120419714>
+
+## Steam Workshop Link
+https://steamcommunity.com/sharedfiles/filedetails/?id=2428353239
