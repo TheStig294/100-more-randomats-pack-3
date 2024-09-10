@@ -1,4 +1,7 @@
-_This is the third of my 4 randomat packs. These randomats will automatically turn on as you install the mods they need. So, if you install, or already have at least one of the mods listed below, this mod will add a randomat for it! (Or a few!)_
+# 100 More Randomats Pack 3
+The randomat is a mechanic for TTT that triggers a random effect either when the "Randomat-4000" item is bought and used by a detective, or automatically at the start of every round.\
+This mod adds many new "randomats" that could happen.\
+This is the third of my 3 randomat packs. These randomats require other less known mods to work, many of which you might not already have installed, linked in the list of randomats below.
 
 # Settings/Options
 
