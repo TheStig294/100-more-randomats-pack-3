@@ -7,6 +7,11 @@ net.Receive("MinimapRandomatToggle", function()
             GMinimap:Activate()
         else
             GMinimap:Deactivate()
+
+            if GMinimap.Config.enable then
+                GMinimap.Config.enable = false
+                GMinimap.Config:Save()
+            end
         end
     end
 end)
