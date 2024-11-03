@@ -12,7 +12,7 @@ if weapons.Get(defaultSSG) == nil then
     defaultSSG = "doom_sshotgun_2016"
 end
 
-CreateConVar("randomat_supershotgun_weaponid", defaultSSG, {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Id of the weapon given")
+CreateConVar("randomat_supershotgun_weaponid", defaultSSG, FCVAR_ARCHIVE, "Id of the weapon given")
 
 function EVENT:Begin()
     for _, ent in pairs(ents.GetAll()) do

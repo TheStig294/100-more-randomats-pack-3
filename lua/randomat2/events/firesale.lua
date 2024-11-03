@@ -5,8 +5,7 @@ EVENT.id = "firesale"
 
 EVENT.Categories = {"biased_traitor", "biased", "item", "entityspawn", "moderateimpact"}
 
-local musicCvar = CreateConVar("randomat_firesale_music", 1, {FCVAR_NOTIFY, FCVAR_ARCHIVE}, "Whether music plays while event is active", 0, 1)
-
+local musicCvar = CreateConVar("randomat_firesale_music", 1, FCVAR_ARCHIVE, "Whether music plays while event is active", 0, 1)
 util.AddNetworkString("FireSaleRandomatBegin")
 util.AddNetworkString("FireSaleRandomatEnd")
 

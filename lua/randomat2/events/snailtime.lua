@@ -1,5 +1,4 @@
-CreateConVar("randomat_snailtime_health", 1, {FCVAR_NOTIFY, FCVAR_ARCHIVE}, "Player health as a snail", 1, 100)
-
+CreateConVar("randomat_snailtime_health", 1, FCVAR_ARCHIVE, "Player health as a snail", 1, 100)
 local EVENT = {}
 EVENT.Title = "Snail Time!"
 EVENT.Description = "Everyone is transformed a snail and set to " .. GetConVar("randomat_snailtime_health"):GetInt() .. " health"

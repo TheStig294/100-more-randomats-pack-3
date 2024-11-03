@@ -12,11 +12,11 @@ EVENT.id = "snails"
 
 EVENT.Categories = {"moderateimpact"}
 
-CreateConVar("randomat_snails_cap", 12, {FCVAR_NOTIFY, FCVAR_ARCHIVE}, "Maximum number of snails spawned", 0, 15)
+CreateConVar("randomat_snails_cap", 12, FCVAR_ARCHIVE, "Maximum number of snails spawned", 0, 15)
 
-CreateConVar("randomat_snails_delay", 0.5, {FCVAR_NOTIFY, FCVAR_ARCHIVE}, "Delay before snails are spawned", 0.1, 2.0)
+CreateConVar("randomat_snails_delay", 0.5, FCVAR_ARCHIVE, "Delay before snails are spawned", 0.1, 2.0)
 
-CreateConVar("randomat_snails_music", 1, {FCVAR_NOTIFY, FCVAR_ARCHIVE}, "Music plays while randomat is active")
+CreateConVar("randomat_snails_music", 1, FCVAR_ARCHIVE, "Music plays while randomat is active")
 
 function EVENT:Begin()
     local cap = GetConVar("randomat_snails_cap"):GetInt()
