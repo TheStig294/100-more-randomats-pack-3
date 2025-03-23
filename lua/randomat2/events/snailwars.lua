@@ -1,5 +1,5 @@
 local EVENT = {}
-CreateConVar("randomat_snailwars_weaponid", "weapon_ttt_freezegun", FCVAR_ARCHIVE, "Id of the freeze gun weapon given")
+CreateConVar("randomat_snailwars_weaponid", "weapon_ttt_freezegun", FCVAR_NONE, "Id of the freeze gun weapon given")
 EVENT.Title = "Snail Wars"
 EVENT.Description = "Everyone has a snail gun + freeze gun"
 EVENT.id = "snailwars"
