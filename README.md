@@ -1,4 +1,5 @@
 # 100 More Randomats Pack 3
+
 The randomat is a mechanic for TTT that triggers a random effect either when the "Randomat-4000" item is bought and used by a detective, or automatically at the start of every round.\
 This mod adds many new "randomats" that could happen.\
 This is the third of my 3 randomat packs. These randomats require other less known mods to work, many of which you might not already have installed, linked in the list of randomats below.
@@ -380,15 +381,6 @@ _ttt_randomat_healthbar_ - Default: 1 - Whether this randomat is enabled\
 Requires:\
 <https://steamcommunity.com/sharedfiles/filedetails/?id=2372740052>
 
-## Time Stop
-
-All moving objects on the map freeze in place for 60 seconds, except for players.\
-NOTE: This randomat is disabled by default as it can cause issues with players becoming stuck. If this randomat is enabled you may need to know how to teleport players out of places where they cannot get out.\
-\
-_ttt_randomat_timestop_ - Default: 0 - Whether this randomat is enabled\
-\
-Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=1337349942>
-
 ## The Slow-mo Guys
 
 Everyone gets a time manipulator
@@ -414,4 +406,4 @@ _ttt_randomat_woof_ - Default: 1 - Whether this randomat is enabled\
 Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=2120419714>
 
 ## Steam Workshop Link
-https://steamcommunity.com/sharedfiles/filedetails/?id=2428353239
+<https://steamcommunity.com/sharedfiles/filedetails/?id=2428353239>
