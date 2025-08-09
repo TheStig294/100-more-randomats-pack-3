@@ -111,13 +111,6 @@ Requires:\
 <https://steamcommunity.com/sharedfiles/filedetails/?id=2428342861>\
 <https://steamcommunity.com/sharedfiles/filedetails/?id=2377790970>
 
-### "Combo: Snails vs. snails"
-
-Everyone is a snail + has a snail following them!\
-_ttt_randomat_csnails_ - Default: 1 - Whether this randomat is enabled\
-Requires:\
-<https://steamcommunity.com/sharedfiles/filedetails/?id=2151761122>
-
 ### "Combo: Uh-oh"
 
 Innocents freeze every 30 secs + RELEASE THE SNAILS!\
@@ -353,15 +346,6 @@ _ttt_randomat_sips_ - Default: 1 - Whether this randomat is enabled\
 Requires:\
 <https://steamcommunity.com/sharedfiles/filedetails/?id=2659543412>
 
-## Snail Time
-
-Transforms everyone into a snail\
-\
-_ttt_randomat_snailtime_ - Default: 1 - Whether this randomat is enabled\
-_randomat_snailtime_health_ - Default: 1 - Player health as a snail\
-\
-Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=2151761122>
-
 ## Snail Wars
 
 Everyone gets a freeze gun and snail gun.\
@@ -406,4 +390,5 @@ _ttt_randomat_woof_ - Default: 1 - Whether this randomat is enabled\
 Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=2120419714>
 
 ## Steam Workshop Link
+
 <https://steamcommunity.com/sharedfiles/filedetails/?id=2428353239>
