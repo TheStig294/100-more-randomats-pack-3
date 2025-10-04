@@ -189,14 +189,6 @@ _ttt_randomat_fleshwound_ - Default: 1 - Whether this randomat is enabled\
 \
 Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=2179764633>
 
-## It's time to go third-person
-
-Switches everyone to an over-the-shoulder thirdperson view\
-\
-_ttt_randomat_thirdperson_ - Default: 1 - Whether this randomat is enabled\
-\
-Requires: <https://steamcommunity.com/sharedfiles/filedetails/?id=2593095865>
-
 ## Jets vs. Wings
 
 Gives someone a jetpack and everyone else a homing pigeon.\
