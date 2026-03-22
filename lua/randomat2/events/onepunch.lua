@@ -6,16 +6,18 @@ EVENT.id = "onepunch"
 EVENT.Categories = {"item", "largeimpact"}
 
 function EVENT:Begin()
-    for i, ply in pairs(self:GetAlivePlayers()) do
+    for _, ply in player.Iterator() do
+        if not ply:Alive() or ply:IsSpec() then continue end
+
         timer.Simple(0.1, function()
-            ply:Give("one_punch_skin")
-            Randomat:CallShopHooks(false, "one_punch_skin", ply)
+            ply:Give("weapon_ttt_one_punch")
+            Randomat:CallShopHooks(false, "weapon_ttt_one_punch", ply)
         end)
     end
 end
 
 function EVENT:Condition()
-    return weapons.Get("one_punch_skin") ~= nil
+    return weapons.Get("weapon_ttt_one_punch") ~= nil
 end
 
 Randomat:register(EVENT)
