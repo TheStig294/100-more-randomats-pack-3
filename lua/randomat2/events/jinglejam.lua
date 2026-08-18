@@ -14,7 +14,7 @@ function EVENT:Begin()
     --Adding the playermodels table to a different table so if more than 8 people are playing, the choosable models are able to be reset
     table.Add(remainingModels, yogsModels)
 
-    for i, ply in pairs(player.GetAll()) do
+    for _, ply in player.Iterator() do
         -- Resets the choosable models for everyone's playermodel if none are left (happens when there are more than 8 players, as there are 8 playermodels to choose from)
         if table.IsEmpty(remainingModels) then
             table.Add(remainingModels, yogsModels)
@@ -35,8 +35,10 @@ function EVENT:Begin()
     end)
 end
 
-function EVENT:End()
-    Randomat:ForceResetAllPlayermodels()
+function EVENT:End(isActive)
+    if isActive then
+        Randomat:ForceResetAllPlayermodels()
+    end
 end
 
 function EVENT:Condition()

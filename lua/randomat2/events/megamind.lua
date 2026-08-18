@@ -8,7 +8,8 @@ EVENT.Categories = {"modelchange", "fun", "smallimpact"}
 local megamindModel = "models/player/megamind/megamind.mdl"
 
 function EVENT:Begin()
-    for _, ply in ipairs(self:GetAlivePlayers()) do
+    for _, ply in player.Iterator() do
+        if not ply:Alive() or ply:IsSpec() then continue end
         Randomat:ForceSetPlayermodel(ply, megamindModel)
     end
 
@@ -19,8 +20,10 @@ function EVENT:Begin()
     end)
 end
 
-function EVENT:End()
-    Randomat:ForceResetAllPlayermodels()
+function EVENT:End(isActive)
+    if isActive then
+        Randomat:ForceResetAllPlayermodels()
+    end
 end
 
 function EVENT:Condition()
