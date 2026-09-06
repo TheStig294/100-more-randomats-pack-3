@@ -42,11 +42,9 @@ function EVENT:Begin()
     end)
 end
 
-function EVENT:End(isActive)
-    if isActive then
-        Randomat:ForceResetAllPlayermodels()
-        table.Empty(selectedModels)
-    end
+function EVENT:End()
+    Randomat:ForceResetAllPlayermodels()
+    table.Empty(selectedModels)
 end
 
 function EVENT:Condition()
